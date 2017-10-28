@@ -1,0 +1,17 @@
+{
+  "name": "nest",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "felbry",
+  "license": "ISC",
+  "dependencies": {
+    "koa": "^2.3.0",
+    "koa-router": "^7.2.1",
+    "vue": "^2.5.2",
+    "vue-server-renderer": "^2.5.2"
+  }
+}
