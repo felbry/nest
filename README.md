@@ -10,5 +10,11 @@
 - **A** vue-server-renderer
 
 ## 2. 抽象
-a. 增加了模板文件
-b. 增加了工厂函数`createApp`避免状态单例
+- 增加了模板文件
+- 增加了工厂函数`createApp`避免状态单例
+
+## 3. 搭建开发环境
+配置了开发环境，加入进了router
+
+### package update list
+- **A** vue-router
