@@ -1,6 +1,10 @@
-const KOA = require('koa');
-const ROUTER = require('./routes');
-const SERVER = new KOA();
+const VUE = require('vue');
 
-SERVER.use(ROUTER.api.routes());
-SERVER.listen(8080);
+module.exports = function createApp(context) {
+    return new VUE({
+        data: {
+            url: context.url
+        },
+        template: `<div>访问的 URL 是： {{ url }}</div>`
+    });
+}

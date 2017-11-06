@@ -1,15 +1,14 @@
-const VUE = require('vue');
-const RENDERER = require('vue-server-renderer').createRenderer();
+const RENDERER = require('vue-server-renderer').createRenderer({
+    template: require('fs').readFileSync('./index.template.html', 'utf-8')
+});
 const ROUTER = require('koa-router');
+const CREATE_APP = require('./app');
 const API = ROUTER();
 
 module.exports.api = API
     .get('*', (ctx, next) => {
-        const APP = new VUE({
-            data: {
-                url: ctx.url
-            },
-            template: `<div>访问的 URL 是： {{ url }}</div>`
+        const APP = CREATE_APP({
+            url: ctx.url
         });
         RENDERER.renderToString(APP, (err, html) => {
             if (err) {
@@ -17,12 +16,6 @@ module.exports.api = API
                 ctx.body = 'Internal Server Error';
                 return;
             }
-            ctx.body = `
-                <!DOCTYPE html>
-                <html lang="en">
-                <head><title>Hello</title></head>
-                <body>${html}</body>
-                </html>
-            `
+            ctx.body = html;
         });
     })
