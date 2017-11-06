@@ -1,25 +1,25 @@
-const RENDERER = require('vue-server-renderer').createRenderer({
-    template: require('fs').readFileSync('./index.template.html', 'utf-8')
+const RENDERER = require('vue-server-renderer').createBundleRenderer(require('./public/vue-ssr-server-bundle.json'), {
+    runInNewContext: false,
+    template: require('fs').readFileSync('./index.template.html', 'utf-8'),
+    clientManifest: require('./public/vue-ssr-client-manifest.json')
 });
 const ROUTER = require('koa-router');
-const CREATE_APP = require('./path/to/built-server-bundle.js'); // 假设已经被webpack打包成功的前提下
 const API = ROUTER();
 
 module.exports.api = API
     .get('*', (ctx, next) => {
-        const CONTEXT = { url: req.url };
-        CREATE_APP(CONTEXT).then(app => {
-            RENDERER.renderToString(app, (err, html) => {
-                if (err) {
-                    if (err.code == 404) {
-                        ctx.status = 404;
-                        ctx.body = 'Page not found';
-                    }
-                    ctx.status = 500;
-                    ctx.body = 'Internal Server Error';
-                    return;
+        const context = { url: ctx.url };
+        RENDERER.renderToString(context, (err, html) => {
+            if (err) {
+                console.log(err);
+                if (err.code == 404) {
+                    ctx.status = 404;
+                    ctx.body = 'Page not found';
                 }
-                ctx.body = html;
-            });
+                ctx.status = 500;
+                ctx.body = 'Internal Server Error';
+                return;
+            }
+            ctx.body = html;
         });
     })

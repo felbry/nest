@@ -10,7 +10,7 @@
     module.exports = {
         data () {
             return {
-                url: context.url
+                url: 'context.url'
             };
         }
     };

@@ -4,7 +4,7 @@ export default context => {
         const { APP, ROUTER } = createApp();
         ROUTER.push(context.url);
         ROUTER.onReady(() => {
-            const MATCHED_COMPONENTS = router.getMatchedComponents();
+            const MATCHED_COMPONENTS = ROUTER.getMatchedComponents();
             // 匹配不到的路由，执行 reject 函数，并返回 404
             if (!MATCHED_COMPONENTS.length) {
                 return reject({ code: 404 })
