@@ -37,3 +37,11 @@
 - **A** babel-core
 - **A** babel-preset-env
 - **A** babel-plugin-syntax-dynamic-import (动态路由，还需要在babel中配置插件)
+
+## 5. 更新配置构建
+编写‘生成用于生产环境’的配置，其实是配置的差不多了。问题出在koa框架上，后台还没处理完成，就返回404响应了。所以更新换成了express框架。
+
+### package update list
+- **R** koa
+- **R** koa-router
+- **A** express

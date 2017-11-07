@@ -7,8 +7,8 @@ export function createApp() {
     const ROUTER = createRouter();
     const APP = new Vue({
         // 根实例简单的渲染应用程序组件。
-        render: h => h(App),
-        router: ROUTER
+        router: ROUTER,
+        render: h => h(App)
     });
     return { APP, ROUTER };
 }

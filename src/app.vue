@@ -3,14 +3,16 @@
 </style>
 
 <template>
-    <div id="app">现在访问的 URL 是： {{ url }}</div>
+    <div id="app">
+        <router-view></router-view>
+    </div>
 </template>
 
 <script>
     module.exports = {
         data () {
             return {
-                url: 'context.url'
+                // url: 'context.url'
             };
         }
     };

@@ -10,8 +10,7 @@
   "author": "felbry",
   "license": "ISC",
   "dependencies": {
-    "koa": "^2.3.0",
-    "koa-router": "^7.2.1",
+    "express": "^4.16.2",
     "vue": "^2.5.3",
     "vue-router": "^3.0.1",
     "vue-server-renderer": "^2.5.3"
