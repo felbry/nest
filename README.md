@@ -42,6 +42,12 @@
 编写‘生成用于生产环境’的配置，其实是配置的差不多了。问题出在koa框架上，后台还没处理完成，就返回404响应了。所以更新换成了express框架。
 
 ### package update list
-- **R** koa
-- **R** koa-router
+- **D** koa
+- **D** koa-router
 - **A** express
+
+## 6. 配置leancloud
+
+### package update list
+- **A** leanengine
+- **A** leancloud-storage

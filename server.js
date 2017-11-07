@@ -1,4 +1,5 @@
 const EXPRESS = require('express');
+const AV = require('leanengine');
 const APP = EXPRESS();
 
 const RENDERER = require('vue-server-renderer').createBundleRenderer(require('./public/vue-ssr-server-bundle.json'), {
@@ -8,6 +9,14 @@ const RENDERER = require('vue-server-renderer').createBundleRenderer(require('./
 });
 
 APP.use(EXPRESS.static('public'));
+
+AV.init({
+    appId: process.env.LEANCLOUD_APP_ID || 'O5IAIMSQppIRDRaYHSOrQwVf-gzGzoHsz',
+    appKey: process.env.LEANCLOUD_APP_KEY || 'k0LjkLcdJuv1mB8UwBfsQTvj',
+    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'cX7ILrIDtIErPmgQzO2qkuYK'
+});
+
+APP.use(AV.express());
 
 APP.get('*', function (req, res) {
     const context = { url: req.url };
@@ -23,6 +32,6 @@ APP.get('*', function (req, res) {
     });
 });
 
-APP.listen(3000, function () {
-    console.log('App listening on port 3000!');
+APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
+    console.log('App listening on online or port 3000!');
 });
