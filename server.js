@@ -1,4 +1,5 @@
 const EXPRESS = require('express');
+const CONFIG = require('./config');
 const AV = require('leanengine');
 const APP = EXPRESS();
 
@@ -11,9 +12,9 @@ const RENDERER = require('vue-server-renderer').createBundleRenderer(require('./
 APP.use(EXPRESS.static('public'));
 
 AV.init({
-    appId: process.env.LEANCLOUD_APP_ID || 'O5IAIMSQppIRDRaYHSOrQwVf-gzGzoHsz',
-    appKey: process.env.LEANCLOUD_APP_KEY || 'k0LjkLcdJuv1mB8UwBfsQTvj',
-    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || 'cX7ILrIDtIErPmgQzO2qkuYK'
+    appId: process.env.LEANCLOUD_APP_ID || CONFIG.appId,
+    appKey: process.env.LEANCLOUD_APP_KEY || CONFIG.appKey,
+    masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || CONFIG.masterKey
 });
 
 APP.use(AV.express());
