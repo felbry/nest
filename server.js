@@ -1,13 +1,23 @@
 const EXPRESS = require('express');
 const CONFIG = require('./config');
+const PATH = require('path');
+const RESOLVE = file => PATH.resolve(__dirname, file);
 const AV = require('leanengine');
 const APP = EXPRESS();
 
-const RENDERER = require('vue-server-renderer').createBundleRenderer(require('./public/vue-ssr-server-bundle.json'), {
-    runInNewContext: false,
-    template: require('fs').readFileSync('./index.template.html', 'utf-8'),
-    clientManifest: require('./public/vue-ssr-client-manifest.json')
-});
+const IS_DEV = process.env.NODE_ENV === 'dev';
+const RENDERER;
+const TEMPLATE_PATH = RESOLVE('./index.template.html');
+
+if (!IS_DEV) {
+    RENDERER = require('vue-server-renderer').createBundleRenderer(require('./public/vue-ssr-server-bundle.json'), {
+        runInNewContext: false,
+        template: require('fs').readFileSync(TEMPLATE_PATH, 'utf-8'),
+        clientManifest: require('./public/vue-ssr-client-manifest.json')
+    });
+} else {
+    // RENDERER = require('./build/startup-dev')()
+}
 
 APP.use(EXPRESS.static('public'));
 
@@ -19,7 +29,7 @@ AV.init({
 
 APP.use(AV.express());
 
-APP.get('*', function (req, res) {
+function render (req, res) {
     const context = { url: req.url };
     RENDERER.renderToString(context, (err, html) => {
         if (err) {
@@ -31,6 +41,10 @@ APP.get('*', function (req, res) {
         }
         res.end(html);
     });
+}
+
+APP.get('*', !IS_DEV ? render : (req, res) => {
+    
 });
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
