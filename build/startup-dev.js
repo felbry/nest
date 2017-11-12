@@ -38,7 +38,7 @@ module.exports = function startupDev(app, templatePath, callback) {
     });
 
     // modify client config to work with hot middleware
-    CLIENT_CONFIG.entry.app = ['webpack-hot-middleware/client?reload=true', CLIENT_CONFIG.entry];
+    CLIENT_CONFIG.entry.app = ['webpack-hot-middleware/client?reload=true', CLIENT_CONFIG.entry.app];
     CLIENT_CONFIG.output.filename = '[name].js';
     CLIENT_CONFIG.plugins.push(
         new WEBPACK.HotModuleReplacementPlugin(),

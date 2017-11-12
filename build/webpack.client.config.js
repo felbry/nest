@@ -3,7 +3,9 @@ const MERGE = require('webpack-merge');
 const BASE_CONFIG = require('./webpack.base.config.js');
 const VUE_SSR_CLIENT_PLUGIN = require('vue-server-renderer/client-plugin');
 module.exports = MERGE(BASE_CONFIG, {
-    entry: './src/entry-client.js',
+    entry: {
+        app: './src/entry-client.js'
+    },
     plugins: [
         // extract vendor chunks for better caching
         new WEBPACK.optimize.CommonsChunkPlugin({
