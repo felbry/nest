@@ -17,7 +17,7 @@
 
 <template>
     <div class="banner">
-        小晶晶的天下。
+        小晶晶的天下...
     </div>
 </template>
 

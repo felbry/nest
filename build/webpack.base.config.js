@@ -2,9 +2,12 @@ const PATH = require('path');
 const WEBPACK = require('webpack');
 const EXTRACT_TEXT_PLUGIN = require('extract-text-webpack-plugin');
 
+const IS_DEV = process.env.NODE_ENV === 'dev';
+
 module.exports = {
     output: {
         path: PATH.resolve(__dirname, '../public'),
+        publicPath: '/public/',
         filename: '[name].[chunkhash].js'
     },
     module: {
@@ -13,7 +16,7 @@ module.exports = {
                 test: /\.vue$/,
                 loader: 'vue-loader',
                 options: {
-                    extractCSS: true
+                    extractCSS: !IS_DEV
                 }
             },
             {
@@ -31,19 +34,19 @@ module.exports = {
             },
             {
                 test: /\.css$/,
-                use: EXTRACT_TEXT_PLUGIN.extract({
+                use: !IS_DEV ? EXTRACT_TEXT_PLUGIN.extract({
                     use: 'css-loader?minimize',
                     fallback: 'vue-style-loader'
-                })
+                }) : ['vue-style-loader', 'css-loader']
             }
         ]
     },
-    plugins: [
+    plugins: !IS_DEV ? [
         new WEBPACK.optimize.UglifyJsPlugin({
             compress: { warnings: false }
         }),
         new EXTRACT_TEXT_PLUGIN({
             filename: 'common.[chunkhash].css'
         })
-    ]
+    ] : []
 }
