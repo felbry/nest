@@ -3,7 +3,7 @@
 
     .col-sm-3 {
         text-align: center;
-        font-family: "fonesia";
+        font-family: "cartoon";
         cursor: pointer;
     }
 </style>
@@ -16,10 +16,10 @@
             </div>
             <div class="col-sm-5">
                 <div class="row">
-                    <div class="col-sm-3 col-xs-12">ticke</div>
-                    <div class="col-sm-3 col-xs-12">blog</div>
-                    <div class="col-sm-3 col-xs-12">photos</div>
-                    <div class="col-sm-3 col-xs-12">about</div>
+                    <div class="col-sm-3 col-xs-12">首页</div>
+                    <div class="col-sm-3 col-xs-12">博客</div>
+                    <div class="col-sm-3 col-xs-12">照片墙</div>
+                    <div class="col-sm-3 col-xs-12">关于</div>
                 </div>
             </div>
         </div>

@@ -7,7 +7,7 @@ const IS_DEV = process.env.NODE_ENV === 'dev';
 module.exports = {
     output: {
         path: PATH.resolve(__dirname, '../public'),
-        publicPath: '/public/',
+        publicPath: IS_DEV ? 'http://localhost:3000/public/' : '/public/',
         filename: '[name].[chunkhash].js'
     },
     module: {
@@ -25,10 +25,10 @@ module.exports = {
                 exclude: /node_modules/
             },
             {
-                test: /\.(png|jpg|gif|svg|ttf)$/,
+                test: /\.(png|jpg|gif|svg|ttf|woff|woff2|svg)$/,
                 loader: 'url-loader',
                 options: {
-                    limit: 10000,
+                    limit: 2000,
                     name: '[name].[ext]?[hash]'
                 }
             },
