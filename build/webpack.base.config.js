@@ -7,7 +7,7 @@ const IS_DEV = process.env.NODE_ENV === 'dev';
 module.exports = {
     output: {
         path: PATH.resolve(__dirname, '../public'),
-        publicPath: IS_DEV ? 'http://localhost:3000/public/' : '/public/',
+        publicPath: IS_DEV ? 'http://localhost:3000/public/' : '/',
         filename: '[name].[chunkhash].js'
     },
     module: {

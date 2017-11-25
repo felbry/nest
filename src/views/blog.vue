@@ -4,23 +4,17 @@
 
 <template>
     <div>
-        <my-header></my-header>
-        <router-view></router-view>
+        blog.
     </div>
 </template>
 
 <script>
-    import Header from '../components/header.vue';
-
     module.exports = {
         data () {
             return {
                 // url: 'context.url'
             };
         },
-        components: {
-            myHeader: Header
-        }
     };
 </script>
 

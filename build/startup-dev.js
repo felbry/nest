@@ -34,7 +34,7 @@ module.exports = function startupDev(app, templatePath, callback) {
     CHOKIDAR.watch(templatePath).on('change', () => {
         template = FS.readFileSync(templatePath, 'utf-8');
         console.log('index.html template updated.');
-        update();
+        UPDATE();
     });
 
     // modify client config to work with hot middleware
