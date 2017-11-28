@@ -4,17 +4,25 @@
 
 <template>
     <div>
-        blog.
+        <vue-markdown>i am a ~~tast~~ **test**.</vue-markdown>
     </div>
 </template>
 
 <script>
+    import VueMarkdown from 'vue-markdown';
+
     module.exports = {
+		created () {
+			
+		},
         data () {
             return {
-                // url: 'context.url'
+                // url: ''
             };
-        },
+		},
+		components: {
+			VueMarkdown
+		}
     };
 </script>
 
