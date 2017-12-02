@@ -13,7 +13,7 @@
 
     module.exports = {
 		created () {
-			
+			console.log(this.$route.params);
 		},
         data () {
             return {

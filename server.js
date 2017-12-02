@@ -47,6 +47,13 @@ function render (req, res) {
     });
 }
 
+APP.use(/^\/api/, (req, res, next) => {
+    res.json({
+        id: 1
+    });
+    next();
+});
+
 APP.get('*', !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
 });
