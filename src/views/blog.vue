@@ -4,7 +4,7 @@
 
 <template>
     <div>
-        <vue-markdown>i am a ~~tast~~ **test**.</vue-markdown>
+        <vue-markdown>i am a ~~tast~~ **test**.  {{item}}</vue-markdown>
     </div>
 </template>
 
@@ -12,14 +12,19 @@
     import VueMarkdown from 'vue-markdown';
 
     module.exports = {
-		created () {
-			console.log(this.$route.params);
-		},
+        asyncData ({ store, route }) {
+            return store.dispatch('fetchItem', route.params.id);
+        },
         data () {
             return {
                 // url: ''
             };
-		},
+        },
+        computed: {
+            item () {
+                return this.$store.state.item;
+            }
+        },
 		components: {
 			VueMarkdown
 		}
