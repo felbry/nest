@@ -26,7 +26,7 @@
                         <router-link to="/index">首页</router-link>
                     </div>
                     <div class="col-xs-3">
-                        <router-link to="/blog/1">博客</router-link>
+                        <router-link to="/blog">博客</router-link>
                     </div>
                     <div class="col-xs-3">
                         <router-link to="/photos">照片墙</router-link>

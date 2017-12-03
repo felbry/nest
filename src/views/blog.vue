@@ -4,27 +4,33 @@
 
 <template>
     <div>
-        <vue-markdown>i am a ~~tast~~ **test**.  {{item}}</vue-markdown>
+        <div v-for="item in articalList">
+            {{item.title}} - {{item.date}}
+        </div>
     </div>
 </template>
 
 <script>
     import VueMarkdown from 'vue-markdown';
+    import { mapState } from 'vuex';
+    import blogModule from '../store/modules/blog';
 
     module.exports = {
         asyncData ({ store, route }) {
-            return store.dispatch('fetchItem', route.params.id);
+            store.registerModule('blog', blogModule);
+            return store.dispatch('getArticalList');
+        },
+        destroyed () {
+            this.$store.unregisterModule('blog');
         },
         data () {
             return {
                 // url: ''
             };
         },
-        computed: {
-            item () {
-                return this.$store.state.item;
-            }
-        },
+        computed: mapState({
+            articalList: state => state.blog.articalList
+        }),
 		components: {
 			VueMarkdown
 		}

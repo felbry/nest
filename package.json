@@ -15,6 +15,7 @@
   "author": "felbry",
   "license": "ISC",
   "dependencies": {
+    "axios": "^0.17.1",
     "express": "^4.16.2",
     "leancloud-storage": "^3.3.1",
     "leanengine": "^3.0.2",

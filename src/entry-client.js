@@ -34,6 +34,6 @@ ROUTER.onReady(() => {
             // 停止加载指示器(loading indicator)
             next();
         }).catch(next);
-    })
+    });
     APP.$mount('#app');
 });

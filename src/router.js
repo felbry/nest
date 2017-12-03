@@ -15,7 +15,7 @@ export function createRouter() {
                         component: () => import('./views/home.vue'),
                     },
                     {
-                        path: 'blog/:id',
+                        path: 'blog',
                         component: () => import('./views/blog.vue'),
                     },
                     {
