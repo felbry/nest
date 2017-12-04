@@ -1,4 +1,5 @@
 const EXPRESS = require('express');
+const ROUTER = require('./routes');
 const CONFIG = require('./config');
 const PATH = require('path');
 const RESOLVE = file => PATH.resolve(__dirname, file);
@@ -37,6 +38,7 @@ function render (req, res) {
     const context = { url: req.url };
     renderer.renderToString(context, (err, html) => {
         if (err) {
+            console.log(err);
             if (err.code == 404) {
                 res.status(404).end('Page not found');
             }
@@ -47,16 +49,9 @@ function render (req, res) {
     });
 }
 
-APP.use(/^\/api/, (req, res, next) => {
-    res.json([
-        {
-            id: 1,
-            title: '第一篇文章',
-            date: new Date()
-        }
-    ]);
-    next();
-});
+// 路径没有匹配到问题
+
+APP.use(/^\/api/, ROUTER.router);
 
 APP.get('*', !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
