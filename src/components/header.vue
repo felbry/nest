@@ -4,8 +4,6 @@
     .col-xs-3 {
         padding: 25px 0;
         text-align: center;
-        font-family: "cartoon";
-        font-size: 16px;
         cursor: pointer;
     }
 
