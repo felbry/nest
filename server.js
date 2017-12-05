@@ -38,7 +38,6 @@ function render (req, res) {
     const context = { url: req.url };
     renderer.renderToString(context, (err, html) => {
         if (err) {
-            console.log(err);
             if (err.code == 404) {
                 res.status(404).end('Page not found');
             }
@@ -49,13 +48,11 @@ function render (req, res) {
     });
 }
 
-// 路径没有匹配到问题
-
-APP.use(/^\/api/, ROUTER.router);
-
-APP.get('*', !IS_DEV ? render : (req, res) => {
+ROUTER.router.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
 });
+
+APP.use(ROUTER.router);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
     console.log('App listening on online or port 3000!');
