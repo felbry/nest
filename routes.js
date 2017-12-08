@@ -1,5 +1,6 @@
 const EXPRESS = require('express');
 const FS = require('fs');
+const MD = new require('markdown-it')();
 
 const ROUTER = EXPRESS.Router();
 
@@ -15,7 +16,7 @@ ROUTER.route('/api/blog/articals')
     })
 
 ROUTER.get('/api/blog/articals/:id', (req, res) => {
-    res.end(FS.readFileSync('./README.md'));
+    res.end(MD.render(FS.readFileSync('./README.md', { encoding: 'utf-8' })));
 });
 
 module.exports = {

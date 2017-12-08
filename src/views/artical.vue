@@ -9,12 +9,11 @@
 
 <template>
     <div class="body">
-        <vue-markdown>{{artical}}</vue-markdown>
+        <div v-html="artical"></div>
     </div>
 </template>
 
 <script>
-    import VueMarkdown from 'vue-markdown';
     import { mapState } from 'vuex';
     import blogModule from '../store/modules/blog';
 
@@ -34,9 +33,6 @@
         computed: mapState({
             artical: state => state.blog.artical
         }),
-        components: {
-			VueMarkdown
-		}
     };
 </script>
 

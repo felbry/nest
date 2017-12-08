@@ -4,11 +4,6 @@ import {
     GET_ARTICAL,
 } from '../../../api';
 
-const STATE = {
-    articalList: [],
-    artical: ''
-};
-
 const ACTIONS = {
     getArticalList({ commit }) {
         return GET_ARTICAL_LIST().then(res => {
@@ -34,7 +29,10 @@ const MUTATIONS = {
 };
 
 export default {
-    state: STATE,
+    state: () => ({
+        articalList: [],
+        artical: ''
+    }),
     mutations: MUTATIONS,
     actions: ACTIONS    
 }

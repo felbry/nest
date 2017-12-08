@@ -41,7 +41,7 @@ function render (req, res) {
             if (err.code == 404) {
                 res.status(404).end('Page not found');
             }
-            res.status(500).end('Internal Server Error');
+            res.status(500).end(`Internal Server Error：${err}`);
             return;
         }
         res.end(html);
@@ -55,5 +55,5 @@ ROUTER.router.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
 APP.use(ROUTER.router);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
-    console.log('App listening on online or port 3000!');
+    console.log(`App listening on online or port ${process.env.LEANCLOUD_APP_PORT || 3000}!`);
 });
