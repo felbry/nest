@@ -11,3 +11,9 @@ export const GET_ARTICAL_LIST = () => {
         return res.data;
     });
 }
+
+export const GET_ARTICAL = (params) => {
+    return A.get(`/api/blog/articals/${params.id}`).then(res => {
+        return res.data;
+    });
+}

@@ -26,6 +26,10 @@ export function createRouter() {
                         path: 'about',
                         component: () => import('./views/about.vue'),
                     },
+                    {
+                        path: 'blog/articals/:id',
+                        component: () => import('./views/artical.vue'),
+                    },
                 ]
             },
         ]

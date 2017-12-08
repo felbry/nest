@@ -1,7 +1,11 @@
-const MERGE = require('webpack-merge')
-const NODE_EXTERNALS = require('webpack-node-externals')
-const BASE_CONFIG = require('./webpack.base.config.js')
-const VUE_SSR_SERVER_PLUGIN = require('vue-server-renderer/server-plugin')
+const MERGE = require('webpack-merge');
+const NODE_EXTERNALS = require('webpack-node-externals');
+const BASE_CONFIG = require('./webpack.base.config.js');
+const VUE_SSR_SERVER_PLUGIN = require('vue-server-renderer/server-plugin');
+const CLEAN_WEBPACK_PLUGIN = require('clean-webpack-plugin');
+
+const IS_DEV = process.env.NODE_ENV === 'dev';
+
 module.exports = MERGE(BASE_CONFIG, {
     // 将 entry 指向应用程序的 server entry 文件
     entry: './src/entry-server.js',
@@ -28,7 +32,10 @@ module.exports = MERGE(BASE_CONFIG, {
     // 这是将服务器的整个输出
     // 构建为单个 JSON 文件的插件。
     // 默认文件名为 `vue-ssr-server-bundle.json`
-    plugins: [
+    plugins: IS_DEV ? [
+        new VUE_SSR_SERVER_PLUGIN()
+    ] : [
+        new CLEAN_WEBPACK_PLUGIN(['../public'], { allowExternal: true }),
         new VUE_SSR_SERVER_PLUGIN()
     ]
-})
+});

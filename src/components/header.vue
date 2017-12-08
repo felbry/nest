@@ -1,6 +1,4 @@
 <style scoped>
-    @import "../fonts/fonts.css";
-
     .col-xs-3 {
         padding: 25px 0;
         text-align: center;
