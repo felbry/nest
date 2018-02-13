@@ -13,12 +13,15 @@ ROUTER.onReady(() => {
     ROUTER.beforeResolve((to, from, next) => {
         const MATCHED = ROUTER.getMatchedComponents(to);
         const PREV_MATCHED = ROUTER.getMatchedComponents(from);
+        // console.log(MATCHED);
+        // console.log(PREV_MATCHED);
         // 我们只关心之前没有渲染的组件
         // 所以我们对比它们，找出两个匹配列表的差异组件
         let diffed = false;
         const ACTIVED = MATCHED.filter((c, i) => {
             return diffed || (diffed = (PREV_MATCHED[i] !== c));
-        })
+        });
+        // console.log(ACTIVED);
         if (!ACTIVED.length) {
             return next();
         }

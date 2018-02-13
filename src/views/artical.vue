@@ -20,9 +20,11 @@
     module.exports = {
         asyncData ({ store, route }) {
             store.registerModule('blog', blogModule);
+            console.log('async:artical');
             return store.dispatch('getArtical', route.params.id);
         },
         destroyed () {
+            console.log('destroyed:artical'); 
             this.$store.unregisterModule('blog');
         },
         data () {
@@ -30,9 +32,16 @@
                 // url: 'context.url'
             };
         },
-        computed: mapState({
-            artical: state => state.blog.artical
-        }),
+        // computed: mapState({
+        //     artical: state => state.blog.artical
+        // }),
+        computed: {
+            artical () {
+                console.log('computed:artical');
+                console.log(this.$store.state.blog);
+                return this.$store.state.blog.artical;
+            }
+        },
     };
 </script>
 
