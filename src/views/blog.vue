@@ -36,33 +36,19 @@
 
 <script>
     import { mapState } from 'vuex';
-    import blogModule from '../store/modules/blog';
 
     module.exports = {
         asyncData ({ store, route }) {
-            store.registerModule('blog', blogModule);
-            console.log('async:list');
             return store.dispatch('getArticalList');
-        },
-        destroyed () {
-            console.log('destroyed:list');
-            this.$store.unregisterModule('blog');
         },
         data () {
             return {
                 // url: ''
             };
         },
-        // computed: mapState({
-        //     articalList: state => state.blog.articalList
-        // }),
-        computed: {
-            articalList () {
-                console.log('computed:list');
-                console.log(this.$store.state.blog);
-                return this.$store.state.blog.articalList;
-            }
-        },
+        computed: mapState({
+            articalList: state => state.blog.articalList
+        }),
         methods: {
             detailBlog (id) {
                 this.$router.push(`/blog/articals/${id}`);
