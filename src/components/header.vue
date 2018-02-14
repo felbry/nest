@@ -1,46 +1,93 @@
-<style scoped>
-    .col-xs-3 {
-        padding: 25px 0;
-        text-align: center;
-        cursor: pointer;
-    }
-
-    .router-link-active {
-        border-bottom: 3px solid #6190e8;
-    }
-</style>
-
 <template>
-    <div class="container-fluid">
-        <div class="row">
-            <div class="col-xs-1">
-                
-            </div>
-            <div class="col-xs-5">
-                <div class="row">
-                    <div class="col-xs-3">
-                        <router-link to="/index">首页</router-link>
-                    </div>
-                    <div class="col-xs-3">
-                        <router-link to="/blog">博客</router-link>
-                    </div>
-                    <div class="col-xs-3">
-                        <router-link to="/photos">照片墙</router-link>
-                    </div>
-                    <div class="col-xs-3">
-                        <router-link to="/about">关于</router-link>
-                    </div>
-                </div>
-            </div>
-        </div>
+    <div class="sidebar">
+        <h1 class="logo">
+            <span class="logo-day">{{timer}}</span>days<br/>
+        </h1>
+        <ul class="menu">
+            <router-link
+                tag="li"
+                to="/index">
+                <a>Home</a>
+            </router-link>
+            <router-link
+                tag="li"
+                to="/blog">
+                <a>Blog</a>
+            </router-link>
+            <router-link
+                tag="li"
+                to="/photos">
+                <a>Photos</a>
+            </router-link>
+            <router-link
+                tag="li"
+                to="/about">
+                <a>About</a>
+            </router-link>
+        </ul>
     </div>
 </template>
 
 <script>
 module.exports = {
     data() {
-        return {};
-    }
+        return {
+            current: new Date(),
+            start: new Date(2017, 4, 19)
+        };
+    },
+    computed: {
+        timer () {
+            return Math.floor((this.current.getTime() - this.start.getTime()) / (24 * 3600 * 1000));
+        }
+    },
 };
 </script>
+
+<style scoped>
+    .sidebar {
+        width: 360px;
+        float: left;
+    }
+
+    .logo {
+        width: 280px;
+        height: 128px;
+        padding: 48px 0 0;
+    }
+
+    .logo-day {
+        font-size: 50px;
+    }
+
+    .menu {
+        margin: 0;
+        padding: 122px 0 0;
+    }
+
+    .menu li {
+        /* display: inline-block; */
+        list-style: none;
+        height: 60px;
+        padding-bottom: 4px;
+    }
+
+    a {
+        display: inline-block;
+        height: 56px;
+        line-height: 56px;
+        background-color: #000;
+        padding: 0 95px 0 40px;
+        color: #fff;
+        font-size: 26px;
+        font-weight: bolder;
+        cursor: pointer;
+        transition: background-color 1s;
+    }
+
+    a:hover {
+        background-color: #fff;
+        color: #000;
+    }
+</style>
 

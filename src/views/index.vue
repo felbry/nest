@@ -1,11 +1,11 @@
-<style>
-    
-</style>
-
 <template>
-    <div>
+    <div class="body">
         <my-header></my-header>
-        <router-view></router-view>
+        <transition name="right-area">
+            <div class="content">
+                <router-view></router-view>
+            </div>
+        </transition>
     </div>
 </template>
 
@@ -15,7 +15,7 @@
     module.exports = {
         data () {
             return {
-                // url: 'context.url'
+                
             };
         },
         components: {
@@ -23,4 +23,29 @@
         }
     };
 </script>
+
+<style scoped>
+    .body {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        width: 1100px;
+        height: 100%;
+        padding: 20px 0;        
+        transform: translateX(-50%);
+    }
+
+    .content {
+        float: left;
+        width: 740px;
+        height: 100%;
+        padding: 25px 55px 25px 60px;
+        background-color: #000;
+        opacity: 0.8;
+    }
+
+    .right-area-leave-active {
+        height: 0;
+    }
+</style>
 
