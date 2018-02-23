@@ -89,5 +89,10 @@ module.exports = {
         background-color: #fff;
         color: #000;
     }
+
+    .router-link-active a {
+        background-color: #fff;
+        color: #000;
+    }
 </style>
 

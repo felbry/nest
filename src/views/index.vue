@@ -1,11 +1,11 @@
 <template>
     <div class="body">
         <my-header></my-header>
-        <transition name="right-area">
-            <div class="content">
-                <router-view></router-view>
-            </div>
-        </transition>
+        <!-- <transition
+            name="right-area"
+            mode="out-in"> -->
+            <router-view></router-view>
+        <!-- </transition> -->
     </div>
 </template>
 
@@ -35,17 +35,12 @@
         transform: translateX(-50%);
     }
 
-    .content {
-        float: left;
-        width: 740px;
-        height: 100%;
-        padding: 25px 55px 25px 60px;
-        background-color: #000;
-        opacity: 0.8;
+    .right-area-enter-active, .right-area-leave-active {
+        transition: opacity .3s;
     }
 
-    .right-area-leave-active {
-        height: 0;
+    .right-area-enter, .right-area-leave-to {
+        opacity: 0;
     }
 </style>
 
