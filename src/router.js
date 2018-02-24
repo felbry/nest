@@ -8,7 +8,6 @@ export function createRouter() {
             {
                 path: '/',
                 component: () => import('./views/index.vue'),
-                redirect: '/index',
                 children: [
                     {
                         path: 'index',
@@ -32,6 +31,21 @@ export function createRouter() {
                     },
                 ]
             },
+            {
+                path: '/admin',
+                component: () => import('./views/admin.vue'),
+                redirect: '/admin/post',
+                children: [
+                    {
+                        path: 'post',
+                        component: () => import('./views/admin/post.vue'),                        
+                    },
+                    {
+                        path: 'test',
+                        component: () => import('./views/admin/test.vue'),                        
+                    },
+                ]
+            }
         ]
     });
 }

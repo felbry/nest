@@ -4,7 +4,7 @@
         <!-- <transition
             name="right-area"
             mode="out-in"> -->
-            <router-view></router-view>
+        <router-view></router-view>
         <!-- </transition> -->
     </div>
 </template>
@@ -35,12 +35,12 @@
         transform: translateX(-50%);
     }
 
-    .right-area-enter-active, .right-area-leave-active {
+    /* .right-area-enter-active, .right-area-leave-active {
         transition: opacity .3s;
     }
 
     .right-area-enter, .right-area-leave-to {
         opacity: 0;
-    }
+    } */
 </style>
 

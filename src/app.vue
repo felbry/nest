@@ -15,6 +15,10 @@
 </script>
 
 <style>
+    * {
+        box-sizing: border-box;
+    }
+    
     html, body {
         height: 100vh;
         width: 100wh;
@@ -23,6 +27,11 @@
         background-size: 100%;
         background-position: center;
         background-repeat: no-repeat;
+    }
+
+    h1, h2, ul, html, body {
+        margin: 0;
+        padding: 0;
     }
 
     #app {
