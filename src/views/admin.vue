@@ -3,51 +3,30 @@
         <div class="header">
             <h2>Control Panel</h2>
         </div>
-        <div class="container">
-            <!-- <div class="sidebar">
-                <el-menu
-                    class="el-menu-vertical-demo"
-                    router>
-                    <el-menu-item index="/admin/post">
-                        <i class="el-icon-plus"></i>
-                        <span slot="title">新博客</span>
-                    </el-menu-item>
-                    <el-menu-item index="/admin/test">
-                        <i class="el-icon-location"></i>
-                        <span slot="title">测试</span>
-                    </el-menu-item>
-                </el-menu>
-            </div> -->
-            <ul class="sidebar">
-                <li>1</li>
-                <li>2</li>
-                <li>3</li>
-                <li>4</li>
-            </ul>
-            <!-- <router-view></router-view> -->
-            <div class="content">content</div>
+        <ul class="sidebar">
+            <router-link
+                tag="li"
+                to="/admin/post">
+                新博客
+            </router-link>
+            <router-link
+                tag="li"
+                to="/admin/test">
+                测试内容
+            </router-link>
+        </ul>
+        <div class="content">
+            <router-view></router-view>
         </div>
     </div>
 </template>
 
 <script>
-    import { Menu, MenuItem } from 'element-ui';
-
     module.exports = {
         data () {
-            return {
-                logo: '管理面板',
-            };
+            return {};
         },
-        methods: {
-            logout () {
-
-            }
-        },
-        components: {
-            [Menu.name]: Menu,
-            [MenuItem.name]: MenuItem,
-        }
+        methods: {},
     };
 </script>
 
@@ -72,14 +51,14 @@
 
     .container {
         width: 100%;
-        height: calc(100vh - 60px);
+        overflow: hidden;
     }
 
     .sidebar {
+        float: left;        
         width: 200px;
-        height: 100%;
+        height: calc(100vh - 60px);
         border-right: 1px solid #e6e6e6;
-        overflow: hidden;
     }
 
     .sidebar li {
@@ -89,17 +68,20 @@
     }
 
     .sidebar li:hover {
+        cursor: pointer;
         background-color: #ecf5ff;
         color: #409EFF;
     }
 
-    .content {
-        float: left;
-        height: 100%;
+    .router-link-active {
+        background-color: #ecf5ff;        
+        color: #409EFF;
     }
 
-    .el-menu {
-        height: 100%;
+    .content {
+        height: calc(100vh - 60px);
+        padding: 20px;
+        overflow: hidden;        
     }
 </style>
 
