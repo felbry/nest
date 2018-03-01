@@ -1,11 +1,13 @@
 const EXPRESS = require('express');
-const ROUTER = require('./routes');
+const ROUTER = EXPRESS.Router();
 const CONFIG = require('./config');
 const PATH = require('path');
 const RESOLVE = file => PATH.resolve(__dirname, file);
 const CREATE_BUNDLE_RENDERER = require('vue-server-renderer').createBundleRenderer;
 const AV = require('leanengine');
 const APP = EXPRESS();
+
+const BLOG_ROUTER = require('./controller/blog');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 const TEMPLATE_PATH = RESOLVE('./index.template.html');
@@ -48,11 +50,11 @@ function render (req, res) {
     });
 }
 
-ROUTER.router.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
+APP.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
 });
 
-APP.use(ROUTER.router);
+APP.use('/api/blog', BLOG_ROUTER);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
     console.log(`App listening on online or port ${process.env.LEANCLOUD_APP_PORT || 3000}!`);

@@ -3,3 +3,4 @@ node_modules
 public
 .leancloud
 config.js
+npm-debug.log

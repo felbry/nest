@@ -8,7 +8,7 @@
         <el-upload
             ref="upload"
             :multiple="false"
-            action="/api/admin/posts"
+            action="/api/blog/articals"
             :on-change="onChange"
             :on-success="onSuccess"
             :on-error="onError"
