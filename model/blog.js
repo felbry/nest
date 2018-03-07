@@ -1,9 +1,11 @@
 const AV = require('leanengine');
 
-module.exports.create = function (fileOpt) {
-    let file = new AV.File(fileOpt.originalname, fileOpt.buffer);
+module.exports.create = function (opt) {
+    let file = new AV.File(opt.originalname, opt.buffer);
     return file.save().then((file) => {
-        console.log(1);
-        console.log(file.id);
-    });
+        return file.id;
+    }).then(id => {
+        console.log(id);
+        
+    })
 }

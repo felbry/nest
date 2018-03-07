@@ -16,8 +16,10 @@
   "license": "ISC",
   "dependencies": {
     "axios": "^0.17.1",
-    "element-ui": "^2.2.0",
+    "body-parser": "^1.18.2",
+    "cors": "^2.8.4",
     "express": "^4.16.2",
+    "jsonwebtoken": "^8.2.0",
     "leancloud-storage": "^3.3.1",
     "leanengine": "^3.0.2",
     "markdown-it": "^8.4.0",

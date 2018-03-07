@@ -5,9 +5,12 @@ const PATH = require('path');
 const RESOLVE = file => PATH.resolve(__dirname, file);
 const CREATE_BUNDLE_RENDERER = require('vue-server-renderer').createBundleRenderer;
 const AV = require('leanengine');
+const CORS = require('cors');
 const APP = EXPRESS();
+var bodyParser = require('body-parser');
 
-const BLOG_ROUTER = require('./controller/blog');
+const BLOG_CONTROLLER = require('./controller/blog');
+const USER_CONTROLLER = require('./controller/user');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 const TEMPLATE_PATH = RESOLVE('./index.template.html');
@@ -27,6 +30,7 @@ if (!IS_DEV) {
 }
 
 APP.use(EXPRESS.static('public'));
+APP.use(bodyParser.json());
 
 AV.init({
     appId: process.env.LEANCLOUD_APP_ID || CONFIG.appId,
@@ -54,7 +58,8 @@ APP.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
 });
 
-APP.use('/api/blog', BLOG_ROUTER);
+APP.use('/api/blog', BLOG_CONTROLLER);
+APP.use('/api/user', CORS(), USER_CONTROLLER);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
     console.log(`App listening on online or port ${process.env.LEANCLOUD_APP_PORT || 3000}!`);

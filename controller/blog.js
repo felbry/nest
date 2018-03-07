@@ -3,8 +3,11 @@ const ROUTER = EXPRESS.Router();
 const FS = require('fs');
 const MD = new require('markdown-it')();
 const MULTER  = require('multer');
+const CORS = require('cors');
 var upload = MULTER();
+
 var blog = require('../model/blog');
+var jwt = require('../middleware/auth');
 
 ROUTER.route('/articals')
     .get((req, res) => {
@@ -16,10 +19,12 @@ ROUTER.route('/articals')
             }
         ]);
     })
-    .post(upload.single('file'), (req, res) => {
-        blog.create(Object.assign(req.body, req.file)).then(() => {
-            console.log(2);
-            res.end('ggg');
+    .post(CORS(), jwt, upload.single('file'), (req, res) => {
+        blog.create(Object.assign(req.body, req.file, req.user)).then(result => {
+            if (result.code >= 0) {
+                res.json(result);
+            }
+            res.status(500).json(result);
         });
     })
 
