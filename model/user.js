@@ -1,8 +1,10 @@
 const AV = require('leanengine');
 const JWT = require('jsonwebtoken');
 
+var utils = require('../utils');
+
 module.exports.find = function (opt) {
-    var cql = 'select * from admin where username = ? and password = ?';
+    var cql = 'select * from Admin where username = ? and password = ?';
     var pv = [opt.username, opt.password];
     return AV.Query.doCloudQuery(cql, pv).then(data => {
         let results = data.results;
@@ -25,12 +27,5 @@ module.exports.find = function (opt) {
                 )
             }
         }
-    }).catch(err => {
-        return {
-            code: -1,
-            data: {
-                msg: err.toString()
-            }
-        }
-    });
+    }).catch(utils.handleDBErr);
 }
