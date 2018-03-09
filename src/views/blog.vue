@@ -6,8 +6,10 @@
         padding: 25px 55px 25px 60px;
         background-color: #000;
         opacity: 0.8;
+        overflow: auto;
     }
-    /* .blog-list {
+    
+    .blog-list {
         width: 768px;
         margin: 0 auto;
         padding: 35px 0;
@@ -29,16 +31,15 @@
     .title {
         font-size: 22px;
         cursor: pointer;
-    } */
+    }
 </style>
 
 <template>
     <div class="content">
-        博客立马更新。
-        <!-- <div v-for="item in articalList" class="blog-item">
-            <div class="date">{{new Date(item.date).toDateString()}}</div>
+        <div v-for="item in articalList" class="blog-item">
+            <div class="date">{{new Date(item.createdAt).toLocaleDateString()}}</div>
             <div @click="detailBlog(item.id)" class="title">{{item.title}}</div>
-        </div> -->
+        </div>
     </div>
 </template>
 

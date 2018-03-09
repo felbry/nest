@@ -12,7 +12,7 @@ var utils = require('../utils');
 
 ROUTER.route('/articals')
     .get((req, res) => {
-        blog.find().then(result => {
+        blog.findAll().then(result => {
             utils.handleResponse(result, res);          
         });
     })
@@ -23,7 +23,11 @@ ROUTER.route('/articals')
     })
 
 ROUTER.get('/articals/:id', (req, res) => {
-    res.end(MD.render(FS.readFileSync('../README.md', { encoding: 'utf-8' })));
+    blog.find({
+        id: req.params.id
+    }).then(result => {
+        res.end(MD.render(result, { encoding: 'utf-8' }));
+    });
 });
 
 module.exports = ROUTER;

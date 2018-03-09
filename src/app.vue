@@ -22,7 +22,7 @@
     html, body {
         height: 100vh;
         width: 100wh;
-        font-family: Arial, Helvetica, sans-serif;
+        font-family: Georgia, Palatino, serif;
         background-image: url('./imgs/bg_3.jpg');
         background-size: 100%;
         background-position: center;

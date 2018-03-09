@@ -15,6 +15,6 @@ export const GET_ARTICAL_LIST = () => {
 
 export const GET_ARTICAL = (params) => {
     return A.get(`/api/blog/articals/${params.id}`).then(res => {
-        return res.data;
+        return res;
     });
 }

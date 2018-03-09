@@ -7,14 +7,14 @@ import {
 const ACTIONS = {
     getArticalList({ commit }) {
         return GET_ARTICAL_LIST().then(res => {
-            commit(types.SET_ARTICAL_LIST, res);
+            commit(types.SET_ARTICAL_LIST, res.data);
         });
     },
     getArtical({ commit }, id) {
         return GET_ARTICAL({
             id: id
         }).then(res => {
-            commit(types.SET_ARTICAL, res);
+            commit(types.SET_ARTICAL, res.data);
         });
     },
 };
