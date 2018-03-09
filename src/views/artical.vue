@@ -1,5 +1,4 @@
 <style scoped>
-    @import url('../css/markdown.css');
     .artical-content {
         float: left;
         width: 740px;

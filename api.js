@@ -1,7 +1,5 @@
 import axios from 'axios';
 
-const IS_DEV = process && process.env.NODE_ENV === 'dev';
-
 const A = axios.create({
     // baseURL: IS_DEV ? 'http://localhost:3000' : 'http://flipped.leanapp.cn'
     baseURL: 'http://localhost:3000'

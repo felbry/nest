@@ -15,6 +15,8 @@
 </script>
 
 <style>
+    @import url('./css/markdown.css');
+
     * {
         box-sizing: border-box;
     }

@@ -8,7 +8,7 @@
         opacity: 0.8;
         overflow: auto;
     }
-    
+
     .blog-list {
         width: 768px;
         margin: 0 auto;
@@ -16,16 +16,20 @@
     }
 
     .blog-item {
-        padding: 50px 0;
-        border-top: 1px solid #f4f3f3;
-        border-bottom: 1px solid #f4f3f3;
+        padding: 8px 0;
         font-weight: bolder;
     }
 
     .date {
         font-size: 12px;
+        width: 88px;
         color: #333;
         margin-bottom: 10px;
+        transition: color 1.6s;
+    }
+
+    .date:hover {
+        color: #fff;
     }
 
     .title {
