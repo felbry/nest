@@ -1,18 +1,32 @@
 import axios from 'axios';
 
-const A = axios.create({
-    // baseURL: IS_DEV ? 'http://localhost:3000' : 'http://flipped.leanapp.cn'
-    baseURL: 'http://localhost:3000'
-});
+const HOST = 'http://localhost:3000';
+// const HOST = 'http://flipped.leanapp.cn';
 
-export const GET_ARTICAL_LIST = () => {
-    return A.get('/api/blog/articals').then(res => {
+const _GET = (url, params) => {
+    return axios.request({
+        url: `${HOST}${url}`,
+        method: 'GET',
+        params: params,
+    }).then(res => {
         return res.data;
     });
 }
 
-export const GET_ARTICAL = (params) => {
-    return A.get(`/api/blog/articals/${params.id}`).then(res => {
-        return res;
+const _POST = (url, payload) => {
+    return axios.request({
+        url: `${HOST}${url}`,
+        method: 'POST',
+        data: payload,
+    }).then(res => {
+        return res.data;
     });
+}
+
+export const GET_ARTICAL_LIST = (params) => {
+    return _GET('/api/blog/articals', params);
+}
+
+export const GET_ARTICAL = (params) => {
+    return _GET(`/api/blog/articals/${params.id}`);
 }

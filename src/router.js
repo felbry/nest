@@ -16,6 +16,13 @@ export function createRouter() {
                     {
                         path: 'blog',
                         component: () => import('./views/blog.vue'),
+                        redirect: '/blog/all',
+                        children: [
+                            {
+                                path: '/blog/:type',
+                                component: () => import('./components/blog-list.vue')
+                            }
+                        ]
                     },
                     {
                         path: 'photos',

@@ -12,7 +12,9 @@ var utils = require('../utils');
 
 ROUTER.route('/articals')
     .get((req, res) => {
-        blog.findAll().then(result => {
+        blog.findAll({
+            type: req.query.type
+        }).then(result => {
             utils.handleResponse(result, res);          
         });
     })
@@ -26,8 +28,9 @@ ROUTER.get('/articals/:id', (req, res) => {
     blog.find({
         id: req.params.id
     }).then(result => {
-        res.end(MD.render(result, { encoding: 'utf-8' }));
-    });
+        result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
+        res.json(result);
+    }).catch(err => { console.log(err) });
 });
 
 module.exports = ROUTER;

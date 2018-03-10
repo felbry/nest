@@ -9,63 +9,44 @@
         overflow: auto;
     }
 
-    .blog-list {
-        width: 768px;
-        margin: 0 auto;
-        padding: 35px 0;
+    .category {
+        padding: 25px 0;
+        margin-bottom: 25px;
     }
 
-    .blog-item {
-        padding: 8px 0;
-        font-weight: bolder;
-    }
-
-    .date {
-        font-size: 12px;
-        width: 88px;
-        color: #333;
-        margin-bottom: 10px;
-        transition: color 1.6s;
-    }
-
-    .date:hover {
+    .menu-item {
         color: #fff;
+        margin-right: 18px;
+        font-size: 24px;
+        transition: font-size 0.6s;
     }
 
-    .title {
-        font-size: 22px;
+    .menu-item:hover, .router-link-active {
+        font-size: 28px;
+        background-color: #fff;
+        color: #000;
         cursor: pointer;
     }
 </style>
 
 <template>
     <div class="content">
-        <div v-for="item in articalList" class="blog-item">
-            <div class="date">{{new Date(item.createdAt).toLocaleDateString()}}</div>
-            <div @click="detailBlog(item.id)" class="title">{{item.title}}</div>
+        <div class="category">
+            <router-link class="menu-item" to="/blog/all">全部</router-link>
+            <router-link class="menu-item" to="/blog/fed">前端</router-link>
+            <router-link class="menu-item" to="/blog/blockchain">区块链</router-link>
+            <router-link class="menu-item" to="/blog/python">Python</router-link>
         </div>
+        <router-view></router-view>
     </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-
     module.exports = {
-        asyncData ({ store, route }) {
-            return store.dispatch('getArticalList');
-        },
         data () {
             return {
                 // url: ''
             };
-        },
-        computed: mapState({
-            articalList: state => state.blog.articalList
-        }),
-        methods: {
-            detailBlog (id) {
-                this.$router.push(`/blog/articals/${id}`);
-            }
         },
     };
 </script>

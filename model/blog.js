@@ -26,6 +26,9 @@ module.exports.create = function (opt) {
 
 module.exports.findAll = function (opt) {
     let query = new AV.Query('Artical');
+    if (opt.type != 'all') {
+        query.equalTo('type', opt.type);        
+    }
     query.include('user');
     return query.find().then(results => {
         return {
@@ -46,9 +49,19 @@ module.exports.findAll = function (opt) {
 module.exports.find = function (opt) {
     let query = new AV.Query('Artical');
     query.include('file');
-    return query.get(opt.id).then(result => {
-        return result.get('file').get('url');
-    }).then(url => {
-        return axios.get(url).then(result => result.data);
+    return query.get(opt.id).then(rs1 => {
+        return rs1;
+    }).then(artical => {
+        let url = artical.get('file').get('url');
+        return axios.get(url).then(rs2 => {
+            return {
+                code: 0,
+                data: {
+                    title: artical.get('title'),
+                    createdAt: artical.get('createdAt'),
+                    content: rs2.data
+                }
+            }
+        });
     }).catch(utils.handleDBErr);  
 }

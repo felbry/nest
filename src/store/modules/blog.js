@@ -5,8 +5,10 @@ import {
 } from '../../../api';
 
 const ACTIONS = {
-    getArticalList({ commit }) {
-        return GET_ARTICAL_LIST().then(res => {
+    getArticalList({ commit }, type) {
+        return GET_ARTICAL_LIST({
+            type: type
+        }).then(res => {
             commit(types.SET_ARTICAL_LIST, res.data);
         });
     },
