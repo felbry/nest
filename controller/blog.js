@@ -14,7 +14,8 @@ var utils = require('../utils');
 ROUTER.route('/articals')
     .get((req, res) => {
         blog.findAll({
-            tid: req.query.tid
+            tid: req.query.tid,
+            page: req.query.page || 1
         }).then(result => {
             utils.handleResponse(result, res);          
         });

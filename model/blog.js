@@ -35,19 +35,28 @@ module.exports.findAll = function (opt) {
         query.equalTo('tag', tag);        
     }
     query.include('user');
-    return query.find().then(results => {
-        return {
-            code: 0,
-            data: results.map(val => {
-                return {
-                    id: val.id,
-                    title: val.get('title'),
-                    author: val.get('user').get('nickname'),
-                    createdAt: val.createdAt,
-                    updatedAt: val.updatedAt
-                };
-            })
+    return query.count().then(count => count).then(count => {
+        query.limit(10);
+        if (opt.page > 1) {
+            query.skip((opt.page - 1) * 10);
         }
+        return query.find().then(results => {
+            return {
+                code: 0,
+                data: {
+                    total: count,
+                    articals: results.map(val => {
+                        return {
+                            id: val.id,
+                            title: val.get('title'),
+                            author: val.get('user').get('nickname'),
+                            createdAt: val.createdAt,
+                            updatedAt: val.updatedAt
+                        };
+                    })
+                }
+            };
+        });
     }).catch(utils.handleDBErr);
 }
 

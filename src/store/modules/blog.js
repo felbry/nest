@@ -6,11 +6,10 @@ import {
 } from '../../../api';
 
 const ACTIONS = {
-    getArticalList({ commit }, tid) {
-        return GET_ARTICAL_LIST({
-            tid: tid
-        }).then(res => {
-            commit(types.SET_ARTICAL_LIST, res.data);
+    getArticalList({ commit }, opt) {
+        return GET_ARTICAL_LIST(opt).then(res => {
+            commit(types.SET_ARTICAL_LIST, res.data.articals);
+            commit(types.SET_TOTAL, res.data.total);
         });
     },
     getArtical({ commit }, id) {
@@ -37,10 +36,14 @@ const MUTATIONS = {
     [types.SET_TAG_LIST] (state, payload) {
         state.tagList = payload;
     },
+    [types.SET_TOTAL] (state, payload) {
+        state.total = payload;
+    },
 };
 
 export default {
     state: () => ({
+        total: 0,
         articalList: [],
         artical: '',
         tagList: []
