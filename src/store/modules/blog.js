@@ -5,9 +5,9 @@ import {
 } from '../../../api';
 
 const ACTIONS = {
-    getArticalList({ commit }, type) {
+    getArticalList({ commit }, tid) {
         return GET_ARTICAL_LIST({
-            type: type
+            tid: tid
         }).then(res => {
             commit(types.SET_ARTICAL_LIST, res.data);
         });

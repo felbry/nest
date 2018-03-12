@@ -32,7 +32,7 @@
 <template>
     <div class="content">
         <div class="category">
-            <router-link class="menu-item" to="/blog/all">全部</router-link>
+            <router-link class="menu-item" to="/blog/">全部</router-link>
             <router-link class="menu-item" to="/blog/fed">前端</router-link>
             <router-link class="menu-item" to="/blog/blockchain">区块链</router-link>
             <router-link class="menu-item" to="/blog/python">Python</router-link>

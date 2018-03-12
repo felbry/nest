@@ -16,10 +16,10 @@ export function createRouter() {
                     {
                         path: 'blog',
                         component: () => import('./views/blog.vue'),
-                        redirect: '/blog/all',
+                        redirect: '/blog',
                         children: [
                             {
-                                path: '/blog/:type',
+                                path: '/blog/:tid',
                                 component: () => import('./components/blog-list.vue')
                             }
                         ]

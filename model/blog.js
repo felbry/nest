@@ -12,6 +12,10 @@ module.exports.create = function (opt) {
         let file = AV.Object.createWithoutData('_File', fid);
         artical.set('user', user);
         artical.set('file', file);
+        if (opt.tid) {
+            let tag = AV.Object.createWithoutData('Tag', opt.tid);
+            artical.set('tag', tag);
+        }
         artical.set('title', opt.title);
         return artical.save().then(result => {
             return {
@@ -26,8 +30,9 @@ module.exports.create = function (opt) {
 
 module.exports.findAll = function (opt) {
     let query = new AV.Query('Artical');
-    if (opt.type != 'all') {
-        query.equalTo('type', opt.type);        
+    if (opt.tid) {
+        let tag = AV.Object.createWithoutData('Tag', opt.tid);
+        query.equalTo('tag', tag);        
     }
     query.include('user');
     return query.find().then(results => {
@@ -64,4 +69,34 @@ module.exports.find = function (opt) {
             }
         });
     }).catch(utils.handleDBErr);  
+}
+
+module.exports.createTag = function (opt) {
+    let tag = new AV.Object('Tag');
+    tag.set('name', opt.name);
+    tag.set('path', opt.path);
+    return tag.save().then(result => {
+        return {
+            code: 0,
+            data: {
+                id: result.id
+            }
+        }
+    }).catch(utils.handleDBErr);
+}
+
+module.exports.findAllTag = function (opt) {
+    let query = new AV.Query('Tag');
+    return query.find().then(results => {
+        return {
+            code: 0,
+            data: results.map(result => {
+                return {
+                    id: result.id,
+                    name: result.get('name'),
+                    path: result.get('path')
+                };
+            })
+        }
+    }).catch(utils.handleDBErr);
 }
