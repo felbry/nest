@@ -39,12 +39,12 @@ ROUTER.get('/articals/:id', (req, res) => {
 ROUTER.route('/tags')
     .get((req, res) => {
         blog.findAllTag().then(result => {
-            utils.handleResponse(result);
+            utils.handleResponse(result, res);
         });
     })
     .post(CORS(), jwt, (req, res) => {
         blog.createTag(req.body).then(result => {
-            utils.handleResponse(result);
+            utils.handleResponse(result, res);
         });
     })
 

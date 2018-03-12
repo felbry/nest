@@ -32,22 +32,34 @@
 <template>
     <div class="content">
         <div class="category">
-            <router-link class="menu-item" to="/blog/">全部</router-link>
-            <router-link class="menu-item" to="/blog/fed">前端</router-link>
-            <router-link class="menu-item" to="/blog/blockchain">区块链</router-link>
-            <router-link class="menu-item" to="/blog/python">Python</router-link>
+            <router-link class="menu-item" to="/blog/all">全部</router-link>
+            <router-link
+                v-for="tag in tagList"
+                :key="tag.id"
+                :to="'/blog/' + tag.id"
+                class="menu-item">
+                {{tag.name}}
+            </router-link>
         </div>
         <router-view></router-view>
     </div>
 </template>
 
 <script>
+    import { mapState } from 'vuex';    
+
     module.exports = {
+        asyncData ({ store, route }) {
+            return store.dispatch('getTagList', route.params.tid == 'all' ? '' : route.params.tid);
+        },
         data () {
             return {
                 // url: ''
             };
         },
+        computed: mapState({
+            tagList: state => state.blog.tagList
+        }),
     };
 </script>
 

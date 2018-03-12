@@ -30,3 +30,7 @@ export const GET_ARTICAL_LIST = (params) => {
 export const GET_ARTICAL = (params) => {
     return _GET(`/api/blog/articals/${params.id}`);
 }
+
+export const GET_TAG_LIST = (params) => {
+    return _GET('/api/blog/tags');
+}

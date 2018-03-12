@@ -16,7 +16,7 @@ export function createRouter() {
                     {
                         path: 'blog',
                         component: () => import('./views/blog.vue'),
-                        redirect: '/blog',
+                        redirect: '/blog/all',
                         children: [
                             {
                                 path: '/blog/:tid',

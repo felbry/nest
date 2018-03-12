@@ -74,7 +74,6 @@ module.exports.find = function (opt) {
 module.exports.createTag = function (opt) {
     let tag = new AV.Object('Tag');
     tag.set('name', opt.name);
-    tag.set('path', opt.path);
     return tag.save().then(result => {
         return {
             code: 0,
@@ -94,7 +93,6 @@ module.exports.findAllTag = function (opt) {
                 return {
                     id: result.id,
                     name: result.get('name'),
-                    path: result.get('path')
                 };
             })
         }

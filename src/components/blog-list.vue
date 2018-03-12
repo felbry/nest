@@ -40,11 +40,10 @@
 
     module.exports = {
         asyncData ({ store, route }) {
-            console.log(route.params);
-            return store.dispatch('getArticalList', route.params.tid);
+            return store.dispatch('getArticalList', route.params.tid == 'all' ? '' : route.params.tid);
         },
         beforeRouteUpdate (to, from, next) {
-            this.$store.dispatch('getArticalList', to.params.tid).then(() => {
+            this.$store.dispatch('getArticalList', to.params.tid == 'all' ? '' : to.params.tid).then(() => {
                 next();
             });
         },

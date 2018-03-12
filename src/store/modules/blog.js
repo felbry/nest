@@ -2,6 +2,7 @@ import * as types from '../mutation-types';
 import {
     GET_ARTICAL_LIST,
     GET_ARTICAL,
+    GET_TAG_LIST
 } from '../../../api';
 
 const ACTIONS = {
@@ -19,6 +20,11 @@ const ACTIONS = {
             commit(types.SET_ARTICAL, res.data);
         });
     },
+    getTagList({ commit }) {
+        return GET_TAG_LIST().then(res => {
+            commit(types.SET_TAG_LIST, res.data);
+        });
+    },
 };
 
 const MUTATIONS = {
@@ -28,12 +34,16 @@ const MUTATIONS = {
     [types.SET_ARTICAL] (state, payload) {
         state.artical = payload;
     },
+    [types.SET_TAG_LIST] (state, payload) {
+        state.tagList = payload;
+    },
 };
 
 export default {
     state: () => ({
         articalList: [],
-        artical: ''
+        artical: '',
+        tagList: []
     }),
     mutations: MUTATIONS,
     actions: ACTIONS    
