@@ -26,7 +26,8 @@
 
     .el-pagination {
         position: absolute;
-        bottom: 60px;
+        left: 60px;
+        bottom: 40px;
     }
 </style>
 

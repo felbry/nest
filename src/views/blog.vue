@@ -1,5 +1,6 @@
 <style scoped>
     .content {
+        position: relative;
         float: left;
         width: 740px;
         height: 100%;

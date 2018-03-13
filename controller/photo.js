@@ -18,11 +18,11 @@ ROUTER.route('/imgs')
             utils.handleResponse(result, res);          
         });
     })
-    // .post(CORS(), jwt, upload.single('file'), (req, res) => {
-    //     blog.create(Object.assign(req.body, req.file, req.user)).then(result => {
-    //         utils.handleResponse(result, res);
-    //     });
-    // })
+    .post(CORS(), jwt, upload.array('file'), (req, res) => {
+        photo.create(Object.assign(req.body, { files: req.files })).then(result => {
+            utils.handleResponse(result, res);
+        });
+    })
 
 // 获取图片详情
 // ROUTER.get('/articals/:id', (req, res) => {

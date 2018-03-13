@@ -1,5 +1,6 @@
 <style scpoed>
     .photo-content {
+        position: relative;
         float: left;
         width: 740px;
         height: 100%;
@@ -8,13 +9,14 @@
         opacity: 0.8;
     }
 
-    .category {
+    .photo-content .category {
+        margin-left: 35px;
         padding: 25px;
         margin-bottom: 25px;
     }
 
     .menu-item {
-        color: #fff;
+        color: #fff!important;
         margin-right: 18px;
         font-size: 24px;
         transition: font-size 0.6s;
@@ -23,7 +25,7 @@
     .menu-item:hover, .router-link-active {
         font-size: 28px;
         background-color: #fff;
-        color: #000;
+        color: #000!important;
         cursor: pointer;
     }
 </style>

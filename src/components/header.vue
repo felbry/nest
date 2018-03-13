@@ -3,23 +3,27 @@
         <h1 class="logo">
             <span class="logo-day">{{timer}}</span>days<br/>
         </h1>
-        <ul class="menu">
+        <ul class="header-menu">
             <router-link
+                active-class="header-router-link-active"
                 tag="li"
                 to="/index">
                 <a>Home</a>
             </router-link>
             <router-link
+                active-class="header-router-link-active"
                 tag="li"
                 to="/blog">
                 <a>Blog</a>
             </router-link>
             <router-link
+                active-class="header-router-link-active"
                 tag="li"
                 to="/photos">
                 <a>Photos</a>
             </router-link>
             <router-link
+                active-class="header-router-link-active"
                 tag="li"
                 to="/about">
                 <a>About</a>
@@ -60,12 +64,12 @@ module.exports = {
         font-size: 50px;
     }
 
-    .menu {
+    .header-menu {
         margin: 0;
         padding: 122px 0 0;
     }
 
-    .menu li {
+    .header-menu li {
         /* display: inline-block; */
         list-style: none;
         height: 60px;
@@ -90,7 +94,7 @@ module.exports = {
         color: #000;
     }
 
-    .router-link-active a {
+    .header-router-link-active a {
         background-color: #fff;
         color: #000;
     }

@@ -14,15 +14,20 @@
 
     .el-pagination {
         position: absolute;
-        bottom: 60px;
+        left: 60px;
+        bottom: 40px;
     }
 </style>
 
 <template>
     <div>
         <div id="lightgallery">
-            <a class="lg-item" v-for="i in 16" href="https://p.upyun.com/docs/cloud/demo.jpg">
-                <img style="width: 184x; height: 120px" src="https://p.upyun.com/docs/cloud/demo.jpg">
+            <a class="lg-item"
+                v-for="item in photoList"
+                :href="item.url">
+                <img
+                    style="width: 184x; height: 120px"
+                    :src="item.thumbUrl" />
             </a>
         </div>
         <el-pagination
