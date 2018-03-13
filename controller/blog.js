@@ -38,7 +38,7 @@ ROUTER.get('/articals/:id', (req, res) => {
 
 // 创建、获取标签
 ROUTER.route('/tags')
-    .get((req, res) => {
+    .get(CORS(), (req, res) => {
         blog.findAllTag().then(result => {
             utils.handleResponse(result, res);
         });

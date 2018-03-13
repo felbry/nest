@@ -36,7 +36,7 @@ ROUTER.route('/imgs')
 
 // 创建、获取标签
 ROUTER.route('/tags')
-    .get((req, res) => {
+    .get(CORS(), (req, res) => {
         photo.findAllTag().then(result => {
             utils.handleResponse(result, res);
         });

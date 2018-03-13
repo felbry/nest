@@ -59,6 +59,7 @@ APP.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
     readyPromise.then(() => render(req, res));
 });
 
+APP.options('*', CORS());
 APP.use('/api/blog', BLOG_CONTROLLER);
 APP.use('/api/photo', PHOTO_CONTROLLER);
 APP.use('/api/user', CORS(), USER_CONTROLLER);
