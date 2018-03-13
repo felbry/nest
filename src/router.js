@@ -27,6 +27,13 @@ export function createRouter() {
                     {
                         path: 'photos',
                         component: () => import('./views/photos.vue'),
+                        redirect: '/photos/all',
+                        children: [
+                            {
+                                path: '/photos/:tid',
+                                component: () => import('./components/photo-list.vue')
+                            }
+                        ]
                     },
                     {
                         path: 'about',

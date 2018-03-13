@@ -10,6 +10,7 @@ const APP = EXPRESS();
 var bodyParser = require('body-parser');
 
 const BLOG_CONTROLLER = require('./controller/blog');
+const PHOTO_CONTROLLER = require('./controller/photo');
 const USER_CONTROLLER = require('./controller/user');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
@@ -59,6 +60,7 @@ APP.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
 });
 
 APP.use('/api/blog', BLOG_CONTROLLER);
+APP.use('/api/photo', PHOTO_CONTROLLER);
 APP.use('/api/user', CORS(), USER_CONTROLLER);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {

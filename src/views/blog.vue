@@ -50,7 +50,7 @@
 
     module.exports = {
         asyncData ({ store, route }) {
-            return store.dispatch('getTagList', route.params.tid == 'all' ? '' : route.params.tid);
+            return store.dispatch('getTagList');
         },
         data () {
             return {

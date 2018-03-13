@@ -1,27 +1,15 @@
 <style scoped>
-    .blog-item {
-        padding: 8px 0;
-        font-weight: bolder;
+    @import url("../lib/lightgallery/css/lightgallery.min.css");
+    
+    #lightgallery {
+        float: left;
     }
 
-    .date {
-        font-size: 12px;
-        width: 88px;
-        color: #333;
-        margin-bottom: 10px;
-        transition: color 1.6s;
-    }
-
-    .date:hover {
-        color: #fff;
-    }
-
-    .title {
-        font-size: 22px;
-        cursor: pointer;
-        text-overflow:ellipsis;
-        white-space: nowrap;
-        overflow: hidden;
+    .lg-item {
+        float: left;
+        width: 184px;
+        height: 120px;
+        margin: 0 1px 1px 0;
     }
 
     .el-pagination {
@@ -32,13 +20,11 @@
 
 <template>
     <div>
-        <div v-if="articalList.length">
-            <div v-for="item in articalList" class="blog-item">
-                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}}</div>
-                <div @click="detailBlog(item.id)" class="title">{{item.title}}</div>
-            </div>
+        <div id="lightgallery">
+            <a class="lg-item" v-for="i in 16" href="https://p.upyun.com/docs/cloud/demo.jpg">
+                <img style="width: 184x; height: 120px" src="https://p.upyun.com/docs/cloud/demo.jpg">
+            </a>
         </div>
-        <div v-else>暂无相关文章</div>
         <el-pagination
             @current-change="pageChange"
             :current-page.sync="page"
@@ -49,20 +35,21 @@
     </div>
 </template>
 
+<script src="../lib/lightgallery.min.js"></script>
 <script>
     import { mapState } from 'vuex';
     import { Pagination } from 'element-ui';
 
     module.exports = {
         asyncData ({ store, route }) {
-            return store.dispatch('getArticalList', {
+            return store.dispatch('getPhotoList', {
                 tid: route.params.tid == 'all' ? '' : route.params.tid,
                 page: 1
             });
         },
         beforeRouteUpdate (to, from, next) {
             // 重置下分页状态
-            this.$store.dispatch('getArticalList', {
+            this.$store.dispatch('getPhotoList', {
                 tid: to.params.tid == 'all' ? '' : to.params.tid,
                 page: 1
             }).then(() => {
@@ -71,21 +58,24 @@
                 });
             });
         },
+        mounted () {
+            require('../lib/lightgallery/js/lightgallery.min.js');
+            require('../lib/lightgallery/js/lg-thumbnail.min.js');
+            require('../lib/lightgallery/js/lg-zoom.min.js');
+            lightGallery(document.getElementById('lightgallery'));
+        },
         data () {
             return {
                 page: 1
             };
         },
         computed: mapState({
-            articalList: state => state.blog.articalList,
-            total: state => state.blog.total,
+            photoList: state => state.photo.photoList,
+            total: state => state.photo.total,
         }),
         methods: {
-            detailBlog (id) {
-                this.$router.push(`/blog/articals/${id}`);
-            },
             pageChange (page) {
-                this.$store.dispatch('getArticalList', {
+                this.$store.dispatch('getPhotoList', {
                     tid: route.params.tid == 'all' ? '' : route.params.tid,
                     page: page
                 });
@@ -96,4 +86,3 @@
         }
     };
 </script>
-

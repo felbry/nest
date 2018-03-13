@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const HOST = 'http://localhost:3000';
-// const HOST = 'http://flipped.leanapp.cn';
+// const HOST = 'http://localhost:3000';
+const HOST = 'http://flipped.leanapp.cn';
 
 const _GET = (url, params) => {
     return axios.request({
@@ -23,6 +23,7 @@ const _POST = (url, payload) => {
     });
 }
 
+// blog start
 export const GET_ARTICAL_LIST = (params) => {
     return _GET('/api/blog/articals', params);
 }
@@ -31,6 +32,17 @@ export const GET_ARTICAL = (params) => {
     return _GET(`/api/blog/articals/${params.id}`);
 }
 
-export const GET_TAG_LIST = (params) => {
+export const GET_TAG_LIST = () => {
     return _GET('/api/blog/tags');
 }
+// blog end
+
+// photo start
+export const GET_PHOTO_LIST = (params) => {
+    return _GET('/api/photo/imgs', params);
+}
+
+export const GET_PHOTO_TAG_LIST = () => {
+    return _GET('/api/photo/tags');
+}
+// photo end
