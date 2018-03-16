@@ -47,7 +47,7 @@ module.exports.findAll = function (opt) {
                     photos: results.map(val => {
                         return {
                             id: val.id,
-                            thumbUrl: val.get('file').thumbnailURL(184, 120),
+                            thumbUrl: val.get('file').thumbnailURL(160, 120),
                             url: val.get('file').get('url'),
                             createdAt: val.createdAt,
                         };

@@ -2,14 +2,21 @@
     @import url("../lib/lightgallery/css/lightgallery.min.css");
     
     #lightgallery {
-        float: left;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: space-around;
     }
 
     .lg-item {
-        float: left;
-        width: 184px;
+        display: inline-flex;
+        justify-content: center;
+        align-items: center;
+        width: 160px;
         height: 120px;
-        margin: 0 1px 1px 0;
+        border: 2px solid #fff;
+        border-radius: 2px;
+        overflow: hidden;
+        margin-bottom: 15px;
     }
 
     .el-pagination {
@@ -25,9 +32,7 @@
             <a class="lg-item"
                 v-for="item in photoList"
                 :href="item.url">
-                <img
-                    style="width: 184x; height: 120px"
-                    :src="item.thumbUrl" />
+                <img :src="item.thumbUrl" />
             </a>
         </div>
         <el-pagination

@@ -18,7 +18,7 @@ const _POST = (url, payload) => {
         url: `${HOST}${url}`,
         method: 'POST',
         data: payload,
-    }).then(res => {
+    }).then(res => {      
         return res.data;
     });
 }

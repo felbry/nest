@@ -1,4 +1,6 @@
 import { createApp } from './universal';
+import { Loading } from 'element-ui';
+
 // 客户端特定引导逻辑……
 const { APP, ROUTER, STORE } = createApp();
 if (window.__INITIAL_STATE__) {
@@ -13,8 +15,6 @@ ROUTER.onReady(() => {
     ROUTER.beforeResolve((to, from, next) => {
         const MATCHED = ROUTER.getMatchedComponents(to);
         const PREV_MATCHED = ROUTER.getMatchedComponents(from);
-        // console.log(MATCHED);
-        // console.log(PREV_MATCHED);
         // 我们只关心之前没有渲染的组件
         // 所以我们对比它们，找出两个匹配列表的差异组件
         let diffed = false;
@@ -26,6 +26,11 @@ ROUTER.onReady(() => {
             return next();
         }
         // 这里如果有加载指示器(loading indicator)，就触发
+        var ls = Loading.service({
+            lock: true,
+            spinner: 'el-icon-loading',
+            background: 'rgba(0, 0, 0, 0.7)'
+        });
         Promise.all(ACTIVED.map(c => {
             if (c.asyncData) {
                 return c.asyncData({
@@ -35,6 +40,7 @@ ROUTER.onReady(() => {
             }
         })).then(() => {
             // 停止加载指示器(loading indicator)
+            ls.close();
             next();
         }).catch(next);
     });

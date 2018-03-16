@@ -1,7 +1,16 @@
 const EXPRESS = require('express');
+const hljs = require('highlight.js');
 const ROUTER = EXPRESS.Router();
 const FS = require('fs');
-const MD = new require('markdown-it')();
+const MD = new require('markdown-it')({
+    highlight: function (str, lang) {
+        if (lang && hljs.getLanguage(lang)) {
+            return hljs.highlight(lang, str).value;
+        }
+
+        return ''; // use external default escaping
+    }
+});
 const MULTER  = require('multer');
 const CORS = require('cors');
 var upload = MULTER();

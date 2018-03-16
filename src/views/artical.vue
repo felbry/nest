@@ -1,4 +1,5 @@
 <style scoped>
+    @import url('../css/atom-one-light.css');
     .artical-content {
         float: left;
         width: 740px;
