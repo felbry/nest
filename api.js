@@ -1,7 +1,7 @@
 import axios from 'axios';
 
-const HOST = 'http://localhost:3000';
-// const HOST = 'http://flipped.leanapp.cn';
+// const HOST = 'http://localhost:3000';
+const HOST = 'http://flipped.leanapp.cn';
 
 const _GET = (url, params) => {
     return axios.request({

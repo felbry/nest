@@ -12,7 +12,7 @@ module.exports.create = function (opt) {
             photo.set('file', file);
             if (opt.tid) {
                 let photoTag = AV.Object.createWithoutData('PhotoTag', opt.tid);
-                photo.set('tag', photoTag);    
+                photo.set('tag', photoTag);
             }
             return photo.save().then(result => result.id);
         }).catch(err => { console.log(err) });
@@ -31,7 +31,7 @@ module.exports.findAll = function (opt) {
     let query = new AV.Query('Photo');
     if (opt.tid) {
         let tag = AV.Object.createWithoutData('PhotoTag', opt.tid);
-        query.equalTo('tag', tag);        
+        query.equalTo('tag', tag);       
     }
     return query.count().then(count => count).then(count => {
         query.limit(16);

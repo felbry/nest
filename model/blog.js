@@ -8,7 +8,7 @@ module.exports.create = function (opt) {
         return file.id;
     }).then(fid => {
         let artical = new AV.Object('Artical');
-        let user = AV.Object.createWithoutData('Admin', opt.uid);
+        let user = AV.Object.createWithoutData('_User', opt.uid);
         let file = AV.Object.createWithoutData('_File', fid);
         artical.set('user', user);
         artical.set('file', file);
@@ -32,7 +32,7 @@ module.exports.findAll = function (opt) {
     let query = new AV.Query('Artical');
     if (opt.tid) {
         let tag = AV.Object.createWithoutData('Tag', opt.tid);
-        query.equalTo('tag', tag);        
+        query.equalTo('tag', tag);
     }
     query.include('user');
     return query.count().then(count => count).then(count => {
@@ -49,7 +49,7 @@ module.exports.findAll = function (opt) {
                         return {
                             id: val.id,
                             title: val.get('title'),
-                            author: val.get('user').get('nickname'),
+                            author: val.get('user').get('nickName'),
                             createdAt: val.createdAt,
                             updatedAt: val.updatedAt
                         };
