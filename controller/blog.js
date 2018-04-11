@@ -29,7 +29,7 @@ ROUTER.route('/articals')
             utils.handleResponse(result, res);          
         });
     })
-    .post(CORS(), jwt, upload.single('file'), (req, res) => {
+    .post(jwt, upload.single('file'), (req, res) => {
         blog.create(Object.assign(req.body, req.file, req.user)).then(result => {
             utils.handleResponse(result, res);
         });
@@ -47,12 +47,12 @@ ROUTER.get('/articals/:id', (req, res) => {
 
 // 创建、获取标签
 ROUTER.route('/tags')
-    .get(CORS(), (req, res) => {
+    .get((req, res) => {
         blog.findAllTag().then(result => {
             utils.handleResponse(result, res);
         });
     })
-    .post(CORS(), jwt, (req, res) => {
+    .post(jwt, (req, res) => {
         blog.createTag(req.body).then(result => {
             utils.handleResponse(result, res);
         });

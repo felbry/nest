@@ -1,7 +1,6 @@
 import axios from 'axios';
 
-// const HOST = 'http://localhost:3000';
-const HOST = 'http://flipped.leanapp.cn';
+const HOST = process.env.LEANCLOUD_APP_ID ? 'http://flipped.leanapp.cn' : 'http://localhost:3000';
 
 const _GET = (url, params) => {
     return axios.request({

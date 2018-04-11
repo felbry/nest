@@ -35,6 +35,7 @@ module.exports.findAll = function (opt) {
         query.equalTo('tag', tag);
     }
     query.include('user');
+    query.include('tag');
     return query.count().then(count => count).then(count => {
         query.limit(10);
         if (opt.page > 1) {
@@ -50,6 +51,10 @@ module.exports.findAll = function (opt) {
                             id: val.id,
                             title: val.get('title'),
                             author: val.get('user').get('nickName'),
+                            tag: val.get('tag') ? {
+                                id: val.get('tag').id,
+                                name: val.get('tag').get('name')
+                            } : { id: '' },
                             createdAt: val.createdAt,
                             updatedAt: val.updatedAt
                         };

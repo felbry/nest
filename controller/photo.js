@@ -18,7 +18,7 @@ ROUTER.route('/imgs')
             utils.handleResponse(result, res);          
         });
     })
-    .post(CORS(), jwt, upload.array('file'), (req, res) => {
+    .post(jwt, upload.array('file'), (req, res) => {
         photo.create(Object.assign(req.body, { files: req.files })).then(result => {
             utils.handleResponse(result, res);
         });
@@ -36,7 +36,7 @@ ROUTER.route('/imgs')
 
 // 创建、获取标签
 ROUTER.route('/tags')
-    .get(CORS(), (req, res) => {
+    .get((req, res) => {
         photo.findAllTag().then(result => {
             utils.handleResponse(result, res);
         });

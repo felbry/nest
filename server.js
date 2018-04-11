@@ -60,8 +60,8 @@ APP.get(/^(?!\/api)/, !IS_DEV ? render : (req, res) => {
 });
 
 APP.options('*', CORS());
-APP.use('/api/blog', BLOG_CONTROLLER);
-APP.use('/api/photo', PHOTO_CONTROLLER);
+APP.use('/api/blog', CORS(), BLOG_CONTROLLER);
+APP.use('/api/photo', CORS(), PHOTO_CONTROLLER);
 APP.use('/api/user', CORS(), USER_CONTROLLER);
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
