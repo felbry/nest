@@ -1,8 +1,9 @@
 const JWT = require('jsonwebtoken');
+var config = require('../config');
 
 module.exports = function (req, res, next) {
     let token = req.headers.authorization.split(' ')[1] || '';
-    JWT.verify(token, 'ajing', (err, decoded) => {
+    JWT.verify(token, config.secret, (err, decoded) => {
         if (err) {
             res.status(401).json({ code: 1, data: { msg: err } });
             return;
