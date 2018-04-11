@@ -23,7 +23,7 @@ module.exports.find = function (opt) {
                     {
                         uid: results[0].id
                     },
-                    'ajing'
+                    'jingbao'
                 )
             }
         }
