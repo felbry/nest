@@ -1,6 +1,6 @@
 <style scoped>
     .blog-item {
-        padding: 8px 0;
+        /* padding: 8px 0; */
         font-weight: bolder;
     }
 
@@ -17,11 +17,26 @@
     }
 
     .title {
+        display: flex;
+        align-items: center;
+        height: 46px;
         font-size: 22px;
         cursor: pointer;
-        text-overflow:ellipsis;
+        text-overflow: ellipsis;
         white-space: nowrap;
         overflow: hidden;
+    }
+
+    .title-avatar {
+        margin-right: 8px;
+        width: 30px;
+        height: 30px;
+        border: 2px solid #fff;
+        border-radius: 30px;
+    }
+
+    .title-avatar:hover {
+        transform: rotate(180deg);
     }
 
     .el-pagination {
@@ -36,7 +51,10 @@
         <div v-if="articalList.length">
             <div v-for="item in articalList" class="blog-item">
                 <div class="date">{{new Date(item.createdAt).toLocaleDateString()}}</div>
-                <div @click="detailBlog(item.id)" class="title">{{item.title}}</div>
+                <div @click="detailBlog(item.id)" class="title">
+                    <img :src="item.avatarUrl" class="title-avatar" />
+                    {{item.title}}
+                </div>
             </div>
         </div>
         <div v-else>暂无相关文章</div>

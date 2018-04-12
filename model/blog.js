@@ -86,6 +86,7 @@ module.exports.findAll = function (opt) {
                                 id: val.get('tag').id,
                                 name: val.get('tag').get('name')
                             } : { id: '' },
+                            avatarUrl: val.get('user').get('avatarUrl'),
                             createdAt: val.createdAt,
                             updatedAt: val.updatedAt
                         };
