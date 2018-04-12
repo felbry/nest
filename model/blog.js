@@ -28,6 +28,37 @@ module.exports.create = function (opt) {
     }).catch(utils.handleDBErr);
 }
 
+module.exports.updateByFile = function (opt) {
+    let artical = new AV.Query('Artical');
+    let oldFid = '';
+    artical.include('file');
+    // 1. 保留旧的文件id
+    return artical.get(opt.aid).then(rs1 => {
+        oldFid = rs1.get('file').id;
+        // 2. _File中保存新文件
+        let file = new AV.File(opt.originalname, opt.buffer);
+        return file.save();
+    }).then(rs2 => {
+        // 3. 替换新文件(及其它属性)
+        let art = AV.Object.createWithoutData('Artical', opt.aid);
+        art.set('file', rs2);
+        if (opt.tid) {
+            let tag = AV.Object.createWithoutData('Tag', opt.tid);
+            art.set('tag', tag);
+        }
+        art.set('title', opt.title);
+        return art.save();
+    }).then(() => {
+        // 4. 删除旧文件
+        let oldFile = AV.Object.createWithoutData('_File', oldFid);
+        return oldFile.destroy();
+    }).then(() => {
+        return {
+            code: 0
+        };
+    }).catch(utils.handleDBErr);
+}
+
 module.exports.findAll = function (opt) {
     let query = new AV.Query('Artical');
     if (opt.tid) {

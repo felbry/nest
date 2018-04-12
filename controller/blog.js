@@ -45,6 +45,13 @@ ROUTER.get('/articals/:id', (req, res) => {
     }).catch(err => { console.log(err) });
 });
 
+// 博客更新 -> 文件替换
+ROUTER.post('/articals/update', jwt, upload.single('file'), (req, res) => {
+    blog.updateByFile(Object.assign(req.body, req.file, req.user)).then(result => {
+        utils.handleResponse(result, res);
+    });
+});
+
 // 创建、获取标签
 ROUTER.route('/tags')
     .get((req, res) => {
