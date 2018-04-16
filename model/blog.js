@@ -65,6 +65,7 @@ module.exports.findAll = function (opt) {
         let tag = AV.Object.createWithoutData('Tag', opt.tid);
         query.equalTo('tag', tag);
     }
+    query.descending('createdAt');
     query.include('user');
     query.include('tag');
     return query.count().then(count => count).then(count => {

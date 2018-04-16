@@ -143,7 +143,7 @@
         <div class="artical-header">
             <h2>
                 {{artical.title}}
-                <small class="artical-time">{{new Date(artical.createdAt).toLocaleDateString()}}</small>
+                <small class="artical-time">{{new Date(artical.createdAt).toLocaleDateString()}} {{new Date(artical.createdAt).toLocaleTimeString()}}</small>
             </h2>
         </div>
         <div

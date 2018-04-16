@@ -6,7 +6,7 @@
 
     .date {
         font-size: 12px;
-        width: 88px;
+        width: 150px;
         color: #333;
         margin-bottom: 10px;
         transition: color 1.6s;
@@ -50,7 +50,7 @@
     <div>
         <div v-if="articalList.length">
             <div v-for="item in articalList" class="blog-item">
-                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}}</div>
+                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}} {{new Date(item.createdAt).toLocaleTimeString()}}</div>
                 <div @click="detailBlog(item.id)" class="title">
                     <img :src="item.avatarUrl" class="title-avatar" />
                     {{item.title}}
