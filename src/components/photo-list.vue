@@ -4,17 +4,17 @@
     #lightgallery {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
+        justify-content: flex-start;
     }
 
     .lg-item {
         display: inline-flex;
         justify-content: center;
         align-items: center;
-        width: 160px;
-        height: 120px;
+        width: 185px;
+        height: 111px;
         border: 2px solid #fff;
-        border-radius: 2px;
+        /* border-radius: 50px; */
         overflow: hidden;
         margin-bottom: 15px;
     }
