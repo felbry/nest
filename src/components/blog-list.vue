@@ -8,7 +8,6 @@
         font-size: 12px;
         width: 150px;
         color: #333;
-        margin-bottom: 10px;
         transition: color 1.6s;
     }
 
@@ -18,6 +17,7 @@
 
     .title {
         display: flex;
+        margin-bottom: 10px;        
         align-items: center;
         height: 46px;
         font-size: 22px;
@@ -50,7 +50,7 @@
     <div>
         <div v-if="articalList.length">
             <div v-for="item in articalList" class="blog-item">
-                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}} {{new Date(item.createdAt).toLocaleTimeString()}}</div>
+                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}} {{new Date(item.createdAt).toLocaleTimeString().slice(0, -3)}}</div>
                 <div @click="detailBlog(item.id)" class="title">
                     <img :src="item.avatarUrl" class="title-avatar" />
                     {{item.title}}
