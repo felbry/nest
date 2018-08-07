@@ -8,50 +8,42 @@
         margin-bottom: 24px;
     }
 
-    .artical-content {
-        float: left;
-        width: 740px;
-        height: 100%;
-        padding: 0px 55px 0px 60px;
-        background-color: #000;
-        font-size: 20px;
-        opacity: 0.8;
-        overflow: auto;
-        word-break: break-all;
-    }
-
     .blog-body {
+        line-height: 30px;
+
         /deep/ h1 {
             @include h-universal;
             font-size: 48px;
+            line-height: 48px;
             padding-bottom: 10px;
-            border-bottom: 1px solid #fff;
         }
 
         /deep/ h2 {
             @include h-universal;
             font-size: 38px;
+            line-height: 38px;
             width: 90%;
             padding-bottom: 10px;            
-            border-bottom: 1px solid #fff;            
         }
 
         /deep/ h3 {
             @include h-universal;
             font-size: 28px;
+            line-height: 28px;
             width: 80%;
             padding-bottom: 10px;            
-            border-bottom: 1px solid #fff;
         }
 
         /deep/ h4 {
             @include h-universal;
             font-size: 25px;
+            line-height: 25px;
         }
 
         /deep/ h5 {
             @include h-universal;
             font-size: 22px;
+            line-height: 22px;
         }
 
         /deep/ p {
@@ -74,6 +66,8 @@
             padding-left: 25px;
             background-color:#333;
             border-radius: 10px;
+            opacity: 0.8;
+            color: #fff;
 
             li {
                 line-height: 28px;
@@ -111,6 +105,8 @@
             margin: 0 0 24px 0;
             padding: 24px;
             background-color:#333;
+            opacity: 0.8;
+            color: #fff;
             white-space: pre-wrap;
             border-radius: 10px;
 
@@ -121,13 +117,23 @@
         }
     }
 
+    .artical-content {
+      margin: 50px auto 0;
+      max-width: 920px;
+    }
+
     .artical-header {
         padding: 25px 0;
         margin-bottom: 25px;
+
+        h2 {
+          font-size: 48px;
+        }
     }
 
     .artical-time {
         display: block;
+        font-size: 20px;
     }
 
     .el-dialog__wrapper /deep/ .el-dialog__header {

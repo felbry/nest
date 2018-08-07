@@ -21,6 +21,7 @@
     
     html, body {
         font-family: Georgia, Palatino, serif;
+        font-size: 16px;
     }
 
     h1, h2, ul, html, body {
