@@ -61,6 +61,7 @@ module.exports.updateByFile = function (opt) {
 
 module.exports.findAll = function (opt) {
     let query = new AV.Query('Artical');
+    // 如果带tid就包含标签筛选
     if (opt.tid) {
         let tag = AV.Object.createWithoutData('Tag', opt.tid);
         query.equalTo('tag', tag);
@@ -69,10 +70,10 @@ module.exports.findAll = function (opt) {
     query.include('user');
     query.include('tag');
     return query.count().then(count => count).then(count => {
-        query.limit(10);
-        if (opt.page > 1) {
-            query.skip((opt.page - 1) * 10);
-        }
+        query.limit(20);
+        // if (opt.page > 1) {
+        //     query.skip((opt.page - 1) * 10);
+        // }
         return query.find().then(results => {
             return {
                 code: 0,

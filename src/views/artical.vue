@@ -1,4 +1,5 @@
 <style lang="scss" scoped>
+    // 代码风格
     @import url('../css/atom-one-light.css');
 
     @mixin h-universal {
@@ -164,7 +165,6 @@
 <script>
     import { mapState } from 'vuex';
     import { Dialog } from 'element-ui';
-    import Scrollbar from 'smooth-scrollbar';
 
     module.exports = {
         asyncData ({ store, route }) {

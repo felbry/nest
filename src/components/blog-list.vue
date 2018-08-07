@@ -74,10 +74,7 @@
 
     module.exports = {
         asyncData ({ store, route }) {
-            return store.dispatch('getArticalList', {
-                tid: route.params.tid == 'all' ? '' : route.params.tid,
-                page: 1
-            });
+            return store.dispatch('getArticalList');
         },
         beforeRouteUpdate (to, from, next) {
             // 重置下分页状态

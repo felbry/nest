@@ -55,6 +55,7 @@ module.exports = {
     }
 
     .logo {
+        color: #000;
         width: 280px;
         height: 128px;
         padding: 48px 0 0;

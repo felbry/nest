@@ -27,8 +27,9 @@
         left: 50%;
         width: 1100px;
         height: 100%;
-        padding: 20px 0;        
+        padding: 20px 0;
         transform: translateX(-50%);
+        color: #fff;
     }
 </style>
 

@@ -14,17 +14,6 @@ export function createRouter() {
                         component: () => import('./views/home.vue'),
                     },
                     {
-                        path: 'blog',
-                        component: () => import('./views/blog.vue'),
-                        redirect: '/blog/all',
-                        children: [
-                            {
-                                path: '/blog/:tid',
-                                component: () => import('./components/blog-list.vue')
-                            }
-                        ]
-                    },
-                    {
                         path: 'photos',
                         component: () => import('./views/photos.vue'),
                         redirect: '/photos/all',
@@ -39,11 +28,15 @@ export function createRouter() {
                         path: 'about',
                         component: () => import('./views/about.vue'),
                     },
-                    {
-                        path: 'blog/articals/:id',
-                        component: () => import('./views/artical.vue'),
-                    },
                 ]
+            },
+            {
+                path: '/blog',
+                component: () => import('./views/blog.vue')
+            },
+            {
+                path: '/blog/articals/:id',
+                component: () => import('./views/artical.vue'),
             },
         ]
     });
