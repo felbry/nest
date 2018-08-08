@@ -6,16 +6,24 @@
         <title>felbry and jing's nest</title>
         <style>
             /* base */
-            html, body {
-                font-size: 16px!important;
+            * {
+                box-sizing: border-box;
+                word-break: break-all;
             }
-
+            html, body {
+                font-family: Georgia, Palatino, serif;
+                font-size: 16px;
+            }
             a, a:visited, a:link, a:hover, a:active {
                 text-decoration: none!important;
             }
+            h1, h2, ul, html, body {
+                margin: 0;
+                padding: 0;
+            }
         </style>
     </head>
-    <body style="min-width: 1100px;">
+    <body>
         <!--vue-ssr-outlet-->
     </body>
 </html>

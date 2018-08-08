@@ -119,7 +119,7 @@
 
     .artical-content {
       margin: 50px auto 0;
-      max-width: 920px;
+      max-width: 720px;
     }
 
     .artical-header {
@@ -177,8 +177,6 @@
             return store.dispatch('getArtical', route.params.id);
         },
         mounted () {
-            Scrollbar.init(document.querySelector('.artical-content'));
-
             let imgs = document.querySelectorAll('.artical-content img');
             let that = this;
             Array.from(imgs).forEach(img => {

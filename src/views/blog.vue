@@ -34,7 +34,7 @@
         max-width: 990px;
     }
     .recent-posts {
-        width: 630px;
+        max-width: 630px;
     }
     .h2 {
         padding: 8px 0;
