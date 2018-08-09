@@ -118,8 +118,9 @@
     }
 
     .artical-content {
-      margin: 50px auto 0;
-      max-width: 720px;
+      margin: 30px auto 0;
+      max-width: 736px;
+      padding: 8px;
     }
 
     .artical-header {
@@ -157,7 +158,6 @@
             v-html="artical.content"
             class="blog-body">
         </div>
-        <div style="height: 25px"></div>
         <el-dialog
             :visible.sync="isPreview"
             custom-class="blog-img-dialog"
@@ -165,12 +165,15 @@
             :show-close="false">
             <img :src="previewUrl" />
         </el-dialog>
+        <!-- <input type="text" v-model="email"> -->
+        <!-- <button @click="registry">拿到验证码</button> -->
     </div>
 </template>
 
 <script>
     import { mapState } from 'vuex';
     import { Dialog } from 'element-ui';
+    import { POST_FRIEND_REGISTRY } from '../../api';
 
     module.exports = {
         asyncData ({ store, route }) {
@@ -189,12 +192,21 @@
         data () {
             return {
                 isPreview: false,
-                previewUrl: ''
+                previewUrl: '',
+                email: ''
             };
         },
         computed: mapState({
             artical: state => state.blog.artical
         }),
+        methods: {
+            registry () {
+                POST_FRIEND_REGISTRY({
+                    email: this.email
+                })
+                    .then(data => { console.log(data); })
+            }
+        },
         components: {
             [Dialog.name]: Dialog
         }

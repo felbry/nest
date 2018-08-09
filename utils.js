@@ -6,10 +6,12 @@ module.exports.handleResponse = function (result, response) {
 }
 
 module.exports.handleDBErr = function (err) {
-    return {
-        code: -1,
-        data: {
-            msg: err.toString()
-        }
-    }
+    return err && err.code
+    ?   err
+    :   {
+            code: -1,
+            data: {
+                msg: err.toString()
+            }
+        };
 }

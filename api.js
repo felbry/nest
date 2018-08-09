@@ -46,3 +46,8 @@ export const GET_PHOTO_TAG_LIST = () => {
     return _GET('/api/photo/tags');
 }
 // photo end
+
+// 朋友
+export const POST_FRIEND_REGISTRY = (payload) => {
+    return _POST('/api/friend/registry', payload);
+}
