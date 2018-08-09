@@ -116,7 +116,7 @@ module.exports.find = function (opt) {
                 }
             }
         });
-    }).catch(utils.handleDBErr);  
+    }).catch(utils.handleDBErr);
 }
 
 module.exports.createTag = function (opt) {
@@ -145,4 +145,8 @@ module.exports.findAllTag = function (opt) {
             })
         }
     }).catch(utils.handleDBErr);
+}
+
+module.exports.createComment = function (opt) {
+    
 }

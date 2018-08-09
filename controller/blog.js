@@ -1,7 +1,6 @@
 const EXPRESS = require('express');
 const hljs = require('highlight.js');
 const ROUTER = EXPRESS.Router();
-const FS = require('fs');
 const MD = new require('markdown-it')({
     highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -12,11 +11,11 @@ const MD = new require('markdown-it')({
     }
 });
 const MULTER  = require('multer');
-const CORS = require('cors');
 var upload = MULTER();
 
 var blog = require('../model/blog');
 var jwt = require('../middleware/auth');
+var jwtFriends = require('../middleware/authFriends');
 var utils = require('../utils');
 
 // 创建、获取博客
@@ -60,6 +59,14 @@ ROUTER.route('/tags')
         });
     })
     .post(jwt, (req, res) => {
+        blog.createTag(req.body).then(result => {
+            utils.handleResponse(result, res);
+        });
+    })
+
+// 创建评论
+ROUTER.route('/comments')
+    .post(jwtFriends, (req, res) => {
         blog.createTag(req.body).then(result => {
             utils.handleResponse(result, res);
         });

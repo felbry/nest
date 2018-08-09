@@ -58,3 +58,7 @@ module.exports.create = function (opt) {
             }
         });
 }
+
+module.exports.login = function (opt) {
+    let friendQuery = new AV.Query('Friend');
+}
