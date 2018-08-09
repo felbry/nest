@@ -6,13 +6,21 @@ var utils = require('../utils');
 var config = require('../config');
 
 module.exports.create = function (opt) {
+    if (!utils.verifyEmail(opt.email)) {
+        return Promise.resolve({
+            code: 1,
+            data: {
+                msg: '邮箱格式非法'
+            }
+        });
+    }
     let friendQuery = new AV.Query('Friend');
     friendQuery.equalTo('email', opt.email);
     return friendQuery.find()
         .then(results => {
             if (results.length) {
                 throw {
-                    code: 1,
+                    code: 2,
                     data: {
                         msg: '用户已存在'
                     }
@@ -27,6 +35,7 @@ module.exports.create = function (opt) {
             let friend = new AV.Object('Friend');
             friend.set('email', opt.email);
             friend.set('password', code);
+            friend.set('nickname', opt.nickname || '一名吃瓜群众');
             return friend.save();
         })
         .then(result => MAIL({
@@ -39,7 +48,7 @@ module.exports.create = function (opt) {
         .catch((err) => {
             if (err && !Number.isInteger(err.code)) {
                 return {
-                    code: 2,
+                    code: 3,
                     data: {
                         msg: `邮件发送失败：${JSON.stringify(err)}`
                     }

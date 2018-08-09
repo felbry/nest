@@ -15,3 +15,7 @@ module.exports.handleDBErr = function (err) {
             }
         };
 }
+
+module.exports.verifyEmail = function (str) {
+    return /^([\w-]+(?:\.[\w-]+)*)@((?:[\w-]+\.)*\w[\w-]{0,66})\.([a-z]{2,6}(?:\.[a-z]{2})?)$/.test(str);
+}
