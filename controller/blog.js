@@ -1,6 +1,7 @@
 const EXPRESS = require('express');
 const hljs = require('highlight.js');
 const ROUTER = EXPRESS.Router();
+const markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 const MD = new require('markdown-it')({
     highlight: function (str, lang) {
         if (lang && hljs.getLanguage(lang)) {
@@ -9,7 +10,13 @@ const MD = new require('markdown-it')({
 
         return ''; // use external default escaping
     }
-});
+})
+    .use(
+        markdownItTocAndAnchor,
+        {
+            anchorLink: false
+        }
+    );
 const MULTER  = require('multer');
 var upload = MULTER();
 
@@ -39,8 +46,19 @@ ROUTER.get('/articals/:id', (req, res) => {
     blog.find({
         id: req.params.id
     }).then(result => {
-        result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
-        res.json(result);
+        let toc = '';
+        MD.set({
+            tocCallback: function(tocMarkdown, tocArray, tocHtml) {
+                toc = tocHtml;
+            }
+        });
+        try {
+            result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
+            result.data.content = toc + result.data.content;
+            res.json(result);
+        } catch (err) {
+            res.status(500).end('markdown-it toc convert error');
+        }
     }).catch(err => { console.log(err) });
 });
 
