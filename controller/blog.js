@@ -49,12 +49,13 @@ ROUTER.get('/articals/:id', (req, res) => {
         let toc = '';
         MD.set({
             tocCallback: function(tocMarkdown, tocArray, tocHtml) {
+                console.log(tocArray);
                 toc = tocHtml;
             }
         });
         try {
             result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
-            result.data.content = toc + result.data.content;
+            result.data.toc = toc;
             res.json(result);
         } catch (err) {
             res.status(500).end('markdown-it toc convert error');
