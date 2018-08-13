@@ -10,6 +10,10 @@ export function createRouter() {
                 component: () => import('./views/index.vue'),
                 children: [
                     {
+                        path: '',
+                        component: () => import('./views/img.vue')
+                    },
+                    {
                         path: 'index',
                         component: () => import('./views/home.vue'),
                     },
