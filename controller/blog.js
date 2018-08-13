@@ -46,44 +46,42 @@ ROUTER.get('/articals/:id', (req, res) => {
   blog.find({
     id: req.params.id
   }).then(result => {
-    let toc = '';
-    let arr = [];
+    let toc = [];
     MD.set({
       tocCallback: function (tocMarkdown, tocArray, tocHtml) {
-        toc = tocHtml;
+        // toc = tocHtml;
         try {
           tocArray.forEach((h, i) => {
             if (h.level === 1) {
               h.chilren = [];
-              let j = 0;
-              while (tocArray[i + j] && tocArray[i + j].level !== 2) {
-                tocArray[i + j].chilren = [];
-                h.chilren.push(tocArray[i + j]);
-                j++;
+              let j = 1;
+              if (i != tocArray.length - 1) {
+                while (tocArray[i + j] && tocArray[i + j].level === 2) {
+                  tocArray[i + j].chilren = [];
+                  h.chilren.push(tocArray[i + j]);
+                  j++;
+                }
+                let k = 0;
+                while (tocArray[i + j + k] & tocArray[i + j + k].level === 3) {
+                  h.chilren[h.chilren.length - 1].chilren.push(tocArray[i + j + k]);
+                  k++;
+                }
               }
-              let k = 0;
-              while (tocArray[i + j + k] & tocArray[i + j + k].level !== 3) {
-                h.chilren.push(tocArray[i + j + k]);
-                k++;
-              }
-              arr.push(h);
+              toc.push(h);
             }
           });
         } catch (err) {
           console.log('toc chilren convert err: ' + err);
         }
-        console.log(tocArray);
-        console.log('-----------------------------');
-        console.log(arr);
       }
     });
     try {
       result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
       result.data.toc = toc;
-      result.data.arr = arr;
+      console.log(toc);
       res.json(result);
     } catch (err) {
-      res.status(500).end('markdown-it toc convert error');
+      res.status(500).end('markdown-it toc convert error: ' + err);
     }
   }).catch(err => { console.log(err) });
 });

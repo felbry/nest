@@ -194,10 +194,22 @@
           v-html="artical.content"
           class="blog-body">
       </div>
-      <div
-        class="toc-container"
-        v-html="artical.toc">
-      </div>
+      <!-- 只有三层就不抽组件了 0.0 -->
+      <ul class="toc-container">
+        <li v-for="item in artical.toc">
+          <a :href="'#' + item.anchor">{{item.content}}</a>
+          <ul v-if="item.children.length">
+            <li v-for="itemH2 in item.children">
+              <a :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
+              <ul v-if="itemH2.children.length">
+                <li v-for="itemH3 in itemH2.children">
+                  <a :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </li>
+      </ul>
       <el-dialog
         :visible.sync="isPreview"
         custom-class="blog-img-dialog"
