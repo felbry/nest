@@ -53,17 +53,17 @@ ROUTER.get('/articals/:id', (req, res) => {
         try {
           tocArray.forEach((h, i) => {
             if (h.level === 1) {
-              h.chilren = [];
+              h.children = [];
               let j = 1;
               if (i != tocArray.length - 1) {
                 while (tocArray[i + j] && tocArray[i + j].level === 2) {
-                  tocArray[i + j].chilren = [];
-                  h.chilren.push(tocArray[i + j]);
+                  tocArray[i + j].children = [];
+                  h.children.push(tocArray[i + j]);
                   j++;
                 }
                 let k = 0;
                 while (tocArray[i + j + k] & tocArray[i + j + k].level === 3) {
-                  h.chilren[h.chilren.length - 1].chilren.push(tocArray[i + j + k]);
+                  h.children[h.children.length - 1].children.push(tocArray[i + j + k]);
                   k++;
                 }
               }
@@ -78,7 +78,6 @@ ROUTER.get('/articals/:id', (req, res) => {
     try {
       result.data.content = MD.render(result.data.content, { encoding: 'utf-8' });
       result.data.toc = toc;
-      console.log(toc);
       res.json(result);
     } catch (err) {
       res.status(500).end('markdown-it toc convert error: ' + err);

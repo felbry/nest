@@ -146,15 +146,20 @@
   font-size: 14px;
   top: 60px;
   margin-left: 736px + 20px;
+  padding: 20px;
   overflow: auto;
 
-  /deep/ ul {
+  ul {
     padding-left: 30px;
+  }
 
-    li {
-      padding: 5px 0;
-      list-style: none;
-    }
+  li {
+    list-style: none;
+  }
+
+  a {
+    line-height: 28px;
+    font-size: 14px;
   }
 }
 
@@ -201,7 +206,7 @@
           <ul v-if="item.children.length">
             <li v-for="itemH2 in item.children">
               <a :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
-              <ul v-if="itemH2.children.length">
+              <ul v-if="itemH2.children && itemH2.children.length">
                 <li v-for="itemH3 in itemH2.children">
                   <a :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
                 </li>
