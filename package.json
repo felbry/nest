@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "cross-env NODE_ENV=dev nodemon server",
+    "dev": "cross-env NODE_ENV=dev nodemon server --delay 1",
     "start": "node server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "cross-env NODE_ENV=production webpack --config build/webpack.server.config.js --progress --hide-modules && webpack --config build/webpack.client.config.js --progress --hide-modules"
