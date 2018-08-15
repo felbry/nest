@@ -1,34 +1,4 @@
 <style scoped>
-    /* .content {
-        position: relative;
-        float: left;
-        width: 740px;
-        height: 100%;
-        padding: 25px 55px 25px 60px;
-        background-color: #000;
-        opacity: 0.8;
-        overflow: auto;
-    }
-
-    .category {
-        padding: 25px 0;
-        margin-bottom: 25px;
-    }
-
-    .menu-item {
-        color: #fff;
-        margin-right: 18px;
-        font-size: 24px;
-        transition: font-size 0.6s;
-    }
-
-    .menu-item:hover, .router-link-active {
-        font-size: 28px;
-        background-color: #fff;
-        color: #000;
-        cursor: pointer;
-    } */
-
     .blog-container {
         margin: 50px auto 0;
         max-width: 990px;

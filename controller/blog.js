@@ -14,7 +14,8 @@ const MD = new require('markdown-it')({
   .use(
     markdownItTocAndAnchor,
     {
-      anchorLink: false
+      anchorLink: false,
+      tocLastLevel: 3
     }
   );
 const MULTER = require('multer');
@@ -46,10 +47,10 @@ ROUTER.get('/articals/:id', (req, res) => {
   blog.find({
     id: req.params.id
   }).then(result => {
+    if (req.query.isOrigin) res.json(result);
     let toc = [];
     MD.set({
       tocCallback: function (tocMarkdown, tocArray, tocHtml) {
-        // toc = tocHtml;
         try {
           tocArray.forEach((h, i) => {
             if (h.level === 1) {
