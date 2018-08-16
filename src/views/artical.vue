@@ -143,23 +143,30 @@
   position: fixed;
   width: 350px;
   height: 100%;
-  font-size: 14px;
   top: 60px;
   margin-left: 736px + 20px;
   padding: 20px;
   overflow: auto;
-
+  color: #333;
   ul {
     padding-left: 30px;
   }
-
   li {
     list-style: none;
   }
-
-  a {
-    line-height: 28px;
-    font-size: 14px;
+  .h1 {
+    font-size: 16px;
+    margin-bottom: 18px;
+  }
+  .h2, .h3 {
+    font-size: 12px;
+    margin: 6px 0;
+  }
+  .anchor {
+    // border-left: 3px solid #ff9800;
+    &:before {
+      content: '✔';
+    }
   }
 }
 
@@ -201,14 +208,26 @@
       </div>
       <!-- 只有三层就不抽组件了 0.0 -->
       <ul class="toc-container">
-        <li v-for="item in artical.toc">
-          <a :href="'#' + item.anchor">{{item.content}}</a>
+        <li
+          class="h1"
+          v-for="item in artical.toc">
+          <a
+            class="anchor"
+            :href="'#' + item.anchor">{{item.content}}</a>
           <ul v-if="item.children.length">
-            <li v-for="itemH2 in item.children">
-              <a :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
+            <li
+              class="h2"
+              v-for="itemH2 in item.children">
+              <a
+                class="anchor"
+                :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
               <ul v-if="itemH2.children && itemH2.children.length">
-                <li v-for="itemH3 in itemH2.children">
-                  <a :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
+                <li
+                  class="h3"
+                  v-for="itemH3 in itemH2.children">
+                  <a
+                    class="anchor"
+                    :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
                 </li>
               </ul>
             </li>
@@ -286,11 +305,11 @@ module.exports = {
       // 先看有没有在 0 - 15之间的，有直接确定不走之后的逻辑。没有的话如果大于0就保存值以及此dom的index
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
-      this.headGroup.forEach(head => {
-        console.log(head.innerHTML);
-        console.log(head.getAttribute('id'));
-        console.log(head.getBoundingClientRect().top);
-      });
+      // this.headGroup.forEach(head => {
+      //   console.log(head.innerHTML);
+      //   console.log(head.getAttribute('id'));
+      //   console.log(head.getBoundingClientRect().top);
+      // });
     }
   },
   components: {
