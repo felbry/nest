@@ -144,8 +144,9 @@
   width: 350px;
   height: 100%;
   top: 60px;
+  margin-bottom: 60px;
   margin-left: 736px + 20px;
-  padding: 20px;
+  padding-left: 20px;
   overflow: auto;
   color: #333;
   ul {
@@ -163,9 +164,17 @@
     margin: 6px 0;
   }
   .anchor {
-    // border-left: 3px solid #ff9800;
+    &:before {
+      content: '';
+      color: #ff9800;
+      padding-right: 0;
+      transition: padding-right 0.3s;
+    }
+  }
+  .anchor:hover, .anchor-active {
     &:before {
       content: '✔';
+      padding-right: 8px;
     }
   }
 }
@@ -213,6 +222,9 @@
           v-for="item in artical.toc">
           <a
             class="anchor"
+            :class="{
+              'anchor-active': item.isActive
+            }"
             :href="'#' + item.anchor">{{item.content}}</a>
           <ul v-if="item.children.length">
             <li
@@ -220,6 +232,9 @@
               v-for="itemH2 in item.children">
               <a
                 class="anchor"
+                :class="{
+                  'anchor-active': item.isActive
+                }"
                 :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
               <ul v-if="itemH2.children && itemH2.children.length">
                 <li
@@ -227,6 +242,9 @@
                   v-for="itemH3 in itemH2.children">
                   <a
                     class="anchor"
+                    :class="{
+                      'anchor-active': item.isActive
+                    }"
                     :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
                 </li>
               </ul>
@@ -266,28 +284,28 @@ module.exports = {
     });
 
     let h1s = document.querySelectorAll('.blog-body h1');
-    // let h2s = document.querySelectorAll('.blog-body h2');
-    // let h3s = document.querySelectorAll('.blog-body h3');
+    let h2s = document.querySelectorAll('.blog-body h2');
+    let h3s = document.querySelectorAll('.blog-body h3');
     // console.log(h1s)
     // console.log(h2s)
     // console.log(h3s)
     Array.from(h1s).forEach(item => {
       this.headGroup.push(item);
     });
-    // Array.from(h2s).forEach(item => {
-    //   this.headGroup.push(item);
-    // });
-    // Array.from(h3s).forEach(item => {
-    //   this.headGroup.push(item);
-    // });
-    // this.headGroup.concat(Array.from(h1s), Array.from(h2s), Array.from(h3s));
+    Array.from(h2s).forEach(item => {
+      this.headGroup.push(item);
+    });
+    Array.from(h3s).forEach(item => {
+      this.headGroup.push(item);
+    });
   },
   data() {
     return {
       isPreview: false,
       previewUrl: "",
       email: "",
-      headGroup: []
+      headGroup: [],
+      currentAnchor: ''
     };
   },
   computed: mapState({
@@ -305,11 +323,10 @@ module.exports = {
       // 先看有没有在 0 - 15之间的，有直接确定不走之后的逻辑。没有的话如果大于0就保存值以及此dom的index
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
-      // this.headGroup.forEach(head => {
-      //   console.log(head.innerHTML);
-      //   console.log(head.getAttribute('id'));
-      //   console.log(head.getBoundingClientRect().top);
-      // });
+      this.headGroup.forEach(head => {
+        console.log(head.getAttribute('id'));
+        console.log(head.getBoundingClientRect().top);
+      });
     }
   },
   components: {

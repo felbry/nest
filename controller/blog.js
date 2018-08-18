@@ -55,15 +55,19 @@ ROUTER.get('/articals/:id', (req, res) => {
           tocArray.forEach((h, i) => {
             if (h.level === 1) {
               h.children = [];
+              h.isActive = false;
+              h.isExpand = false;
               let j = 1;
               if (i != tocArray.length - 1) {
                 while (tocArray[i + j] && tocArray[i + j].level === 2) {
                   tocArray[i + j].children = [];
+                  tocArray[i + j].isActive = false;
                   h.children.push(tocArray[i + j]);
                   j++;
                 }
                 let k = 0;
                 while (tocArray[i + j + k] & tocArray[i + j + k].level === 3) {
+                  tocArray[i + j + k].isActive = false;
                   h.children[h.children.length - 1].children.push(tocArray[i + j + k]);
                   k++;
                 }
