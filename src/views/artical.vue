@@ -211,7 +211,6 @@
         </h2>
       </div>
       <div
-          @click="test"
           v-html="artical.content"
           class="blog-body">
       </div>
@@ -223,17 +222,19 @@
           <a
             class="anchor"
             :class="{
-              'anchor-active': item.isActive
+              'anchor-active': item.anchor === currentAnchor
             }"
             :href="'#' + item.anchor">{{item.content}}</a>
-          <ul v-if="item.children.length">
+          <ul
+            v-if="item.children.length"
+            v-show="item.anchor === currentFatherAnchor">
             <li
               class="h2"
               v-for="itemH2 in item.children">
               <a
                 class="anchor"
                 :class="{
-                  'anchor-active': item.isActive
+                  'anchor-active': itemH2.anchor === currentAnchor
                 }"
                 :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
               <ul v-if="itemH2.children && itemH2.children.length">
@@ -243,7 +244,7 @@
                   <a
                     class="anchor"
                     :class="{
-                      'anchor-active': item.isActive
+                      'anchor-active': itemH3.anchor === currentAnchor
                     }"
                     :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
                 </li>
@@ -277,27 +278,13 @@ module.exports = {
     let imgs = document.querySelectorAll(".artical-content img");
     let that = this;
     Array.from(imgs).forEach(img => {
-      img.addEventListener("click", function(e) {
+      img.addEventListener("click", function (e) {
         that.previewUrl = e.target.src;
         that.isPreview = true;
       });
     });
-
-    let h1s = document.querySelectorAll('.blog-body h1');
-    let h2s = document.querySelectorAll('.blog-body h2');
-    let h3s = document.querySelectorAll('.blog-body h3');
-    // console.log(h1s)
-    // console.log(h2s)
-    // console.log(h3s)
-    Array.from(h1s).forEach(item => {
-      this.headGroup.push(item);
-    });
-    Array.from(h2s).forEach(item => {
-      this.headGroup.push(item);
-    });
-    Array.from(h3s).forEach(item => {
-      this.headGroup.push(item);
-    });
+    this.findActive();
+    document.addEventListener('scroll', this.findActive);
   },
   data() {
     return {
@@ -305,7 +292,8 @@ module.exports = {
       previewUrl: "",
       email: "",
       headGroup: [],
-      currentAnchor: ''
+      currentAnchor: '',
+      currentFatherAnchor: ''
     };
   },
   computed: mapState({
@@ -319,13 +307,38 @@ module.exports = {
         console.log(data);
       });
     },
-    test () {
-      // 先看有没有在 0 - 15之间的，有直接确定不走之后的逻辑。没有的话如果大于0就保存值以及此dom的index
+    findActive () {
+      // 先看有没有在 0 - 10之间的，有直接确定不走之后的逻辑。没有的话下一步
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
-      this.headGroup.forEach(head => {
-        console.log(head.getAttribute('id'));
-        console.log(head.getBoundingClientRect().top);
+      this.artical.tocSort.some((tocItem, index) => {
+        let arr = this.artical.tocSort;
+        let head = document.getElementById(tocItem.anchor);
+        let top = head.getBoundingClientRect().top;
+        if (top < 0) {
+          return;
+        } else {
+          let currentIndex = 0;
+          if (top <= 10) {
+            this.currentAnchor = tocItem.anchor;
+            currentIndex = index;
+          } else {
+            if (index === 0) {
+              this.currentAnchor = tocItem.anchor;
+              currentIndex = index;
+            } else {
+              this.currentAnchor = arr[index - 1].anchor;
+              currentIndex = index - 1;
+            }
+          }
+          // 找到顶级anchor，为了控制展开收缩
+          let i = 0;
+          while (arr[currentIndex - i].level !== 1) {
+            i++;
+          }
+          this.currentFatherAnchor = arr[currentIndex - i].anchor;
+          return true;
+        }
       });
     }
   },
