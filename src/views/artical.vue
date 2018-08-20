@@ -119,24 +119,24 @@
   }
 }
 
-@media only screen and (max-width: 1057px) {
-    .artical-content {
-      padding-right: 0!important;
-      max-width: 736px!important;
-    }
+@media only screen and (max-width: 1146px) {
+  .artical-content {
+    padding-right: 0 !important;
+    max-width: 736px !important;
+  }
 
-    .toc-container {
-      top: 0!important;
-      margin-left: 0!important;
-      width: 0!important;
-      background: #000;
-    }
+  .toc-container {
+    top: 0 !important;
+    margin-left: 0 !important;
+    width: 0 !important;
+    background: #000;
+  }
 }
 
 .artical-content {
   margin: 30px auto 0;
-  max-width: 736px + 350px;
-  padding-right: 350px;
+  max-width: 736px + 350px + 60px;
+  padding-right: 350px + 60px;
 }
 
 .toc-container {
@@ -145,8 +145,8 @@
   height: 100%;
   top: 60px;
   margin-bottom: 60px;
-  margin-left: 736px + 20px;
-  padding-left: 20px;
+  margin-left: 736px + 60px;
+  // padding-left: 20px;
   overflow: auto;
   color: #333;
   ul {
@@ -159,21 +159,23 @@
     font-size: 16px;
     margin-bottom: 18px;
   }
-  .h2, .h3 {
+  .h2,
+  .h3 {
     font-size: 12px;
     margin: 6px 0;
   }
   .anchor {
     &:before {
-      content: '';
+      content: "";
       color: #ff9800;
       padding-right: 0;
       transition: padding-right 0.3s;
     }
   }
-  .anchor:hover, .anchor-active {
+  .anchor:hover,
+  .anchor-active {
     &:before {
-      content: '✔';
+      content: "✔";
       padding-right: 8px;
     }
   }
@@ -276,15 +278,19 @@ module.exports = {
   },
   mounted() {
     let imgs = document.querySelectorAll(".artical-content img");
+    let as = document.querySelectorAll(".blog-body a");
     let that = this;
     Array.from(imgs).forEach(img => {
-      img.addEventListener("click", function (e) {
+      img.addEventListener("click", function(e) {
         that.previewUrl = e.target.src;
         that.isPreview = true;
       });
     });
+    Array.from(as).forEach(a => {
+      a.setAttribute('target', '_blank');
+    });
     this.findActive();
-    document.addEventListener('scroll', this.findActive);
+    document.addEventListener("scroll", this.findActive);
   },
   data() {
     return {
@@ -292,8 +298,8 @@ module.exports = {
       previewUrl: "",
       email: "",
       headGroup: [],
-      currentAnchor: '',
-      currentFatherAnchor: ''
+      currentAnchor: "",
+      currentFatherAnchor: ""
     };
   },
   computed: mapState({
@@ -307,7 +313,7 @@ module.exports = {
         console.log(data);
       });
     },
-    findActive () {
+    findActive() {
       // 先看有没有在 0 - 10之间的，有直接确定不走之后的逻辑。没有的话下一步
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
