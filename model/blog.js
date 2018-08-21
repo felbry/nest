@@ -102,16 +102,23 @@ module.exports.findAll = function (opt) {
 module.exports.find = function (opt) {
   let query = new AV.Query('Artical');
   query.include('file');
+  query.include('user');
   return query.get(opt.id).then(rs1 => {
     return rs1;
   }).then(artical => {
     let url = artical.get('file').get('url');
+    let user = artical.get('user');
+    let gender = user.get('gender');
+    let nickName = user.get('nickName');
     return axios.get(url).then(rs2 => {
       return {
         code: 0,
         data: {
           title: artical.get('title'),
+          gender,
+          nickName,
           createdAt: artical.get('createdAt'),
+          updatedAt: artical.get('updatedAt'),
           content: rs2.data
         }
       }

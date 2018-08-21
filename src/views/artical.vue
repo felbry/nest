@@ -202,6 +202,15 @@
 .el-dialog__wrapper /deep/ .el-dialog__body img {
   width: 100%;
 }
+.footer-img {
+  text-align: center;
+  margin-bottom: 24px;
+
+  img {
+    width: 350px;
+    height: 350px;
+  }
+}
 </style>
 
 <template>
@@ -262,6 +271,14 @@
         :show-close="false">
         <img :src="previewUrl" />
       </el-dialog>
+      <div class="footer-img">
+        <img
+          v-if="artical.gender === 1"
+          src="../imgs/felbry.jpg" />
+        <img
+          v-else
+          src="../imgs/jing.jpg" />
+      </div>
       <!-- <input type="text" v-model="email"> -->
       <!-- <button @click="registry">拿到验证码</button> -->
     </div>
@@ -277,7 +294,7 @@ module.exports = {
     return store.dispatch("getArtical", route.params.id);
   },
   mounted() {
-    let imgs = document.querySelectorAll(".artical-content img");
+    let imgs = document.querySelectorAll(".blog-body img");
     let as = document.querySelectorAll(".blog-body a");
     let that = this;
     Array.from(imgs).forEach(img => {
