@@ -14,15 +14,15 @@
 
   /deep/ h1 {
     @include h-universal;
-    font-size: 48px;
-    line-height: 48px;
+    font-size: 40px;
+    line-height: 40px;
     padding-bottom: 10px;
   }
 
   /deep/ h2 {
     @include h-universal;
-    font-size: 38px;
-    line-height: 38px;
+    font-size: 32px;
+    line-height: 32px;
     width: 90%;
     padding-bottom: 10px;
   }
@@ -37,8 +37,8 @@
 
   /deep/ h4 {
     @include h-universal;
-    font-size: 25px;
-    line-height: 25px;
+    font-size: 24px;
+    line-height: 24px;
   }
 
   /deep/ h5 {
@@ -128,6 +128,8 @@
   .toc-container {
     top: 0 !important;
     margin-left: 0 !important;
+    padding-left: 0 !important;
+    border: none !important;
     width: 0 !important;
     background: #000;
   }
@@ -142,11 +144,12 @@
 .toc-container {
   position: fixed;
   width: 350px;
-  height: 100%;
-  top: 60px;
-  margin-bottom: 60px;
-  margin-left: 736px + 60px;
-  // padding-left: 20px;
+  height: 90vh;
+  top: 5vh;
+  bottom: 5vh;
+  margin-left: 736px + 30px;
+  border-left: 1px solid #eee;
+  padding-left: 30px;
   overflow: auto;
   color: #333;
   ul {
@@ -161,23 +164,15 @@
   }
   .h2,
   .h3 {
-    font-size: 12px;
+    font-size: 14px;
     margin: 6px 0;
-  }
-  .anchor {
-    &:before {
-      content: "";
-      color: #ff9800;
-      padding-right: 0;
-      transition: padding-right 0.3s;
-    }
   }
   .anchor:hover,
   .anchor-active {
-    &:before {
-      content: "✔";
-      padding-right: 8px;
-    }
+    display: inline-flex;
+    padding: 5px 0;
+    background: #f3f3f3;
+    color: #e58c7c;
   }
 }
 
@@ -226,7 +221,9 @@
           class="blog-body">
       </div>
       <!-- 只有三层就不抽组件了 0.0 -->
-      <ul class="toc-container">
+      <ul
+        v-if="artical.toc && artical.toc.length"
+        class="toc-container">
         <li
           class="h1"
           v-for="item in artical.toc">
