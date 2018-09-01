@@ -284,9 +284,14 @@
 <script>
 import { mapState } from "vuex";
 import { Dialog } from "element-ui";
+import titleMixin from "../mixin/title";
 import { POST_FRIEND_REGISTRY } from "../../api";
 
 module.exports = {
+  mixins: [titleMixin],
+  title () {
+    return `${this.artical.title} - ${this.artical.nickName}`;
+  },
   asyncData({ store, route }) {
     return store.dispatch("getArtical", route.params.id);
   },
@@ -301,7 +306,7 @@ module.exports = {
       });
     });
     Array.from(as).forEach(a => {
-      a.setAttribute('target', '_blank');
+      a.setAttribute("target", "_blank");
     });
     this.findActive();
     document.addEventListener("scroll", this.findActive);
@@ -320,14 +325,14 @@ module.exports = {
     artical: state => state.blog.artical
   }),
   methods: {
-    registry() {
+    registry () {
       POST_FRIEND_REGISTRY({
         email: this.email
       }).then(data => {
         console.log(data);
       });
     },
-    findActive() {
+    findActive () {
       // 先看有没有在 0 - 10之间的，有直接确定不走之后的逻辑。没有的话下一步
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
