@@ -120,7 +120,7 @@
 }
 
 @media only screen and (max-width: 1146px) {
-  .artical-content {
+  .artical-content, .footer-content {
     padding-right: 0 !important;
     max-width: 736px !important;
   }
@@ -135,10 +135,15 @@
   }
 }
 
-.artical-content {
+.artical-content, .footer-content {
   margin: 30px auto 0;
   max-width: 736px + 350px + 60px;
   padding-right: 350px + 60px;
+}
+
+.footer-container {
+  padding: 20px 15px;
+  background: #f0f2fa;
 }
 
 .toc-container {
@@ -202,13 +207,47 @@
   margin-bottom: 24px;
 
   img {
-    width: 350px;
-    height: 350px;
+    width: 280px;
+    height: 280px;
+  }
+}
+.comment-box {
+  display: flex;
+  img {
+    flex-shrink: 0;
+    width: 70px;
+    height: 70px;
+    border-radius: 100%;
+    margin-right: 30px;
+  }
+}
+.comment-box-right {
+  width: 100%;
+  textarea {
+    width: 100%;
+    height: 100px;
+    padding: 15px;
+    background: #fcfcfc;
+    border: none;
+    border-radius: 4px;
+    outline: none;
+    resize: none;
+  }
+  input {
+    width: 100%;
+    height: 25px;
+    margin-top: 12px;
+    padding: 5px 10px;
+    background: #fcfcfc;
+    border: none;
+    border-radius: 4px;
+    outline: none;
   }
 }
 </style>
 
 <template>
+  <div>
     <div class="artical-content">
       <div class="artical-header">
         <h2>
@@ -217,8 +256,8 @@
         </h2>
       </div>
       <div
-          v-html="artical.content"
-          class="blog-body">
+        v-html="artical.content"
+        class="blog-body">
       </div>
       <!-- 只有三层就不抽组件了 0.0 -->
       <ul
@@ -279,6 +318,18 @@
       <!-- <input type="text" v-model="email"> -->
       <!-- <button @click="registry">拿到验证码</button> -->
     </div>
+    <div class="footer-container">
+      <div class="footer-content">
+        <div class="comment-box">
+          <img src="https://thoughtcatalog.files.wordpress.com/2018/01/kyle-smith-528234-e1516823451262.jpg?w=192&h=192&crop=1&resize=192,192&quality=95&strip=all" alt="">
+          <div class="comment-box-right">
+            <textarea></textarea>
+            <input type="text">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 </template>
 
 <script>
