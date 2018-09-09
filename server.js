@@ -41,6 +41,8 @@ AV.init({
 });
 
 APP.use(AV.express());
+// APP.enable('trust proxy');
+// APP.use(AV.Cloud.HttpsRedirect());
 
 function render(req, res) {
   const context = {
