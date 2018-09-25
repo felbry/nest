@@ -3,11 +3,11 @@ const hljs = require('highlight.js');
 const ROUTER = EXPRESS.Router();
 const markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 const MD = new require('markdown-it')({
+  html: true,
   highlight: function (str, lang) {
     if (lang && hljs.getLanguage(lang)) {
       return hljs.highlight(lang, str).value;
     }
-
     return ''; // use external default escaping
   }
 })
