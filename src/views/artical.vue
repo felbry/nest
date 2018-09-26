@@ -103,6 +103,15 @@
     }
   }
 
+  /deep/ code {
+    display: inline-block;
+    padding: 0 5px;
+    background: pink;
+    border-radius: 5px;
+    margin: auto 3px;
+    color: #111;
+  }
+
   /deep/ pre {
     margin: 0 0 24px 0;
     padding: 24px;
@@ -115,6 +124,33 @@
     code {
       font-family: Consolas, Monaco, Andale Mono, monospace;
       line-height: 1.5;
+      background: inherit;
+      color: inherit;
+    }
+  }
+
+  /deep/ table {
+    border: 1px solid #ccc;
+    border-collapse: collapse;
+    table-layout: fixed;
+    width: 100%;
+    margin-bottom: 25px;
+
+    tr {
+      border: 1px solid #ddd;
+      &:nth-child(even) {
+        background: #f8f8f8;  
+      }
+    }
+
+    th {
+      background: #999;
+      color: #fff;
+      text-transform: uppercase;
+    }
+
+    td {
+      padding: 10px 15px;
     }
   }
 }
@@ -318,17 +354,17 @@
       <!-- <input type="text" v-model="email"> -->
       <!-- <button @click="registry">拿到验证码</button> -->
     </div>
-    <div class="footer-container">
+    <!-- <div class="footer-container">
       <div class="footer-content">
         <div class="comment-box">
-          <img src="https://thoughtcatalog.files.wordpress.com/2018/01/kyle-smith-528234-e1516823451262.jpg?w=192&h=192&crop=1&resize=192,192&quality=95&strip=all" alt="">
+          <img src="https://pic2.zhimg.com/v2-1e02c1531c33f9460ae82eb88a999cdd_r.jpg" alt="">
           <div class="comment-box-right">
             <textarea></textarea>
             <input type="text">
           </div>
         </div>
       </div>
-    </div>
+    </div> -->
   </div>
 </template>
 

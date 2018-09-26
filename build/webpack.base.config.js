@@ -1,6 +1,7 @@
 const PATH = require('path');
 const WEBPACK = require('webpack');
 const EXTRACT_TEXT_PLUGIN = require('extract-text-webpack-plugin');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const IS_DEV = process.env.NODE_ENV === 'dev';
 
@@ -49,13 +50,19 @@ module.exports = {
     ]
   },
   plugins: !IS_DEV
-  ? [
-      new WEBPACK.optimize.UglifyJsPlugin({
-        compress: { warnings: false }
-      }),
-      new EXTRACT_TEXT_PLUGIN({
-        filename: 'common.[chunkhash].css'
-      })
-    ]
-  : []
+    ? [
+        new WEBPACK.optimize.UglifyJsPlugin({
+          compress: { warnings: false }
+        }),
+        new EXTRACT_TEXT_PLUGIN({
+          filename: 'common.[chunkhash].css'
+        }),
+        new CopyWebpackPlugin([
+          {
+            from: PATH.resolve(__dirname, '../favicon.ico'),
+            to: PATH.resolve(__dirname, '../public')
+          }
+        ])
+      ]
+    : []
 }
