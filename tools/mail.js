@@ -13,8 +13,8 @@ function sendMail (opts) {
     let mailOptions = {
         from: '"Felbry 👻" <505792925@qq.com>', // sender address
         to: opts.receiver, // list of receivers
-        subject: '柴方博的个人网站登录密码 ✔', // Subject line
-        html: '<p>您正在进行 柴方博的个人网站 注册</p><p>登录密码为：<b>' + opts.code + '</b></p>'
+        subject: opts.subject, // Subject line
+        html: opts.html
     };
     return transporter.sendMail(mailOptions);
 }

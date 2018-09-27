@@ -1,6 +1,7 @@
 const EXPRESS = require('express');
 const hljs = require('highlight.js');
 const ROUTER = EXPRESS.Router();
+const MAIL = require('../tools/mail');
 const markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default;
 const MD = new require('markdown-it')({
   html: true,
@@ -115,6 +116,18 @@ ROUTER.route('/comments')
     blog.createTag(req.body).then(result => {
       utils.handleResponse(result, res);
     });
+  })
+
+// 激活leancloud
+ROUTER.route('/active')
+  .get((req, res) => {
+    MAIL({
+        receiver: '505792925@qq.com',
+        subject: 'VPS定时触发器',
+        html: `<p>当前时间为：<b>${new Date()}</b></p>`
+    })
+      .then(() => res.end('success'))
+      .catch(() => res.end('email send error'))
   })
 
 module.exports = ROUTER;

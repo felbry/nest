@@ -40,7 +40,8 @@ module.exports.create = function (opt) {
         })
         .then(result => MAIL({
             receiver: result.get('email'),
-            code: result.get('password')
+            subject: '阿晶和我个人网站登录密码 ✔',
+            html: `<p>您正在进行 柴方博的个人网站 注册</p><p>登录密码为：<b>${result.get('password')}</b></p>`
         }))
         .then(() => {
             return { code: 0 };
