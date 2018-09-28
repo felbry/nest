@@ -1,20 +1,20 @@
 <template>
   <!-- <img class="bg" src="https://api.yingjoy.cn/pic/?t=bing&w=1920" /> -->
   <div class="bg">
-    <img src="http://pcon69vb0.bkt.clouddn.com/18-8-14/9930112.jpg" />
-    <dog></dog>
+    <img src="http://pcon69vb0.bkt.clouddn.com/18-8-14/9930112.jpg">
+    <dog/>
   </div>
 </template>
 <script>
-import dog from './dog.vue';
+import dog from './dog.vue'
 export default {
-  data () {
-    return {};
-  },
   components: {
     dog
+  },
+  data () {
+    return {}
   }
-};
+}
 </script>
 <style lang="scss" scoped>
   .bg {
@@ -40,4 +40,3 @@ export default {
     }
   }
 </style>
-

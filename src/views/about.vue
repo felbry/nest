@@ -10,18 +10,17 @@
 </style>
 
 <template>
-    <div class="content">
-        这里写点我和阿晶的简介。
-    </div>
+  <div class="content">
+    这里写点我和阿晶的简介。
+  </div>
 </template>
 
 <script>
-    module.exports = {
-        data () {
-            return {
-                // url: 'context.url'
-            };
-        },
-    };
+module.exports = {
+  data () {
+    return {
+      // url: 'context.url'
+    }
+  }
+}
 </script>
-

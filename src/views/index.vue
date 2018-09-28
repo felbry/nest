@@ -1,23 +1,23 @@
 <template>
-    <div class="body">
-        <my-header></my-header>
-        <router-view></router-view>
-    </div>
+  <div class="body">
+    <my-header/>
+    <router-view/>
+  </div>
 </template>
 
 <script>
-    import Header from '../components/header.vue';
+import Header from '../components/header.vue'
 
-    module.exports = {
-        data () {
-            return {
-                
-            };
-        },
-        components: {
-            myHeader: Header
-        }
-    };
+module.exports = {
+  data () {
+    return {
+
+    }
+  },
+  components: {
+    myHeader: Header
+  }
+}
 </script>
 
 <style scoped>
@@ -32,4 +32,3 @@
         color: #fff;
     }
 </style>
-

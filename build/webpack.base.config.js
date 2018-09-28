@@ -1,9 +1,9 @@
-const PATH = require('path');
-const WEBPACK = require('webpack');
-const EXTRACT_TEXT_PLUGIN = require('extract-text-webpack-plugin');
-const CopyWebpackPlugin = require('copy-webpack-plugin');
+const PATH = require('path')
+const WEBPACK = require('webpack')
+const EXTRACT_TEXT_PLUGIN = require('extract-text-webpack-plugin')
+const CopyWebpackPlugin = require('copy-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV === 'dev';
+const IS_DEV = process.env.NODE_ENV === 'dev'
 
 module.exports = {
   output: {
@@ -17,13 +17,13 @@ module.exports = {
         test: /\.(js|vue)$/,
         loader: 'eslint-loader',
         enforce: 'pre',
-        exclude: /node_modules/,
+        exclude: [
+          /node_modules/,
+          /public/,
+          /lib/
+        ],
         options: {
-          cache: true,
-          emitError: true,
-          emitWarning: true,
-          // failOnWarning: true,
-          // failOnError: true
+          formatter: require('eslint-friendly-formatter')
         }
       },
       {
@@ -59,23 +59,23 @@ module.exports = {
           use: ['css-loader', 'sass-loader'],
           fallback: 'vue-style-loader'
         }) : ['vue-style-loader', 'css-loader', 'sass-loader']
-      },
+      }
     ]
   },
   plugins: !IS_DEV
     ? [
-        new WEBPACK.optimize.UglifyJsPlugin({
-          compress: { warnings: false }
-        }),
-        new EXTRACT_TEXT_PLUGIN({
-          filename: 'common.[chunkhash].css'
-        }),
-        new CopyWebpackPlugin([
-          {
-            from: PATH.resolve(__dirname, '../favicon.ico'),
-            to: PATH.resolve(__dirname, '../public')
-          }
-        ])
-      ]
+      new WEBPACK.optimize.UglifyJsPlugin({
+        compress: { warnings: false }
+      }),
+      new EXTRACT_TEXT_PLUGIN({
+        filename: 'common.[chunkhash].css'
+      }),
+      new CopyWebpackPlugin([
+        {
+          from: PATH.resolve(__dirname, '../favicon.ico'),
+          to: PATH.resolve(__dirname, '../public')
+        }
+      ])
+    ]
     : []
 }

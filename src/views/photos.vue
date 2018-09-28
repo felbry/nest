@@ -31,36 +31,37 @@
 </style>
 
 <template>
-    <div class="photo-content">
-        <div class="category">
-            <router-link class="menu-item" to="/photos/all">全部</router-link>
-            <router-link
-                v-for="tag in tagList"
-                :key="tag.id"
-                :to="'/photos/' + tag.id"
-                class="menu-item">
-                {{tag.name}}
-            </router-link>
-        </div>
-        <router-view></router-view>        
+  <div class="photo-content">
+    <div class="category">
+      <router-link
+        class="menu-item"
+        to="/photos/all">全部</router-link>
+      <router-link
+        v-for="tag in tagList"
+        :key="tag.id"
+        :to="'/photos/' + tag.id"
+        class="menu-item">
+        {{tag.name}}
+      </router-link>
     </div>
+    <router-view/>
+  </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';    
+import { mapState } from 'vuex'
 
-    module.exports = {
-        asyncData ({ store, route }) {
-            return store.dispatch('getPhotoTagList');
-        },
-        data () {
-            return {
-                // url: ''
-            };
-        },
-        computed: mapState({
-            tagList: state => state.photo.tagList
-        }),
-    };
+module.exports = {
+  asyncData ({ store, route }) {
+    return store.dispatch('getPhotoTagList')
+  },
+  data () {
+    return {
+      // url: ''
+    }
+  },
+  computed: mapState({
+    tagList: state => state.photo.tagList
+  })
+}
 </script>
-

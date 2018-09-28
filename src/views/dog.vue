@@ -1,84 +1,127 @@
 <template>
   <div class="dog">
     <div class="husky">
-  <div class="mane">
-    <div class="coat"></div>
-  </div>
-  <div class="body">
-    <div class="head">
-      <div class="ear"></div>
-      <div class="ear"></div>
-      <div class="face">
-        <div class="eye"></div>
-        <div class="eye"></div>
-        <div class="nose"></div>
-        <div class="mouth">
-          <div class="lips"></div>
-          <div class="tongue"></div>
+      <div class="mane">
+        <div class="coat"></div>
+      </div>
+      <div class="body">
+        <div class="head">
+          <div class="ear"></div>
+          <div class="ear"></div>
+          <div class="face">
+            <div class="eye"></div>
+            <div class="eye"></div>
+            <div class="nose"></div>
+            <div class="mouth">
+              <div class="lips"></div>
+              <div class="tongue"></div>
+            </div>
+          </div>
+        </div>
+        <div class="torso"></div>
+      </div>
+      <div class="legs">
+        <div class="front-legs">
+          <div class="leg"></div>
+          <div class="leg"></div>
+        </div>
+        <div class="hind-leg">
         </div>
       </div>
-    </div>
-    <div class="torso"></div>
-  </div>
-  <div class="legs">
-    <div class="front-legs">
-      <div class="leg"></div>
-      <div class="leg"></div>
-    </div>
-    <div class="hind-leg">
-    </div>
-  </div>
-  <div class="tail">
-    <div class="tail">
       <div class="tail">
         <div class="tail">
           <div class="tail">
             <div class="tail">
-              <div class="tail"></div>
+              <div class="tail">
+                <div class="tail">
+                  <div class="tail"></div>
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </div>
     </div>
-  </div>
-</div>
 
-<svg xmlns="http://www.w3.org/2000/svg" version="1.1" style="display:none">
-  <defs>
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      version="1.1"
+      style="display:none">
+      <defs>
 
-    
-    <filter id="squiggly-0">
-      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="0"/>
-      <feDisplacementMap id="displacement" in="SourceGraphic" in2="noise" scale="2" />
-    </filter>
-    <filter id="squiggly-1">
-      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="1"/>
-<feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
-    </filter>
-    
-    <filter id="squiggly-2">
-      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="2"/>
-<feDisplacementMap in="SourceGraphic" in2="noise" scale="2" />
-    </filter>
-    <filter id="squiggly-3">
-      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="3"/>
-<feDisplacementMap in="SourceGraphic" in2="noise" scale="3" />
-    </filter>
-    
-    <filter id="squiggly-4">
-      <feTurbulence id="turbulence" baseFrequency="0.02" numOctaves="3" result="noise" seed="4"/>
-<feDisplacementMap in="SourceGraphic" in2="noise" scale="1" />
-    </filter>
-  </defs> 
-</svg>
+        <filter id="squiggly-0">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="0"/>
+          <feDisplacementMap
+            id="displacement"
+            in="SourceGraphic"
+            in2="noise"
+            scale="2"/>
+        </filter>
+        <filter id="squiggly-1">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="1"/>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="3"/>
+        </filter>
+
+        <filter id="squiggly-2">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="2"/>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="2"/>
+        </filter>
+        <filter id="squiggly-3">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="3"/>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="3"/>
+        </filter>
+
+        <filter id="squiggly-4">
+          <feTurbulence
+            id="turbulence"
+            baseFrequency="0.02"
+            numOctaves="3"
+            result="noise"
+            seed="4"/>
+          <feDisplacementMap
+            in="SourceGraphic"
+            in2="noise"
+            scale="1"/>
+        </filter>
+      </defs>
+    </svg>
   </div>
 </template>
 <script>
 export default {
   data () {
-    return {};
+    return {}
   }
-};
+}
 </script>
 <style lang="scss" scoped>
 $color-bg: #4F8EDB;
@@ -243,7 +286,7 @@ $k-right-ear: (
   2: rotateZ(-19deg),
   4: rotateZ(-19deg),
   5: rotateZ(-30deg),
-  
+
   5.5: rotateZ(-19deg),
   5.6: rotateZ(-30deg),
   5.7: rotateZ(-19deg),
@@ -253,14 +296,14 @@ $k-right-ear: (
 
   7: rotateZ(-9deg),
   8: rotateZ(-9deg),
-  
+
   9: rotateZ(-19deg),
   9.1: rotateZ(-30deg),
   9.2: rotateZ(-19deg),
   9.4: rotateZ(-19deg),
   9.5: rotateZ(-30deg),
   9.6: rotateZ(-19deg),
-  
+
   12: rotateZ(-19deg),
   14: rotateZ(-16deg),
   $total-kf: rotateZ(-16deg)
@@ -307,12 +350,12 @@ $k-right-ear: (
   // width: 84vmin;
   height: 230px;
   width: 320px;
-  
+
   @media screen and (max-width: 400px) {
     // Chrome for Android chokes
     animation: none;
   }
-  
+
   &:before {
     width: 90%;
     height: 0.5vmin;
@@ -322,7 +365,7 @@ $k-right-ear: (
     left: 5%;
     z-index: 2;
   }
-  
+
   &:after {
     width: 100%;
     height: 10%;
@@ -346,7 +389,7 @@ div:before, div:after {
   left: 34%;
   top: 5%;
   transform-origin: bottom center;
-  
+
   &:before {
     background: $color-primary;
     border-top-left-radius: 50% 40%;
@@ -364,7 +407,7 @@ div:before, div:after {
   height: 62%;
   top: 15%;
   left: 2%;
-  
+
   &:before {
     z-index: 1;
     width: 94%;
@@ -389,7 +432,7 @@ div:before, div:after {
   border-top-left-radius: 55% 50%;
   border-top-right-radius: 45% 50%;
   z-index: 2;
-  
+
   &:before {
     animation: left-eye $duration none infinite;
     height: 15%;
@@ -400,7 +443,7 @@ div:before, div:after {
     left: 45%;
     transform-origin: center center;
   }
-  
+
   + .eye {
     z-index: 1;
     right: initial;
@@ -418,7 +461,7 @@ div:before, div:after {
   height: 20%;
   top: 29%;
   left: 42%;
-  
+
   &:after {
     background: $color-primary;
     height: 100%;
@@ -428,7 +471,7 @@ div:before, div:after {
     border-bottom-right-radius: 55% 80%;
     border-bottom-left-radius: 50% 80%;
   }
-  
+
   &:before {
     height: 100%;
     width: 200%;
@@ -452,7 +495,7 @@ div:before, div:after {
   transform-origin: 80% center;
   overflow: hidden;
   background: $color-primary;
-  
+
   &:before {
     width: 70%;
     height: 55%;
@@ -465,7 +508,7 @@ div:before, div:after {
       skewX(30deg)
       rotate(-5deg);
   }
-  
+
   &:after {
     width: 70%;
     height: 100%;
@@ -475,7 +518,7 @@ div:before, div:after {
     transform-origin: top left;
     transform: rotate(-5deg);
   }
-  
+
   + .ear {
     animation: right-ear $duration both infinite;
     background-color: $color-dark;
@@ -483,11 +526,11 @@ div:before, div:after {
     top: 5%;
     z-index: -1;
     transform-origin: right center;
-    
+
     &:before {
       border-color: $color-dark;
     }
-    
+
     &:after {
       background: $color-dark;
     }
@@ -503,7 +546,7 @@ div:before, div:after {
   bottom: -5%;
   left: 28%;
   overflow: hidden;
-  
+
   &:before, &:after {
     animation: mouth-cover-left $duration none infinite;
     width: 28%;
@@ -514,7 +557,7 @@ div:before, div:after {
     z-index: 3;
     transform-origin: right top;
   }
-  
+
   &:after {
     animation: mouth-cover-right $duration none infinite;
     left: initial;
@@ -527,7 +570,7 @@ div:before, div:after {
   z-index: 2;
   height: 35%;
   width: 100%;
-  
+
   &:before, &:after {
     background: $color-white;
     width: calc(50% + 1.5px);
@@ -542,10 +585,10 @@ div:before, div:after {
     border-right-color: transparent;
     border-top-color: transparent;
   }
-  
+
   &:after {
     transform: rotateY(180deg);
-    left: initial;    
+    left: initial;
     right: 0;
   }
 }
@@ -576,7 +619,7 @@ div:before, div:after {
   height: 55%;
   width: 100%;
   bottom: 0;
-  
+
   &:before {
     background: $color-primary;
     height: 100%;
@@ -587,7 +630,7 @@ div:before, div:after {
     transform-origin: left bottom;
     border-radius: 0 30% 0 60%;
   }
-  
+
   &:after {
     background: $color-primary;
     height: 100%;
@@ -606,8 +649,8 @@ div:before, div:after {
   height: 30%;
   top: 44%;
   left: 37%;
-  
-  &:before {    
+
+  &:before {
     background: $color-white;
     height: 40%;
     width: 100%;
@@ -615,7 +658,7 @@ div:before, div:after {
     border-top-right-radius: 20% 100%;
     border-bottom-left-radius: 10% 50%;
   }
-  
+
   &:after {
     background: $color-white;
     top: 25%;
@@ -658,7 +701,7 @@ div:before, div:after {
   height: 117%;
   bottom: 0;
   right: -12%;
-  
+
   &:before {
     width: 4%;
     height: 6%;
@@ -673,7 +716,7 @@ div:before, div:after {
       ;
     z-index: 2;
   }
-  
+
   > .leg {
     width: 51%;
     height: 100%;
@@ -681,7 +724,7 @@ div:before, div:after {
     bottom: 0;
     right: 50%;
     overflow: hidden;
-    
+
     &:before {
       background: $color-lighter;
       height: 100%;
@@ -689,11 +732,11 @@ div:before, div:after {
       transform: skewY(-30deg) skewX(10deg);
       transform-origin: top right;
     }
-    
+
     + .leg {
       right: 0;
       transform: rotateY(180deg);
-      
+
       &:before {
         background: $color-light;
       }
@@ -710,7 +753,7 @@ div:before, div:after {
   border-top-right-radius: 40% 100%;
   bottom: 0%;
   right: 45%;
-  
+
   &:before {
     width: 6%;
     height: 20%;
@@ -731,7 +774,7 @@ div:before, div:after {
   right: 72%;
   background: $color-dark;
   z-index: 0;
-  
+
   > .tail {
     animation: tail $duration none infinite;
     height: 100%;
@@ -743,12 +786,12 @@ div:before, div:after {
     transform: rotate(26deg);
     transform: rotate(0deg);
   }
-  
+
   .husky > & {
     border-top-left-radius: 10% 50%;
     border-bottom-left-radius: 10% 50%;
   }
-  
+
   .husky > & > & {
     right: 88%;
   }

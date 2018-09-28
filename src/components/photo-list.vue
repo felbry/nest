@@ -1,6 +1,6 @@
 <style scoped>
     @import url("../lib/lightgallery/css/lightgallery.min.css");
-    
+
     #lightgallery {
         display: flex;
         flex-wrap: wrap;
@@ -27,22 +27,23 @@
 </style>
 
 <template>
-    <div>
-        <div id="lightgallery">
-            <a class="lg-item"
-                v-for="item in photoList"
-                :href="item.url">
-                <img :src="item.thumbUrl" />
-            </a>
-        </div>
-        <el-pagination
-            @current-change="pageChange"
-            :current-page.sync="page"
-            background
-            :total="total"
-            layout="prev, pager, next, total">
-        </el-pagination>
+  <div>
+    <div id="lightgallery">
+      <a
+        v-for="item in photoList"
+        :key="item.url"
+        :href="item.url"
+        class="lg-item">
+        <img :src="item.thumbUrl">
+      </a>
     </div>
+    <el-pagination
+      :current-page.sync="page"
+      :total="total"
+      background
+      layout="prev, pager, next, total"
+      @current-change="pageChange"/>
+  </div>
 </template>
 
 <script src="../lib/lightgallery.min.js"></script>

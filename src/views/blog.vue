@@ -32,58 +32,48 @@
 </style>
 
 <template>
-    <div class="blog-container">
-        <!-- <div class="category">
-            <router-link class="menu-item" to="/blog/all">全部</router-link>
-            <router-link
-                v-for="tag in tagList"
-                :key="tag.id"
-                :to="'/blog/' + tag.id"
-                class="menu-item">
-                {{tag.name}}
-            </router-link>
-        </div> -->
-        <div class="recent-posts">
-            <h2 class="h2">近期文章</h2>
-            <ul>
-                <li
-                    class="li"
-                    v-for="item in articalList">
-                    {{new Date(item.createdAt).toISOString().slice(0, 10)}} » 
-                    <span
-                        @click="detailBlog(item.id)"
-                        class="title">
-                        {{item.title}}
-                    </span>
-                </li>
-            </ul>
-        </div>
+  <div class="blog-container">
+    <div class="recent-posts">
+      <h2 class="h2">近期文章</h2>
+      <ul>
+        <li
+          v-for="item in articalList"
+          :key="item.id"
+          class="li">
+          {{new Date(item.createdAt).toISOString().slice(0, 10)}} »
+          <span
+            class="title"
+            @click="detailBlog(item.id)">
+            {{item.title}}
+          </span>
+        </li>
+      </ul>
     </div>
+  </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
-    module.exports = {
-        asyncData ({ store, route }) {
-            // return store.dispatch('getTagList');
-            return store.dispatch('getArticalList');
-        },
-        data () {
-            return {
-                // url: ''
-            };
-        },
-        computed: mapState({
-            // tagList: state => state.blog.tagList
-            articalList: state => state.blog.articalList,
-            total: state => state.blog.total,
-        }),
-        methods: {
-            detailBlog (id) {
-                this.$router.push(`/blog/articals/${id}`);
-            },
-        }
-    };
+module.exports = {
+  asyncData ({ store, route }) {
+    // return store.dispatch('getTagList');
+    return store.dispatch('getArticalList')
+  },
+  data () {
+    return {
+      // url: ''
+    }
+  },
+  computed: mapState({
+    // tagList: state => state.blog.tagList
+    articalList: state => state.blog.articalList,
+    total: state => state.blog.total
+  }),
+  methods: {
+    detailBlog (id) {
+      this.$router.push(`/blog/articals/${id}`)
+    }
+  }
+}
 </script>
-

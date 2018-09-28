@@ -139,7 +139,7 @@
     tr {
       border: 1px solid #ddd;
       &:nth-child(even) {
-        background: #f8f8f8;  
+        background: #f8f8f8;
       }
     }
 
@@ -292,44 +292,47 @@
         </h2>
       </div>
       <div
-        v-html="artical.content"
-        class="blog-body">
+        class="blog-body"
+        v-html="artical.content">
       </div>
       <!-- 只有三层就不抽组件了 0.0 -->
       <ul
         v-if="artical.toc && artical.toc.length"
         class="toc-container">
         <li
-          class="h1"
-          v-for="item in artical.toc">
+          v-for="item in artical.toc"
+          :key="item.anchor"
+          class="h1">
           <a
-            class="anchor"
             :class="{
               'anchor-active': item.anchor === currentAnchor
             }"
-            :href="'#' + item.anchor">{{item.content}}</a>
+            :href="'#' + item.anchor"
+            class="anchor">{{item.content}}</a>
           <ul
             v-if="item.children.length"
             v-show="item.anchor === currentFatherAnchor">
             <li
-              class="h2"
-              v-for="itemH2 in item.children">
+              v-for="itemH2 in item.children"
+              :key="itemH2.anchor"
+              class="h2">
               <a
-                class="anchor"
                 :class="{
                   'anchor-active': itemH2.anchor === currentAnchor
                 }"
-                :href="'#' + itemH2.anchor">{{itemH2.content}}</a>
+                :href="'#' + itemH2.anchor"
+                class="anchor">{{itemH2.content}}</a>
               <ul v-if="itemH2.children && itemH2.children.length">
                 <li
-                  class="h3"
-                  v-for="itemH3 in itemH2.children">
+                  v-for="itemH3 in itemH2.children"
+                  :key="itemH3.anchor"
+                  class="h3">
                   <a
-                    class="anchor"
                     :class="{
                       'anchor-active': itemH3.anchor === currentAnchor
                     }"
-                    :href="'#' + itemH3.anchor">{{itemH3.content}}</a>
+                    :href="'#' + itemH3.anchor"
+                    class="anchor">{{itemH3.content}}</a>
                 </li>
               </ul>
             </li>
@@ -338,18 +341,18 @@
       </ul>
       <el-dialog
         :visible.sync="isPreview"
-        custom-class="blog-img-dialog"
         :append-to-body="true"
-        :show-close="false">
-        <img :src="previewUrl" />
+        :show-close="false"
+        custom-class="blog-img-dialog">
+        <img :src="previewUrl">
       </el-dialog>
       <div class="footer-img">
         <img
           v-if="artical.gender === 1"
-          src="../imgs/felbry.jpg" />
+          src="../imgs/felbry.jpg">
         <img
           v-else
-          src="../imgs/jing.jpg" />
+          src="../imgs/jing.jpg">
       </div>
       <!-- <input type="text" v-model="email"> -->
       <!-- <button @click="registry">拿到验证码</button> -->
@@ -369,44 +372,44 @@
 </template>
 
 <script>
-import { mapState } from "vuex";
-import { Dialog } from "element-ui";
-import titleMixin from "../mixin/title";
-import { POST_FRIEND_REGISTRY } from "../../api";
+import { mapState } from 'vuex'
+import { Dialog } from 'element-ui'
+import titleMixin from '../mixin/title'
+import { POST_FRIEND_REGISTRY } from '../../api'
 
 module.exports = {
   mixins: [titleMixin],
   title () {
-    return `${this.artical.title} - ${this.artical.nickName}`;
+    return `${this.artical.title} - ${this.artical.nickName}`
   },
-  asyncData({ store, route }) {
-    return store.dispatch("getArtical", route.params.id);
+  asyncData ({ store, route }) {
+    return store.dispatch('getArtical', route.params.id)
   },
-  mounted() {
-    let imgs = document.querySelectorAll(".blog-body img");
-    let as = document.querySelectorAll(".blog-body a");
-    let that = this;
+  mounted () {
+    let imgs = document.querySelectorAll('.blog-body img')
+    let as = document.querySelectorAll('.blog-body a')
+    let that = this
     Array.from(imgs).forEach(img => {
-      img.addEventListener("click", function(e) {
-        that.previewUrl = e.target.src;
-        that.isPreview = true;
-      });
-    });
+      img.addEventListener('click', function (e) {
+        that.previewUrl = e.target.src
+        that.isPreview = true
+      })
+    })
     Array.from(as).forEach(a => {
-      a.setAttribute("target", "_blank");
-    });
-    this.findActive();
-    document.addEventListener("scroll", this.findActive);
+      a.setAttribute('target', '_blank')
+    })
+    this.findActive()
+    document.addEventListener('scroll', this.findActive)
   },
-  data() {
+  data () {
     return {
       isPreview: false,
-      previewUrl: "",
-      email: "",
+      previewUrl: '',
+      email: '',
       headGroup: [],
-      currentAnchor: "",
-      currentFatherAnchor: ""
-    };
+      currentAnchor: '',
+      currentFatherAnchor: ''
+    }
   },
   computed: mapState({
     artical: state => state.blog.artical
@@ -416,47 +419,46 @@ module.exports = {
       POST_FRIEND_REGISTRY({
         email: this.email
       }).then(data => {
-        console.log(data);
-      });
+        console.log(data)
+      })
     },
     findActive () {
       // 先看有没有在 0 - 10之间的，有直接确定不走之后的逻辑。没有的话下一步
       // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
       // 没有，则是当前最小的选中（即页面刚打开）
       this.artical.tocSort.some((tocItem, index) => {
-        let arr = this.artical.tocSort;
-        let head = document.getElementById(tocItem.anchor);
-        let top = head.getBoundingClientRect().top;
+        let arr = this.artical.tocSort
+        let head = document.getElementById(tocItem.anchor)
+        let top = head.getBoundingClientRect().top
         if (top < 0) {
-          return;
+
         } else {
-          let currentIndex = 0;
+          let currentIndex = 0
           if (top <= 10) {
-            this.currentAnchor = tocItem.anchor;
-            currentIndex = index;
+            this.currentAnchor = tocItem.anchor
+            currentIndex = index
           } else {
             if (index === 0) {
-              this.currentAnchor = tocItem.anchor;
-              currentIndex = index;
+              this.currentAnchor = tocItem.anchor
+              currentIndex = index
             } else {
-              this.currentAnchor = arr[index - 1].anchor;
-              currentIndex = index - 1;
+              this.currentAnchor = arr[index - 1].anchor
+              currentIndex = index - 1
             }
           }
           // 找到顶级anchor，为了控制展开收缩
-          let i = 0;
+          let i = 0
           while (arr[currentIndex - i].level !== 1) {
-            i++;
+            i++
           }
-          this.currentFatherAnchor = arr[currentIndex - i].anchor;
-          return true;
+          this.currentFatherAnchor = arr[currentIndex - i].anchor
+          return true
         }
-      });
+      })
     }
   },
   components: {
     [Dialog.name]: Dialog
   }
-};
+}
 </script>
-

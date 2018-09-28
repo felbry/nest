@@ -1,51 +1,51 @@
 <template>
-    <div class="sidebar">
-        <h1 class="logo">
-            <span class="logo-day">{{timer}}</span>days<br/>
-        </h1>
-        <ul class="header-menu">
-            <router-link
-                active-class="header-router-link-active"
-                tag="li"
-                to="/index">
-                <a>Home</a>
-            </router-link>
-            <router-link
-                active-class="header-router-link-active"
-                tag="li"
-                to="/blog">
-                <a>Blog</a>
-            </router-link>
-            <router-link
-                active-class="header-router-link-active"
-                tag="li"
-                to="/photos">
-                <a>Photos</a>
-            </router-link>
-            <router-link
-                active-class="header-router-link-active"
-                tag="li"
-                to="/about">
-                <a>About</a>
-            </router-link>
-        </ul>
-    </div>
+  <div class="sidebar">
+    <h1 class="logo">
+      <span class="logo-day">{{timer}}</span>days<br>
+    </h1>
+    <ul class="header-menu">
+      <router-link
+        active-class="header-router-link-active"
+        tag="li"
+        to="/index">
+        <a>Home</a>
+      </router-link>
+      <router-link
+        active-class="header-router-link-active"
+        tag="li"
+        to="/blog">
+        <a>Blog</a>
+      </router-link>
+      <router-link
+        active-class="header-router-link-active"
+        tag="li"
+        to="/photos">
+        <a>Photos</a>
+      </router-link>
+      <router-link
+        active-class="header-router-link-active"
+        tag="li"
+        to="/about">
+        <a>About</a>
+      </router-link>
+    </ul>
+  </div>
 </template>
 
 <script>
 module.exports = {
-    data() {
-        return {
-            current: new Date(),
-            start: new Date(2017, 4, 19)
-        };
-    },
-    computed: {
-        timer () {
-            return Math.floor((this.current.getTime() - this.start.getTime()) / (24 * 3600 * 1000));
-        }
-    },
-};
+  data () {
+    return {
+      current: new Date(),
+      start: new Date(2017, 4, 19)
+    }
+  },
+  computed: {
+    timer () {
+      return Math.floor((this.current.getTime() - this.start.getTime()) / (24 * 3600 * 1000))
+    }
+  }
+}
 </script>
 
 <style scoped>
@@ -100,4 +100,3 @@ module.exports = {
         color: #000;
     }
 </style>
-

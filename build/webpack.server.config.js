@@ -1,11 +1,11 @@
-const WEBPACK = require('webpack');
-const MERGE = require('webpack-merge');
-const NODE_EXTERNALS = require('webpack-node-externals');
-const BASE_CONFIG = require('./webpack.base.config.js');
-const VUE_SSR_SERVER_PLUGIN = require('vue-server-renderer/server-plugin');
-const CLEAN_WEBPACK_PLUGIN = require('clean-webpack-plugin');
+const WEBPACK = require('webpack')
+const MERGE = require('webpack-merge')
+const NODE_EXTERNALS = require('webpack-node-externals')
+const BASE_CONFIG = require('./webpack.base.config.js')
+const VUE_SSR_SERVER_PLUGIN = require('vue-server-renderer/server-plugin')
+const CLEAN_WEBPACK_PLUGIN = require('clean-webpack-plugin')
 
-const IS_DEV = process.env.NODE_ENV === 'dev';
+const IS_DEV = process.env.NODE_ENV === 'dev'
 
 module.exports = MERGE(BASE_CONFIG, {
   // 将 entry 指向应用程序的 server entry 文件
@@ -39,10 +39,11 @@ module.exports = MERGE(BASE_CONFIG, {
     })
   ].concat(IS_DEV
     ? [
-        new VUE_SSR_SERVER_PLUGIN()
-      ]
+      new VUE_SSR_SERVER_PLUGIN()
+    ]
     : [
-        new CLEAN_WEBPACK_PLUGIN(['../public'], { allowExternal: true }),
-        new VUE_SSR_SERVER_PLUGIN()
-      ])
-});
+      new CLEAN_WEBPACK_PLUGIN(['../public'], { allowExternal: true }),
+      new VUE_SSR_SERVER_PLUGIN()
+    ]
+  )
+})

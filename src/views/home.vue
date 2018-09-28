@@ -10,16 +10,15 @@
 </style>
 
 <template>
-    <div class="content">
-        这是我和阿晶的窝。
-    </div>
+  <div class="content">
+    这是我和阿晶的窝。
+  </div>
 </template>
 
 <script>
-    module.exports = {
-        data () {
-            return {};
-        },
-    };
+module.exports = {
+  data () {
+    return {}
+  }
+}
 </script>
-

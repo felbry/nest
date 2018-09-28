@@ -12,6 +12,11 @@ module.exports = {
     'vue'
   ],
   rules: {
+    'prefer-promise-reject-errors': [0],
+    'no-throw-literal': [0],
+    'template-curly-spacing': [0],
+    'indent': [0],
+    // vue 相关
     'vue/html-closing-bracket-newline': ['error', {
       'singleline': 'never',
       'multiline': 'never' // default: always

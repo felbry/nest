@@ -17,7 +17,7 @@
 
     .title {
         display: flex;
-        margin-bottom: 10px;        
+        margin-bottom: 10px;
         align-items: center;
         height: 46px;
         font-size: 22px;
@@ -47,69 +47,74 @@
 </style>
 
 <template>
-    <div>
-        <div v-if="articalList.length">
-            <div v-for="item in articalList" class="blog-item">
-                <div class="date">{{new Date(item.createdAt).toLocaleDateString()}} {{new Date(item.createdAt).toLocaleTimeString().slice(0, -3)}}</div>
-                <div @click="detailBlog(item.id)" class="title">
-                    <img :src="item.avatarUrl" class="title-avatar" />
-                    {{item.title}}
-                </div>
-            </div>
+  <div>
+    <div v-if="articalList.length">
+      <div
+        v-for="item in articalList"
+        :key="item.id"
+        class="blog-item">
+        <div class="date">{{new Date(item.createdAt).toLocaleDateString()}} {{new Date(item.createdAt).toLocaleTimeString().slice(0, -3)}}</div>
+        <div
+          class="title"
+          @click="detailBlog(item.id)">
+          <img
+            :src="item.avatarUrl"
+            class="title-avatar">
+          {{item.title}}
         </div>
-        <div v-else>暂无相关文章</div>
-        <el-pagination
-            @current-change="pageChange"
-            :current-page.sync="page"
-            background
-            :total="total"
-            layout="prev, pager, next, total">
-        </el-pagination>
+      </div>
     </div>
+    <div v-else>暂无相关文章</div>
+    <el-pagination
+      :current-page.sync="page"
+      :total="total"
+      background
+      layout="prev, pager, next, total"
+      @current-change="pageChange"/>
+  </div>
 </template>
 
 <script>
-    import { mapState } from 'vuex';
-    import { Pagination } from 'element-ui';
+import { mapState } from 'vuex'
+import { Pagination } from 'element-ui'
 
-    module.exports = {
-        asyncData ({ store, route }) {
-            return store.dispatch('getArticalList');
-        },
-        beforeRouteUpdate (to, from, next) {
-            // 重置下分页状态
-            this.$store.dispatch('getArticalList', {
-                tid: to.params.tid == 'all' ? '' : to.params.tid,
-                page: 1
-            }).then(() => {
-                next(vm => {
-                    vm.page = 1;
-                });
-            });
-        },
-        data () {
-            return {
-                page: 1
-            };
-        },
-        computed: mapState({
-            articalList: state => state.blog.articalList,
-            total: state => state.blog.total,
-        }),
-        methods: {
-            detailBlog (id) {
-                this.$router.push(`/blog/articals/${id}`);
-            },
-            pageChange (page) {
-                this.$store.dispatch('getArticalList', {
-                    tid: route.params.tid == 'all' ? '' : route.params.tid,
-                    page: page
-                });
-            }
-        },
-        components: {
-            [Pagination.name]: Pagination
-        }
-    };
+module.exports = {
+  asyncData ({ store, route }) {
+    return store.dispatch('getArticalList')
+  },
+  beforeRouteUpdate (to, from, next) {
+    // 重置下分页状态
+    this.$store.dispatch('getArticalList', {
+      tid: to.params.tid === 'all' ? '' : to.params.tid,
+      page: 1
+    }).then(() => {
+      next(vm => {
+        vm.page = 1
+      })
+    })
+  },
+  data () {
+    return {
+      page: 1
+    }
+  },
+  computed: mapState({
+    articalList: state => state.blog.articalList,
+    total: state => state.blog.total
+  }),
+  methods: {
+    detailBlog (id) {
+      this.$router.push(`/blog/articals/${id}`)
+    },
+    pageChange (page) {
+      this.$store.dispatch('getArticalList', {
+        tid: this.route.params.tid === 'all' ? '' : this.route.params.tid,
+        page: page
+      })
+    }
+  },
+  components: {
+    [Pagination.name]: Pagination
+  }
+}
 </script>
-

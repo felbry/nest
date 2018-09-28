@@ -1,65 +1,65 @@
-const AV = require('leanengine');
-const JWT = require('jsonwebtoken');
-const MAIL = require('../tools/mail');
+const AV = require('leanengine')
+// const JWT = require('jsonwebtoken')
+const MAIL = require('../tools/mail')
 
-var utils = require('../utils');
-var config = require('../config');
+var utils = require('../utils')
+// var config = require('../config')
 
 module.exports.create = function (opt) {
-    if (!utils.verifyEmail(opt.email)) {
-        return Promise.resolve({
-            code: 1,
-            data: {
-                msg: '邮箱格式非法'
-            }
-        });
-    }
-    let friendQuery = new AV.Query('Friend');
-    friendQuery.equalTo('email', opt.email);
-    return friendQuery.find()
-        .then(results => {
-            if (results.length) {
-                throw {
-                    code: 2,
-                    data: {
-                        msg: '用户已存在'
-                    }
-                };
-            }
-        })
-        .then(() => {
-            let code = '';
-            for (let i = 0; i < 4; i++) {
-                code += Math.floor((Math.random() * 9) + 1);
-            }
-            let friend = new AV.Object('Friend');
-            friend.set('email', opt.email);
-            friend.set('password', code);
-            friend.set('nickname', opt.nickname || '一名吃瓜群众');
-            return friend.save();
-        })
-        .then(result => MAIL({
-            receiver: result.get('email'),
-            subject: '阿晶和我个人网站登录密码 ✔',
-            html: `<p>您正在进行 柴方博的个人网站 注册</p><p>登录密码为：<b>${result.get('password')}</b></p>`
-        }))
-        .then(() => {
-            return { code: 0 };
-        })
-        .catch((err) => {
-            if (err && !Number.isInteger(err.code)) {
-                return {
-                    code: 3,
-                    data: {
-                        msg: `邮件发送失败：${JSON.stringify(err)}`
-                    }
-                }
-            } else {
-                return utils.handleDBErr(err);
-            }
-        });
+  if (!utils.verifyEmail(opt.email)) {
+    return Promise.resolve({
+      code: 1,
+      data: {
+        msg: '邮箱格式非法'
+      }
+    })
+  }
+  let friendQuery = new AV.Query('Friend')
+  friendQuery.equalTo('email', opt.email)
+  return friendQuery.find()
+    .then(results => {
+      if (results.length) {
+        throw {
+          code: 2,
+          data: {
+            msg: '用户已存在'
+          }
+        }
+      }
+    })
+    .then(() => {
+      let code = ''
+      for (let i = 0; i < 4; i++) {
+        code += Math.floor((Math.random() * 9) + 1)
+      }
+      let friend = new AV.Object('Friend')
+      friend.set('email', opt.email)
+      friend.set('password', code)
+      friend.set('nickname', opt.nickname || '一名吃瓜群众')
+      return friend.save()
+    })
+    .then(result => MAIL({
+      receiver: result.get('email'),
+      subject: '阿晶和我个人网站登录密码 ✔',
+      html: `<p>您正在进行 柴方博的个人网站 注册</p><p>登录密码为：<b>${result.get('password')}</b></p>`
+    }))
+    .then(() => {
+      return { code: 0 }
+    })
+    .catch((err) => {
+      if (err && !Number.isInteger(err.code)) {
+        return {
+          code: 3,
+          data: {
+            msg: `邮件发送失败：${JSON.stringify(err)}`
+          }
+        }
+      } else {
+        return utils.handleDBErr(err)
+      }
+    })
 }
 
 module.exports.login = function (opt) {
-    let friendQuery = new AV.Query('Friend');
+  // let friendQuery = new AV.Query('Friend')
 }
