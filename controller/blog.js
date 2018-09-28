@@ -122,13 +122,18 @@ ROUTER.route('/comments')
 // 激活leancloud
 ROUTER.route('/active')
   .get((req, res) => {
-    MAIL({
-      receiver: '505792925@qq.com',
-      subject: 'VPS定时触发器',
-      html: `<p>当前时间为：<b>${new Date()}</b></p>`
-    })
-      .then(() => res.end('success'))
-      .catch(() => res.end('email send error'))
+    let date = new Date()
+    if (date.getHours() === 8 && date.getMinutes() < 5) {
+      MAIL({
+        receiver: '505792925@qq.com',
+        subject: 'Good Morning',
+        html: `<p>当前时间为：<b>${new Date()}</b></p>`
+      })
+        .then(() => res.end('success'))
+        .catch(() => res.end('email send error'))
+    } else {
+      res.end('other time')
+    }
   })
 
 module.exports = ROUTER

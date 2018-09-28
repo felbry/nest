@@ -23,6 +23,7 @@ module.exports = {
           /lib/
         ],
         options: {
+          cache: true,
           formatter: require('eslint-friendly-formatter')
         }
       },
