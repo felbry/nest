@@ -1,34 +1,34 @@
 <style scoped>
-    .blog-container {
-        margin: 50px auto 0;
-        max-width: 990px;
-    }
-    .recent-posts {
-        max-width: 630px;
-    }
-    .h2 {
-        padding: 8px 0;
-        font-size: 22px;
-        font-weight: 400;
-        border-bottom: 1px dashed #ccc;
-        margin-bottom: 15px;
-    }
-    .li {
-        margin-bottom: 5px;
-        list-style: circle;
-        line-height: 28px;
-        font-size: 16px;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-    .title {
-        color: #4a75b5;
-    }
-    .title:hover {
-        color: #e58c7c;
-        text-decoration: underline;
-        cursor: pointer;
-    }
+.blog-container {
+  margin: 50px auto 0;
+  max-width: 990px;
+}
+.recent-posts {
+  max-width: 630px;
+}
+.h2 {
+  padding: 8px 0;
+  font-size: 22px;
+  font-weight: 400;
+  border-bottom: 1px dashed #ccc;
+  margin-bottom: 15px;
+}
+.li {
+  margin-bottom: 5px;
+  list-style: circle;
+  line-height: 28px;
+  font-size: 16px;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+.title {
+  color: #4a75b5;
+}
+.title:hover {
+  color: #e58c7c;
+  text-decoration: underline;
+  cursor: pointer;
+}
 </style>
 
 <template>
