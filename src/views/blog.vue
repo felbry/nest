@@ -41,11 +41,11 @@
           :key="item.id"
           class="li">
           {{new Date(item.createdAt).toISOString().slice(0, 10)}} »
-          <span
-            class="title"
-            @click="detailBlog(item.id)">
+          <router-link
+            :to="`/blog/articals/${item.id}`"
+            class="title">
             {{item.title}}
-          </span>
+          </router-link>
         </li>
       </ul>
     </div>
@@ -70,10 +70,6 @@ module.exports = {
     articalList: state => state.blog.articalList,
     total: state => state.blog.total
   }),
-  methods: {
-    detailBlog (id) {
-      this.$router.push(`/blog/articals/${id}`)
-    }
-  }
+  methods: {}
 }
 </script>
