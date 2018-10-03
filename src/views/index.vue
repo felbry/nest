@@ -1,21 +1,15 @@
 <template>
   <div class="body">
-    <my-header/>
     <router-view/>
   </div>
 </template>
 
 <script>
-import Header from '../components/header.vue'
-
 module.exports = {
   data () {
     return {
 
     }
-  },
-  components: {
-    myHeader: Header
   }
 }
 </script>

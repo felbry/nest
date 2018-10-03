@@ -14,10 +14,6 @@ export function createRouter () {
             component: () => import('./views/img.vue')
           },
           {
-            path: 'index',
-            component: () => import('./views/home.vue')
-          },
-          {
             path: 'photos',
             component: () => import('./views/photos.vue'),
             redirect: '/photos/all',
@@ -27,10 +23,6 @@ export function createRouter () {
                 component: () => import('./components/photo-list.vue')
               }
             ]
-          },
-          {
-            path: 'about',
-            component: () => import('./views/about.vue')
           }
         ]
       },
