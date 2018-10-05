@@ -5,33 +5,29 @@
       @click="isActive = !isActive">
       <div class="burger__patty"></div>
     </div>
-    <transition name="slide-fade">
-      <div
-        v-show="isActive"
-        class="nav-list">
-        <router-link
-          to="/"
-          class="nav-item">
-          <img
-            src="../imgs/home.png"
-            alt="首页">
-        </router-link>
-        <router-link
-          to="/blog"
-          class="nav-item">
-          <img
-            src="../imgs/blog.png"
-            alt="博客">
-        </router-link>
-        <router-link
-          to="/photos"
-          class="nav-item">
-          <img
-            src="../imgs/camera.png"
-            alt="相片">
-        </router-link>
-      </div>
-    </transition>
+    <div :class="{'nav-list': true, 'nav-list-active': isActive}">
+      <router-link
+        to="/"
+        class="nav-item">
+        <img
+          src="../imgs/home.png"
+          alt="首页">
+      </router-link>
+      <router-link
+        to="/blog"
+        class="nav-item">
+        <img
+          src="../imgs/blog.png"
+          alt="博客">
+      </router-link>
+      <router-link
+        to="/photos"
+        class="nav-item">
+        <img
+          src="../imgs/camera.png"
+          alt="相片">
+      </router-link>
+    </div>
   </nav>
 </template>
 <script>
@@ -49,6 +45,11 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 .nav-list {
   display: flex;
   flex-direction: column;
+  height: 0;
+  transition: $ease;
+  overflow: hidden;
+}
+.nav-list-active {
   height: 85vh;
 }
 .nav-item {
@@ -67,11 +68,9 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 // 收缩展开实现
 .nav {
-  position: fixed;
-  z-index: 1;
-  top: 0;
-  left: 0;
   width: 100px;
+  height: 100%;
+  flex-shrink: 0;
 }
 .burger {
   height: 15vh;
@@ -136,7 +135,7 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 
   @media (max-width: 640px) {
-    height: 10vh;
+    // height: 10vh;
 
     &__patty {
       transform: scale(0.8);
@@ -147,6 +146,16 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         transform: scale(0.8) rotate(90deg);
       }
     }
+  }
+}
+// 设置为1100即之后的容器最大宽度都限制在1000以内
+// 如果超出了1000，则必须保证菜单栏不会覆盖到内容元素
+@media only screen and (max-width: 1100px) {
+  .burger {
+    display: none!important;
+  }
+  .nav-list {
+    height: 100vh!important;
   }
 }
 </style>

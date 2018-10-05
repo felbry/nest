@@ -165,7 +165,7 @@
   }
 }
 
-@media only screen and (max-width: 1146px) {
+@media only screen and (max-width: 1246px) {
   .artical-content, .footer-content {
     padding-right: 0 !important;
     max-width: 736px !important;
@@ -293,7 +293,7 @@
 </style>
 
 <template>
-  <div>
+  <div style="height: 100%; overflow: scroll;">
     <div class="artical-content">
       <div class="artical-header">
         <h2>
