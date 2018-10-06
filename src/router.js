@@ -7,26 +7,32 @@ export function createRouter () {
     routes: [
       {
         path: '/',
-        component: () => import('./views/index.vue')
-      },
-      {
-        path: '/photos',
-        component: () => import('./views/photos.vue'),
-        redirect: '/photos/all',
+        component: () => import('./views/index.vue'),
         children: [
           {
-            path: '/photos/:tid',
-            component: () => import('./components/photo-list.vue')
+            path: '',
+            component: () => import('./views/home.vue')
+          },
+          {
+            path: '/photos',
+            component: () => import('./views/photos.vue'),
+            redirect: '/photos/all',
+            children: [
+              {
+                path: '/photos/:tid',
+                component: () => import('./components/photo-list.vue')
+              }
+            ]
+          },
+          {
+            path: '/blog',
+            component: () => import('./views/blog.vue')
+          },
+          {
+            path: '/blog/articals/:id',
+            component: () => import('./views/artical.vue')
           }
         ]
-      },
-      {
-        path: '/blog',
-        component: () => import('./views/blog.vue')
-      },
-      {
-        path: '/blog/articals/:id',
-        component: () => import('./views/artical.vue')
       }
     ]
   })

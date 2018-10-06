@@ -1,5 +1,5 @@
 <template>
-  <nav :class="{nav: true, 'nav-mob-active': isMobActive}">
+  <div :class="{nav: true, 'nav-mob-active': isMobActive}">
     <div class="mask"></div>
     <div
       class="nav-toogle-btn"
@@ -22,7 +22,7 @@
           :alt="item.alt">
       </router-link>
     </div>
-  </nav>
+  </div>
 </template>
 <script>
 export default {
@@ -60,6 +60,11 @@ export default {
 <style lang="scss" scoped>
 $nav-bg: #2b3033;
 $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.nav {
+  width: 100px;
+  height: 100%;
+  flex-shrink: 0;
+}
 .nav-list {
   display: flex;
   flex-direction: column;
@@ -85,11 +90,6 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   }
 }
 // 收缩展开实现
-.nav {
-  width: 100px;
-  height: 100%;
-  flex-shrink: 0;
-}
 .burger {
   height: 15vh;
   position: relative;

@@ -387,7 +387,10 @@ import { Dialog } from 'element-ui'
 import titleMixin from '../mixin/title'
 import { POST_FRIEND_REGISTRY } from '../../api'
 
-module.exports = {
+export default {
+  components: {
+    [Dialog.name]: Dialog
+  },
   mixins: [titleMixin],
   title () {
     return `${this.artical.title} - ${this.artical.nickName}`
@@ -395,6 +398,19 @@ module.exports = {
   asyncData ({ store, route }) {
     return store.dispatch('getArtical', route.params.id)
   },
+  data () {
+    return {
+      isPreview: false,
+      previewUrl: '',
+      email: '',
+      headGroup: [],
+      currentAnchor: '',
+      currentFatherAnchor: ''
+    }
+  },
+  computed: mapState({
+    artical: state => state.blog.artical
+  }),
   mounted () {
     let imgs = document.querySelectorAll('.blog-body img')
     let as = document.querySelectorAll('.blog-body a')
@@ -414,19 +430,6 @@ module.exports = {
   destroyed () {
     document.removeEventListener('scroll', this.findActive)
   },
-  data () {
-    return {
-      isPreview: false,
-      previewUrl: '',
-      email: '',
-      headGroup: [],
-      currentAnchor: '',
-      currentFatherAnchor: ''
-    }
-  },
-  computed: mapState({
-    artical: state => state.blog.artical
-  }),
   methods: {
     registry () {
       POST_FRIEND_REGISTRY({
@@ -469,9 +472,6 @@ module.exports = {
         }
       })
     }
-  },
-  components: {
-    [Dialog.name]: Dialog
   }
 }
 </script>
