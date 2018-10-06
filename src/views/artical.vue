@@ -165,7 +165,7 @@
   }
 }
 
-@media only screen and (max-width: 1246px) {
+@media only screen and (max-width: 1146px) {
   .artical-content, .footer-content {
     padding-right: 0 !important;
     max-width: 736px !important;
@@ -410,6 +410,9 @@ module.exports = {
     })
     this.findActive()
     document.addEventListener('scroll', this.findActive)
+  },
+  destroyed () {
+    document.removeEventListener('scroll', this.findActive)
   },
   data () {
     return {

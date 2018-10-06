@@ -1,5 +1,10 @@
 <template>
-  <nav class="nav">
+  <nav :class="{nav: true, 'nav-mob-active': isMobActive}">
+    <div class="mask"></div>
+    <div
+      class="nav-toogle-btn"
+      @click="isMobActive = !isMobActive">
+    </div>
     <div
       :class="{burger: true, 'burger--active': isActive}"
       @click="isActive = !isActive">
@@ -7,25 +12,14 @@
     </div>
     <div :class="{'nav-list': true, 'nav-list-active': isActive}">
       <router-link
-        to="/"
-        class="nav-item">
+        v-for="item in routes"
+        :key="item.alt"
+        :to="item.path"
+        class="nav-item"
+        @click.native="close">
         <img
-          src="../imgs/home.png"
-          alt="首页">
-      </router-link>
-      <router-link
-        to="/blog"
-        class="nav-item">
-        <img
-          src="../imgs/blog.png"
-          alt="博客">
-      </router-link>
-      <router-link
-        to="/photos"
-        class="nav-item">
-        <img
-          src="../imgs/camera.png"
-          alt="相片">
+          :src="item.src"
+          :alt="item.alt">
       </router-link>
     </div>
   </nav>
@@ -34,7 +28,31 @@
 export default {
   data () {
     return {
-      isActive: false
+      isActive: false,
+      isMobActive: false,
+      routes: [
+        {
+          path: '/',
+          src: require('../imgs/home.png'),
+          alt: '首页'
+        },
+        {
+          path: '/blog',
+          src: require('../imgs/blog.png'),
+          alt: '博客'
+        },
+        {
+          path: '/photos',
+          src: require('../imgs/camera.png'),
+          alt: '相片'
+        }
+      ]
+    }
+  },
+  methods: {
+    close () {
+      this.isActive = false
+      this.isMobActive = false
     }
   }
 }
@@ -46,7 +64,7 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
   display: flex;
   flex-direction: column;
   height: 0;
-  transition: $ease;
+  transition: all .3s;
   overflow: hidden;
 }
 .nav-list-active {
@@ -148,11 +166,55 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     }
   }
 }
-// 设置为1100即之后的容器最大宽度都限制在1000以内
-// 如果超出了1000，则必须保证菜单栏不会覆盖到内容元素
-@media only screen and (max-width: 1100px) {
+// 规定了右侧容器最大宽度为1146，达到1146 nav即收缩
+@media only screen and (max-width: 1146px) {
   .burger {
     display: none!important;
+  }
+  .nav {
+    position: fixed;
+    left: -30vw;
+    width: 30vw;
+    z-index: 2;
+    transition: left .5s;
+    .nav-toogle-btn {
+      display: block;
+      width: 32px;
+      height: 32px;
+      position: absolute;
+      right: -31px;
+      top: 50%;
+      background-image: url('../imgs/arrow.png');
+      transform: translate(0, -50%);
+      transform: rotate(0deg);
+      opacity: 0.6;
+      transition: all .5s;
+      cursor: pointer;
+    }
+  }
+  .nav-mob-active {
+    left: 0;
+    .nav-toogle-btn {
+      width: 48px;
+      height: 48px;
+      top: 0;
+      right: -47px;
+      background: $nav-bg;
+      opacity: 1;
+      transform: translate(0, 0);
+      transform: rotate(720deg);
+      background-image: url('../imgs/close.png');
+    }
+    .mask {
+      position: fixed;
+      z-index: -5;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: #333;
+      opacity: 0.5;
+    }
   }
   .nav-list {
     height: 100vh!important;

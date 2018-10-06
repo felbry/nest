@@ -7,22 +7,16 @@ export function createRouter () {
     routes: [
       {
         path: '/',
-        component: () => import('./views/index.vue'),
+        component: () => import('./views/index.vue')
+      },
+      {
+        path: '/photos',
+        component: () => import('./views/photos.vue'),
+        redirect: '/photos/all',
         children: [
           {
-            path: '',
-            component: () => import('./views/img.vue')
-          },
-          {
-            path: 'photos',
-            component: () => import('./views/photos.vue'),
-            redirect: '/photos/all',
-            children: [
-              {
-                path: '/photos/:tid',
-                component: () => import('./components/photo-list.vue')
-              }
-            ]
+            path: '/photos/:tid',
+            component: () => import('./components/photo-list.vue')
           }
         ]
       },
