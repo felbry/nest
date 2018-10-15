@@ -1,34 +1,34 @@
 <template>
-  <div class="body">
-    <my-header/>
-    <router-view/>
+  <div class="index-body">
+    <navigator/>
+    <div class="body">
+      <router-view/>
+    </div>
   </div>
 </template>
 
 <script>
-import Header from '../components/header.vue'
-
-module.exports = {
+import Navigator from '../components/navigator.vue'
+export default {
+  components: {
+    Navigator
+  },
   data () {
     return {
-
+      // url: 'context.url'
     }
-  },
-  components: {
-    myHeader: Header
   }
 }
 </script>
 
-<style scoped>
-    .body {
-        position: absolute;
-        top: 0;
-        left: 50%;
-        width: 1100px;
-        height: 100%;
-        padding: 20px 0;
-        transform: translateX(-50%);
-        color: #fff;
-    }
+<style lang="scss" scoped>
+.index-body {
+  display: flex;
+  width: 100vw;
+  height: 100vh;
+
+  .body {
+    flex-grow: 1;
+  }
+}
 </style>

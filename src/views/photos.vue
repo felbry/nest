@@ -1,37 +1,40 @@
 <style scpoed>
-    .photo-content {
-        position: relative;
-        float: left;
-        width: 740px;
-        height: 100%;
-        padding: 25px 0px 25px 0px;
-        background-color: #000;
-        opacity: 0.8;
-    }
+.photo-body {
+  width: 740px;
+  min-height: 100%;
+  padding: 25px 0px 25px 0px;
+  background-color: #000;
+  opacity: 0.8;
+}
 
-    .photo-content .category {
-        margin-left: 35px;
-        padding: 25px;
-        margin-bottom: 25px;
-    }
+.photo-body .category {
+  margin-left: 35px;
+  padding: 25px;
+  margin-bottom: 25px;
+}
 
-    .menu-item {
-        color: #fff!important;
-        margin-right: 18px;
-        font-size: 24px;
-        transition: font-size 0.6s;
-    }
+.menu-item {
+  color: #fff!important;
+  margin-right: 18px;
+  font-size: 24px;
+  transition: font-size 0.6s;
+}
 
-    .menu-item:hover, .router-link-active {
-        font-size: 28px;
-        background-color: #fff;
-        color: #000!important;
-        cursor: pointer;
-    }
+.menu-item:hover, .router-link-active {
+  font-size: 28px;
+  background-color: #fff;
+  color: #000!important;
+  cursor: pointer;
+}
+@media only screen and (max-width: 740px) {
+  .photo-body {
+    width: 100%;
+  }
+}
 </style>
 
 <template>
-  <div class="photo-content">
+  <div class="photo-body">
     <div class="category">
       <router-link
         class="menu-item"
@@ -51,7 +54,7 @@
 <script>
 import { mapState } from 'vuex'
 
-module.exports = {
+export default {
   asyncData ({ store, route }) {
     return store.dispatch('getPhotoTagList')
   },

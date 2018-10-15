@@ -55,7 +55,7 @@
 <script>
 import { mapState } from 'vuex'
 
-module.exports = {
+export default {
   asyncData ({ store, route }) {
     // return store.dispatch('getTagList');
     return store.dispatch('getArticalList')

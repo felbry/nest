@@ -11,14 +11,10 @@ export function createRouter () {
         children: [
           {
             path: '',
-            component: () => import('./views/img.vue')
-          },
-          {
-            path: 'index',
             component: () => import('./views/home.vue')
           },
           {
-            path: 'photos',
+            path: '/photos',
             component: () => import('./views/photos.vue'),
             redirect: '/photos/all',
             children: [
@@ -29,18 +25,14 @@ export function createRouter () {
             ]
           },
           {
-            path: 'about',
-            component: () => import('./views/about.vue')
+            path: '/blog',
+            component: () => import('./views/blog.vue')
+          },
+          {
+            path: '/blog/articals/:id',
+            component: () => import('./views/artical.vue')
           }
         ]
-      },
-      {
-        path: '/blog',
-        component: () => import('./views/blog.vue')
-      },
-      {
-        path: '/blog/articals/:id',
-        component: () => import('./views/artical.vue')
       }
     ]
   })

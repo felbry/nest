@@ -6,7 +6,9 @@ module.exports = {
     browser: true,
     node: true
   },
-  globals: {},
+  globals: {
+    lightGallery: 1
+  },
   extends: ['plugin:vue/recommended', 'standard'],
   plugins: [
     'vue'

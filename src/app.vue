@@ -5,11 +5,5 @@
 </template>
 
 <script>
-module.exports = {
-  data () {
-    return {
-      // url: 'context.url'
-    }
-  }
-}
+export default {}
 </script>
