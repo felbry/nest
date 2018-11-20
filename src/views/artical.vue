@@ -163,6 +163,18 @@
       padding: 10px 15px;
     }
   }
+  /deep/ .footnotes-sep {
+    border: none;
+    line-height: 50px;
+    font-size: 30px;
+    &::after {
+      content: '参考文章'
+    }
+  }
+  /deep/ .footnotes-list {
+    background-color: inherit;
+    color: #000;
+  }
 }
 
 @media only screen and (max-width: 1146px) {
@@ -422,6 +434,7 @@ export default {
       })
     })
     Array.from(as).forEach(a => {
+      if (/footnote-/.test(a.getAttribute('class')) || /footnote-/.test(a.parentNode.getAttribute('class'))) return
       a.setAttribute('target', '_blank')
     })
     this.findActive()

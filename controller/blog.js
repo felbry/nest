@@ -20,6 +20,7 @@ const MD = new MD_IT({
       tocLastLevel: 3
     }
   )
+  .use(require('markdown-it-footnote'))
 const MULTER = require('multer')
 var upload = MULTER()
 
