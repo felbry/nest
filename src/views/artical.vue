@@ -305,7 +305,9 @@
 </style>
 
 <template>
-  <div style="height: 100%; overflow: scroll;">
+  <div
+    style="height: 100%; overflow: scroll;"
+    @scroll="findActive">
     <div class="artical-content">
       <div class="artical-header">
         <h2>
@@ -438,7 +440,7 @@ export default {
       a.setAttribute('target', '_blank')
     })
     this.findActive()
-    document.addEventListener('scroll', this.findActive)
+    // document.addEventListener('scroll', this.findActive)
   },
   destroyed () {
     document.removeEventListener('scroll', this.findActive)
