@@ -3,7 +3,7 @@
     <h1 class="logo">
       <span class="logo-day">{{timer}}</span>days<br>
     </h1>
-    <img src="http://pcon69vb0.bkt.clouddn.com/18-8-14/9930112.jpg">
+    <img src="https://blog-1253526387.cos.ap-beijing.myqcloud.com/18-8-14/9930112.jpg">
     <dog/>
   </div>
 </template>
