@@ -1,4 +1,5 @@
 const EXPRESS = require('express')
+require('express-async-errors')
 const CONFIG = require('./config')
 const PATH = require('path')
 const RESOLVE = file => PATH.resolve(__dirname, file)
@@ -11,7 +12,6 @@ var bodyParser = require('body-parser')
 const BLOG_CONTROLLER = require('./controller/blog')
 const PHOTO_CONTROLLER = require('./controller/photo')
 const USER_CONTROLLER = require('./controller/user')
-const FRIEND_CONTROLLER = require('./controller/friend')
 
 const IS_DEV = process.env.NODE_ENV === 'dev'
 const TEMPLATE_PATH = RESOLVE('./index.template.html')
@@ -68,7 +68,18 @@ APP.options('*', CORS())
 APP.use('/api/blog', CORS(), BLOG_CONTROLLER)
 APP.use('/api/photo', CORS(), PHOTO_CONTROLLER)
 APP.use('/api/user', CORS(), USER_CONTROLLER)
-APP.use('/api/friend', FRIEND_CONTROLLER)
+
+APP.use((err, req, res, next) => {
+  if (err) {
+    res
+      .status(200)
+      .json({
+        code: -1,
+        msg: err.toString()
+      })
+  }
+  next(err)
+})
 
 APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
   console.log(`App listening on online or port ${process.env.LEANCLOUD_APP_PORT || 3000}!`)

@@ -1,3 +1,4 @@
+const FS = require('fs')
 const EXPRESS = require('express')
 const hljs = require('highlight.js')
 const ROUTER = EXPRESS.Router()
@@ -24,6 +25,9 @@ const MD = new MD_IT({
 const MULTER = require('multer')
 var upload = MULTER()
 
+const FILE_MODEL = require('../model/file.js')
+const ARTICAL_MODEL = require('../model/artical.js')
+
 var blog = require('../model/blog')
 var jwt = require('../middleware/auth')
 var jwtFriends = require('../middleware/authFriends')
@@ -32,18 +36,49 @@ var utils = require('../utils')
 // 创建、获取博客
 ROUTER.route('/articals')
   .get((req, res) => {
-    blog.findAll({
-      tid: req.query.tid,
-      page: req.query.page || 1
-    }).then(result => {
-      utils.handleResponse(result, res)
-    })
+    ARTICAL_MODEL
+      .find()
+      .populate('file')
+      .then(articalListRet => {
+        res.json(articalListRet)
+      })
+    // blog.findAll({
+    //   tid: req.query.tid,
+    //   page: req.query.page || 1
+    // }).then(result => {
+    //   utils.handleResponse(result, res)
+    // })
   })
-  .post(jwt, upload.single('file'), (req, res) => {
-    blog.create(Object.assign(req.body, req.file, req.user)).then(result => {
-      utils.handleResponse(result, res)
-    })
-  })
+  .post(
+    // jwt,
+    upload.single('file'),
+    (req, res) => {
+      const DATA = req.body
+      const FILE = req.file
+      const PUBLIC_PATH = `/assets/articals/${FILE.originalname}`
+      FS.writeFileSync(process.cwd() + PUBLIC_PATH, FILE.buffer)
+      return FILE_MODEL
+        .create({
+          mimetype: FILE.mimetype,
+          size: FILE.size,
+          encoding: FILE.encoding,
+          originalName: FILE.originalname,
+          publicPath: PUBLIC_PATH
+        })
+        .then(fileRet => {
+          return ARTICAL_MODEL
+            .create({
+              title: DATA.title,
+              file: fileRet._id
+            })
+        })
+        .then(articalRet => {
+          res.json({
+            code: 0
+          })
+        })
+    }
+  )
 
 // 获取博客详情
 ROUTER.get('/articals/:id', (req, res) => {
