@@ -8,7 +8,7 @@ import {
 const ACTIONS = {
   getArticalList ({ commit }, opt) {
     return GET_ARTICAL_LIST(opt).then(res => {
-      commit(types.SET_ARTICAL_LIST, res.data.articals)
+      commit(types.SET_ARTICAL_LIST, res.data.articalList)
       commit(types.SET_TOTAL, res.data.total)
     })
   },

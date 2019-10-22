@@ -7,7 +7,7 @@ const ARTICAL_SCHEMA = new MONGOOSE.Schema({
   },
   author: {
     type: 'ObjectId',
-    ref: 'Admin'
+    ref: 'User'
   },
   file: {
     type: 'ObjectId',

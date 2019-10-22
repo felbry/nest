@@ -2,7 +2,6 @@ const FS = require('fs')
 const EXPRESS = require('express')
 const hljs = require('highlight.js')
 const ROUTER = EXPRESS.Router()
-const MAIL = require('../tools/mail')
 const markdownItTocAndAnchor = require('markdown-it-toc-and-anchor').default
 const MD_IT = require('markdown-it')
 const MD = new MD_IT({
@@ -36,25 +35,36 @@ var utils = require('../utils')
 // 创建、获取博客
 ROUTER.route('/articals')
   .get((req, res) => {
-    ARTICAL_MODEL
-      .find()
-      .populate('file')
-      .then(articalListRet => {
-        res.json(articalListRet)
+    const DATA = req.body
+    return Promise.all([
+      ARTICAL_MODEL
+        .find()
+        .limit(DATA.page)
+        .skip((DATA.page - 1) * DATA.pageSize)
+        .populate('author')
+        .exec(),
+      ARTICAL_MODEL
+        .find()
+        .estimatedDocumentCount()
+        .exec()
+    ])
+      .then(([articalListRet, total]) => {
+        res.json({
+          code: 0,
+          data: {
+            articalList: articalListRet,
+            total
+          }
+        })
       })
-    // blog.findAll({
-    //   tid: req.query.tid,
-    //   page: req.query.page || 1
-    // }).then(result => {
-    //   utils.handleResponse(result, res)
-    // })
   })
   .post(
-    // jwt,
+    jwt,
     upload.single('file'),
     (req, res) => {
       const DATA = req.body
       const FILE = req.file
+      const USER = req.user
       const PUBLIC_PATH = `/assets/articals/${FILE.originalname}`
       FS.writeFileSync(process.cwd() + PUBLIC_PATH, FILE.buffer)
       return FILE_MODEL
@@ -69,7 +79,8 @@ ROUTER.route('/articals')
           return ARTICAL_MODEL
             .create({
               title: DATA.title,
-              file: fileRet._id
+              file: fileRet._id,
+              author: USER._id
             })
         })
         .then(articalRet => {
@@ -153,23 +164,6 @@ ROUTER.route('/comments')
     blog.createTag(req.body).then(result => {
       utils.handleResponse(result, res)
     })
-  })
-
-// 激活leancloud
-ROUTER.route('/active')
-  .get((req, res) => {
-    let date = new Date()
-    if (date.getHours() === 8 && date.getMinutes() < 5) {
-      MAIL({
-        receiver: '505792925@qq.com',
-        subject: 'Good Morning',
-        html: `<p>当前时间为：<b>${new Date()}</b></p>`
-      })
-        .then(() => res.end('success'))
-        .catch(() => res.end('email send error'))
-    } else {
-      res.end('other time')
-    }
   })
 
 module.exports = ROUTER

@@ -1,19 +1,46 @@
 const EXPRESS = require('express')
 const ROUTER = EXPRESS.Router()
-// const CORS = require('cors')
+const JWT = require('jsonwebtoken')
 
 var jwt = require('../middleware/auth')
-var user = require('../model/user')
-var utils = require('../utils')
+const USER = require('../model/user')
+const CONFIG = require('../config')
 
 ROUTER.post('/login', (req, res) => {
-  user.find(req.body).then(result => {
-    utils.handleResponse(result, res)
-  })
+  let {
+    username,
+    password
+  } = req.body
+  return USER
+    .findOne({
+      username,
+      password
+    })
+    .then(userRet => {
+      if (userRet) {
+        return res.json({
+          code: 0,
+          data: {
+            token: JWT.sign(
+              {
+                uid: userRet._id
+              },
+              CONFIG.secret
+            )
+          }
+        })
+      }
+      res.json({
+        code: 1,
+        data: {
+          msg: '用户不存在'
+        }
+      })
+    })
 })
 
 ROUTER.get('/status', jwt, (req, res) => {
-  // 后续校验user表是否存在id
+  // TODO: 后续校验user表是否存在id
   res.json({ code: 0 })
 })
 
