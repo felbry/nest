@@ -7,11 +7,13 @@ const ARTICAL_SCHEMA = new MONGOOSE.Schema({
   },
   author: {
     type: 'ObjectId',
-    ref: 'User'
+    ref: 'User',
+    required: true
   },
   file: {
     type: 'ObjectId',
-    ref: 'File'
+    ref: 'File',
+    required: true
   }
 }, { timestamps: true })
 

@@ -1,8 +1,6 @@
 import axios from 'axios'
 
-const HOST = process.env.NODE_ENV === 'dev'
-  ? 'http://localhost:3000'
-  : 'http://flipped.leanapp.cn'
+const HOST = 'http://localhost:3000'
 
 const _GET = (url, params) => {
   return axios.request({

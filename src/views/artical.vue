@@ -320,7 +320,7 @@
         v-html="artical.content">
       </div>
       <!-- 只有三层就不抽组件了 0.0 -->
-      <ul
+      <!-- <ul
         v-if="artical.toc && artical.toc.length"
         class="toc-container">
         <li
@@ -362,7 +362,7 @@
             </li>
           </ul>
         </li>
-      </ul>
+      </ul> -->
       <el-dialog
         :visible.sync="isPreview"
         :append-to-body="true"

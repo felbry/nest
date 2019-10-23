@@ -42,7 +42,7 @@
           class="li">
           {{new Date(item.createdAt).toISOString().slice(0, 10)}} »
           <router-link
-            :to="`/blog/articals/${item.id}`"
+            :to="`/blog/articals/${item._id}`"
             class="title">
             {{item.title}}
           </router-link>

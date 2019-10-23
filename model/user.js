@@ -12,6 +12,10 @@ const USER_SCHEMA = new MONGOOSE.Schema({
   nickName: {
     type: String,
     required: true
+  },
+  gender: {
+    type: Number,
+    default: 0
   }
 })
 
