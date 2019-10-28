@@ -33,17 +33,17 @@ export default {
       routes: [
         {
           path: '/',
-          src: require('../imgs/home.png'),
+          src: require('../assets/imgs/home.png'),
           alt: '首页'
         },
         {
           path: '/blog',
-          src: require('../imgs/blog.png'),
+          src: require('../assets/imgs/blog.png'),
           alt: '博客'
         },
         {
           path: '/photos',
-          src: require('../imgs/camera.png'),
+          src: require('../assets/imgs/camera.png'),
           alt: '相片'
         }
       ]
@@ -184,7 +184,7 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       position: absolute;
       right: -31px;
       top: 50%;
-      background-image: url('../imgs/arrow.png');
+      background-image: url('../assets/imgs/arrow.png');
       transform: translate(0, -50%);
       transform: rotate(0deg);
       opacity: 0.6;
@@ -203,7 +203,7 @@ $ease: all .5s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       opacity: 1;
       transform: translate(0, 0);
       transform: rotate(720deg);
-      background-image: url('../imgs/close.png');
+      background-image: url('../assets/imgs/close.png');
     }
     .mask {
       position: fixed;

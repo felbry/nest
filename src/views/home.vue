@@ -1,10 +1,11 @@
 <template>
   <div class="home-body">
-    <h1 class="logo">
+    111
+    <!-- <h1 class="logo">
       <span class="logo-day">{{timer}}</span>days<br>
     </h1>
     <img src="https://blog-1253526387.cos.ap-beijing.myqcloud.com/18-8-14/9930112.jpg">
-    <dog/>
+    <dog/> -->
   </div>
 </template>
 

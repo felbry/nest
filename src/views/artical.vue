@@ -1,6 +1,6 @@
 <style lang="scss" scoped>
 // 代码风格
-@import url("../css/atom-one-light.css");
+@import url("~@/assets/css/atom-one-light.css");
 
 @mixin h-universal {
   -webkit-margin-before: 0px;
@@ -305,9 +305,7 @@
 </style>
 
 <template>
-  <div
-    style="height: 100%; overflow: scroll;"
-    @scroll="findActive">
+  <div style="height: 100%; overflow: scroll;">
     <div class="artical-content">
       <div class="artical-header">
         <h2>
@@ -319,50 +317,6 @@
         class="blog-body"
         v-html="artical.content">
       </div>
-      <!-- 只有三层就不抽组件了 0.0 -->
-      <!-- <ul
-        v-if="artical.toc && artical.toc.length"
-        class="toc-container">
-        <li
-          v-for="item in artical.toc"
-          :key="item.anchor"
-          class="h1">
-          <a
-            :class="{
-              'anchor-active': item.anchor === currentAnchor
-            }"
-            :href="'#' + item.anchor"
-            class="anchor">{{item.content}}</a>
-          <ul
-            v-if="item.children.length"
-            v-show="item.anchor === currentFatherAnchor">
-            <li
-              v-for="itemH2 in item.children"
-              :key="itemH2.anchor"
-              class="h2">
-              <a
-                :class="{
-                  'anchor-active': itemH2.anchor === currentAnchor
-                }"
-                :href="'#' + itemH2.anchor"
-                class="anchor">{{itemH2.content}}</a>
-              <ul v-if="itemH2.children && itemH2.children.length">
-                <li
-                  v-for="itemH3 in itemH2.children"
-                  :key="itemH3.anchor"
-                  class="h3">
-                  <a
-                    :class="{
-                      'anchor-active': itemH3.anchor === currentAnchor
-                    }"
-                    :href="'#' + itemH3.anchor"
-                    class="anchor">{{itemH3.content}}</a>
-                </li>
-              </ul>
-            </li>
-          </ul>
-        </li>
-      </ul> -->
       <el-dialog
         :visible.sync="isPreview"
         :append-to-body="true"
@@ -373,10 +327,10 @@
       <div class="footer-img">
         <img
           v-if="artical.gender === 1"
-          src="../imgs/felbry.jpg">
+          src="../assets/imgs/felbry.jpg">
         <img
           v-else
-          src="../imgs/jing.jpg">
+          src="../assets/imgs/jing.jpg">
       </div>
       <!-- <input type="text" v-model="email"> -->
       <!-- <button @click="registry">拿到验证码</button> -->
@@ -416,10 +370,7 @@ export default {
     return {
       isPreview: false,
       previewUrl: '',
-      email: '',
-      headGroup: [],
-      currentAnchor: '',
-      currentFatherAnchor: ''
+      email: ''
     }
   },
   computed: mapState({
@@ -439,11 +390,6 @@ export default {
       if (/footnote-/.test(a.getAttribute('class')) || /footnote-/.test(a.parentNode.getAttribute('class'))) return
       a.setAttribute('target', '_blank')
     })
-    this.findActive()
-    // document.addEventListener('scroll', this.findActive)
-  },
-  destroyed () {
-    document.removeEventListener('scroll', this.findActive)
   },
   methods: {
     registry () {
@@ -451,40 +397,6 @@ export default {
         email: this.email
       }).then(data => {
         console.log(data)
-      })
-    },
-    findActive () {
-      // 先看有没有在 0 - 10之间的，有直接确定不走之后的逻辑。没有的话下一步
-      // 如果一遍下来都没有，就找到最小的index，如果还有上一个index，就是上一个选中
-      // 没有，则是当前最小的选中（即页面刚打开）
-      this.artical.tocSort.some((tocItem, index) => {
-        let arr = this.artical.tocSort
-        let head = document.getElementById(tocItem.anchor)
-        let top = head.getBoundingClientRect().top
-        if (top < 0) {
-
-        } else {
-          let currentIndex = 0
-          if (top <= 10) {
-            this.currentAnchor = tocItem.anchor
-            currentIndex = index
-          } else {
-            if (index === 0) {
-              this.currentAnchor = tocItem.anchor
-              currentIndex = index
-            } else {
-              this.currentAnchor = arr[index - 1].anchor
-              currentIndex = index - 1
-            }
-          }
-          // 找到顶级anchor，为了控制展开收缩
-          let i = 0
-          while (arr[currentIndex - i].level !== 1) {
-            i++
-          }
-          this.currentFatherAnchor = arr[currentIndex - i].anchor
-          return true
-        }
       })
     }
   }

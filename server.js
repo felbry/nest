@@ -1,10 +1,8 @@
 const EXPRESS = require('express')
 require('express-async-errors')
-const CONFIG = require('./config')
 const PATH = require('path')
 const RESOLVE = file => PATH.resolve(__dirname, file)
 const CREATE_BUNDLE_RENDERER = require('vue-server-renderer').createBundleRenderer
-const AV = require('leanengine')
 const CORS = require('cors')
 const APP = EXPRESS()
 var bodyParser = require('body-parser')
@@ -31,16 +29,6 @@ if (!IS_DEV) {
 
 APP.use(EXPRESS.static('public'))
 APP.use(bodyParser.json())
-
-AV.init({
-  appId: process.env.LEANCLOUD_APP_ID || CONFIG.appId,
-  appKey: process.env.LEANCLOUD_APP_KEY || CONFIG.appKey,
-  masterKey: process.env.LEANCLOUD_APP_MASTER_KEY || CONFIG.masterKey
-})
-
-APP.use(AV.express())
-// APP.enable('trust proxy');
-// APP.use(AV.Cloud.HttpsRedirect());
 
 function render (req, res) {
   const context = {
@@ -79,6 +67,6 @@ APP.use((err, req, res, next) => {
   next(err)
 })
 
-APP.listen(process.env.LEANCLOUD_APP_PORT || 3000, function () {
-  console.log(`App listening on online or port ${process.env.LEANCLOUD_APP_PORT || 3000}!`)
+APP.listen(3000, function () {
+  console.log(`App listening on online or port 3000!`)
 })
